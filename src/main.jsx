@@ -3,8 +3,12 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-)
+import { ModoClaOscContext } from "./componentes/ModoClaOscContext";
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+	<React.StrictMode>
+		<ModoClaOscContext>
+			<App />
+		</ModoClaOscContext>
+	</React.StrictMode>
+);
