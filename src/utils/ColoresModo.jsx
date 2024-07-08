@@ -1,28 +1,28 @@
-import { grey, deepPurple } from "@mui/material/colors";
+import { grey } from "@mui/material/colors";
 
+//colores, ver img en carpeta: img de los tp
 export const ModoClaro = {
 	primary: {
-		main: deepPurple[600], //calendario: botones inferior
+		main: "#00899A", // +oscuro - 5
 	},
 	secondary: {
-		main: deepPurple[500],
+		main: "#B1E1EA", //+clarito - 1
 	},
 
 	background: {
-		default: deepPurple[200],
-		paper: deepPurple[800], //calendario: fondo,
-		tableHead: "#5034c9",
-		tableRows: "#6355E6",
+		default: "#B1E1EA", //+clarito - 1  - fondo ppal
+		paper: "#00899A", // +oscuro - 5   - navbar
+		icons: "#00B4C5", // intermedio - 3  - fondo iconos en xs
 	},
-	text: {
-		primary: "#FFFFFF", //calendario: título, nro, días
+	/* text: {
+		primary: "#FFFFFF", //blanco
 		secondary: grey[200],
 		iconos: grey[600],
 	},
 	button: {
 		textHover: grey[200],
 		hover: "#2A2239",
-	},
+	}, */
 	error: {
 		main: "#FFEB3B", //amarillo
 	},
@@ -33,15 +33,14 @@ export const ModoOscuro = {
 		main: grey[800], //navbar fondo iconos
 	},
 	secondary: {
-		main: grey[800],
+		main: grey[400],
 	},
 	background: {
-		default: grey[700],  //fondo iconos en xs
-		paper: grey[800],
-		tableRows: grey[600],
-		tableHead: grey[700],
+		default: grey[400], // fondo ppal
+		paper: grey[800], //- navbar
+		icons: grey[500], //fondo iconos en xs
 	},
-	text: {
+	/* text: {
 		primary: "#FFFFFF", //blanco
 		secondary: grey[200],
 		iconos: grey[800],
@@ -49,7 +48,7 @@ export const ModoOscuro = {
 	button: {
 		textHover: grey[200],
 		hover: grey[900],
-	},
+	}, */
 	error: {
 		main: "#FFEB3B", //amarillo
 	},

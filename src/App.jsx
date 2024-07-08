@@ -8,6 +8,8 @@ import { ColorModeContext } from "./componentes/ModoClaOscContext";
 
 import { ModoClaro } from "./utils/ColoresModo";
 import { ModoOscuro } from "./utils/ColoresModo";
+import { Header } from "./componentes/Header";
+import { Box } from "@mui/material";
 
 //------------------- PRINCIPAL ------------------
 function App() {
@@ -27,8 +29,18 @@ function App() {
 
 	return (
 		<ThemeProvider theme={theme}>
-			<p>Aqui empieza el final</p>
-			<NavBar />
+			<Box
+				sx={{
+					width: "100%",
+					minHeight: "100vh",
+					display: "flex",
+					flexDirection: "column",
+					bgcolor: "background.default",
+				}}
+			>
+				<Header />
+				<NavBar />
+			</Box>
 		</ThemeProvider>
 	);
 }

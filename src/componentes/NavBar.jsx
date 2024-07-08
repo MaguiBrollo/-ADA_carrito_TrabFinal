@@ -105,14 +105,18 @@ export const NavBar = () => {
 	return (
 		<Box sx={{ flexGrow: 1, padding: "0px" }}>
 			<AppBar position="static">
-				<Toolbar sx={{ padding: { xs: "0px", md: "15px" } }}>
+				<Toolbar
+					sx={{
+						padding: { xs: "0px", md: "15px" },
+						backgroundColor: "background.paper",
+					}}
+				>
 					<Box
 						sx={{
 							display: "flex",
 							flexDirection: { xs: "column", md: "row" },
 							justifyContent: "space-between",
 							width: "100%",
-							
 						}}
 					>
 						<Box
@@ -132,8 +136,8 @@ export const NavBar = () => {
 								display: "flex",
 								justifyContent: { xs: "space-around", md: "flex-end" },
 								backgroundColor: {
-									xs: "background.default",
-									md: "primary.main",
+									xs: "background.icons",
+									md: "background.paper",
 								},
 							}}
 						>
