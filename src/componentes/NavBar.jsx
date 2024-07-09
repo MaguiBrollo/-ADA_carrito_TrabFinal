@@ -11,6 +11,7 @@ import {
 	Badge,
 	MenuItem,
 	Menu,
+	CardMedia,
 } from "@mui/material";
 
 import { FiMoon } from "react-icons/fi";
@@ -19,10 +20,13 @@ import { TbShoppingCart } from "react-icons/tb";
 import { MdOutlineSearch } from "react-icons/md";
 import { MdAccountCircle } from "react-icons/md";
 import { MdOutlineFilterList } from "react-icons/md";
+import { MdOutlineHome } from "react-icons/md";
 
 import { ColorModeContext } from "./ModoClaOscContext";
+import Logo_Baby from "../assets/Logo_Baby.png";
 
-//==========================================
+//====================================================================
+//------------------ Componente Principal ----------------------------
 export const NavBar = ({ setStateBuscar }) => {
 	const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -60,8 +64,9 @@ export const NavBar = ({ setStateBuscar }) => {
 			open={isMenuOpen}
 			onClose={handleMenuClose}
 		>
-			<MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-			<MenuItem onClick={handleMenuClose}>My account</MenuItem>
+			<MenuItem onClick={handleMenuClose}>Logout</MenuItem>
+			<MenuItem onClick={handleMenuClose}>Mi Cuenta</MenuItem>
+			<MenuItem onClick={handleMenuClose}>Mis Compras</MenuItem>
 		</Menu>
 	);
 
@@ -71,7 +76,7 @@ export const NavBar = ({ setStateBuscar }) => {
 			<AppBar position="static">
 				<Toolbar
 					sx={{
-						padding: { xs: "0px", md: "15px" },
+						padding: { xs: "0px", md: "5px 15px" },
 						backgroundColor: "background.paper",
 					}}
 				>
@@ -88,15 +93,32 @@ export const NavBar = ({ setStateBuscar }) => {
 								display: "flex",
 								justifyContent: { xs: "center", md: "left" },
 								alignItems: "center",
-								padding: { xs: "20px", md: "0px" },
+								padding: { xs: "5px", md: "0px" },
 							}}
 						>
+							<CardMedia
+								component="img"
+								image={Logo_Baby}
+								alt="Logo Baby Store"
+								sx={{
+									
+									maxWidth: "50px",
+									margin: "10px",
+									borderRadius: "50%",
+									boxShadow: "0px 0px 15px black",
+								}}
+							/>
 							<Typography
-								sx={{ fontSize: "2rem", fontStyle: "italic" }}
+								sx={{
+									fontSize: { xs:"1.5rem", md: "2rem" },
+									fontStyle: "italic",
+									textShadow: "0px 0px 15px black",
+									padding:"10px 15px",
+								}}
 								noWrap
 								component="div"
 							>
-								Carrito de Compras
+								Baby Store
 							</Typography>
 						</Box>
 						<Box
@@ -107,8 +129,19 @@ export const NavBar = ({ setStateBuscar }) => {
 									xs: "background.icons",
 									md: "background.paper",
 								},
+								padding:{xs:"0px", md:"8px"},
 							}}
 						>
+							<Tooltip title="Página Principal">
+								<IconButton
+									size="large"
+									aria-label="Página Principal"
+									color="inherit"
+								>
+									<MdOutlineHome />
+								</IconButton>
+							</Tooltip>
+
 							<Tooltip title="Buscar artículo">
 								<IconButton
 									size="large"

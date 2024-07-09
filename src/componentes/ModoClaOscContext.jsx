@@ -6,6 +6,8 @@ export const ColorModeContext = React.createContext({
 	toggleColorMode: () => {},
 });
 
+//====================================================================
+//------------------ Componente Principal ----------------------------
 export const ModoClaOscContext = ({ children }) => {
 	//--------------------- Modo Claro Oscuro
 	const [mode, setMode] = React.useState(
@@ -22,9 +24,9 @@ export const ModoClaOscContext = ({ children }) => {
 		[]
 	);
 
-
+	//===========================
 	return (
-		<ColorModeContext.Provider value={{colorMode, mode}}>
+		<ColorModeContext.Provider value={{ colorMode, mode }}>
 			{children}
 		</ColorModeContext.Provider>
 	);

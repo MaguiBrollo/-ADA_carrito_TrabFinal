@@ -1,7 +1,10 @@
 import { Typography } from '@mui/material'
 
+//====================================================================
+//------------------ Componente Principal ----------------------------
 export const Header = () => {
-  return (
+	//===========================
+	return (
 		<>
 			<Typography
 				sx={{ textAlign: "center", backgroundColor: "background.default" }}
