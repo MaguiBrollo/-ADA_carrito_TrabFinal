@@ -22,48 +22,8 @@ import { MdOutlineFilterList } from "react-icons/md";
 
 import { ColorModeContext } from "./ModoClaOscContext";
 
-/* const Search = styled("div")(({ theme }) => ({
-	position: "relative",
-	borderRadius: theme.shape.borderRadius,
-	backgroundColor: alpha(theme.palette.common.white, 0.15),
-	"&:hover": {
-		backgroundColor: alpha(theme.palette.common.white, 0.25),
-	},
-	marginRight: theme.spacing(2),
-	marginLeft: 0,
-	width: "100%",
-	[theme.breakpoints.up("sm")]: {
-		marginLeft: theme.spacing(3),
-		width: "auto",
-	},
-}));
-
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-	padding: theme.spacing(0, 2),
-	height: "100%",
-	position: "absolute",
-	pointerEvents: "none",
-	display: "flex",
-	alignItems: "center",
-	justifyContent: "center",
-})); */
-
-/* const StyledInputBase = styled(InputBase)(({ theme }) => ({
-	color: "inherit",
-	"& .MuiInputBase-input": {
-		padding: theme.spacing(1, 1, 1, 0),
-		// vertical padding + font size from searchIcon
-		paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-		transition: theme.transitions.create("width"),
-		width: "100%",
-		[theme.breakpoints.up("md")]: {
-			width: "20ch",
-		},
-	},
-})); */
-
 //==========================================
-export const NavBar = () => {
+export const NavBar = ({ setStateBuscar }) => {
 	const [anchorEl, setAnchorEl] = React.useState(null);
 
 	const { colorMode, mode } = React.useContext(ColorModeContext);
@@ -76,6 +36,10 @@ export const NavBar = () => {
 
 	const handleMenuClose = () => {
 		setAnchorEl(null);
+	};
+
+	const abrirCerrarModalBuscar = () => {
+		setStateBuscar(true);
 	};
 
 	//-------- menú de Login/out
@@ -127,7 +91,11 @@ export const NavBar = () => {
 								padding: { xs: "20px", md: "0px" },
 							}}
 						>
-							<Typography variant="h6" noWrap component="div">
+							<Typography
+								sx={{ fontSize: "2rem", fontStyle: "italic" }}
+								noWrap
+								component="div"
+							>
 								Carrito de Compras
 							</Typography>
 						</Box>
@@ -146,6 +114,7 @@ export const NavBar = () => {
 									size="large"
 									aria-label="Buscar artículos"
 									color="inherit"
+									onClick={abrirCerrarModalBuscar}
 								>
 									<MdOutlineSearch />
 								</IconButton>
