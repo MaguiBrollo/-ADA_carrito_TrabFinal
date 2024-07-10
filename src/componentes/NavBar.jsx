@@ -1,5 +1,4 @@
 import * as React from "react";
-//import { styled, alpha } from "@mui/material/styles";
 import {
 	AppBar,
 	Box,
@@ -7,7 +6,6 @@ import {
 	Toolbar,
 	Typography,
 	Tooltip,
-	//InputBase,
 	Badge,
 	MenuItem,
 	Menu,
@@ -15,13 +13,15 @@ import {
 	Divider,
 } from "@mui/material";
 
+import {
+	MdOutlineWbSunny,
+	MdOutlineSearch,
+	MdAccountCircle,
+	MdOutlineFilterList,
+	MdOutlineHome,
+} from "react-icons/md";
 import { FiMoon } from "react-icons/fi";
-import { MdOutlineWbSunny } from "react-icons/md";
 import { TbShoppingCart } from "react-icons/tb";
-import { MdOutlineSearch } from "react-icons/md";
-import { MdAccountCircle } from "react-icons/md";
-import { MdOutlineFilterList } from "react-icons/md";
-import { MdOutlineHome } from "react-icons/md";
 
 import { ColorModeContext } from "./ModoClaOscContext";
 import Logo_Baby from "../assets/Logo_Baby.png";
@@ -47,7 +47,7 @@ export const NavBar = ({ setStateBuscar }) => {
 		setStateBuscar(true);
 	};
 
-	//-------- menú de Login/out
+	//-------- Menú de Login/out
 	const menuId = "primary-search-account-menu";
 	const renderMenu = (
 		<Menu
@@ -108,7 +108,6 @@ export const NavBar = ({ setStateBuscar }) => {
 								image={Logo_Baby}
 								alt="Logo Baby Store"
 								sx={{
-									
 									maxWidth: "50px",
 									margin: "10px",
 									borderRadius: "50%",
@@ -117,10 +116,10 @@ export const NavBar = ({ setStateBuscar }) => {
 							/>
 							<Typography
 								sx={{
-									fontSize: { xs:"1.5rem", md: "2rem" },
+									fontSize: { xs: "1.5rem", md: "2rem" },
 									fontStyle: "italic",
 									textShadow: "0px 0px 15px black",
-									padding:"10px 15px",
+									padding: "10px 15px",
 								}}
 								noWrap
 								component="div"
@@ -136,7 +135,7 @@ export const NavBar = ({ setStateBuscar }) => {
 									xs: "background.icons",
 									md: "background.paper",
 								},
-								padding:{xs:"0px", md:"8px"},
+								padding: { xs: "0px", md: "8px" },
 							}}
 						>
 							<Tooltip title="Página Principal">
@@ -163,7 +162,7 @@ export const NavBar = ({ setStateBuscar }) => {
 							<Tooltip title="Filtrar artículos">
 								<IconButton
 									size="large"
-									aria-label="filtrar artículos"
+									aria-label="Filtrar artículos"
 									color="inherit"
 								>
 									<MdOutlineFilterList />

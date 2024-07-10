@@ -13,6 +13,7 @@ import { ModoOscuro } from "./utils/ColoresModo";
 
 import LoraItalicVariableFontwght from "./fonts/LoraItalicVariableFontwght.ttf";
 import { Buscar } from "./componentes/Buscar";
+import { Footer } from "./componentes/Footer";
 
 //------------------- PRINCIPAL ------------------
 function App() {
@@ -64,6 +65,9 @@ function App() {
 
 				{/* --------- Barra de Navegación -------- */}
 				<NavBar setStateBuscar={setStateBuscar} />
+
+				{/* --------- Barra de Footer  ----------- */}
+				<Footer/>
 
 				{/* --------- Modal Drawer Buscar -------- */}
 				{stateBuscar && (
