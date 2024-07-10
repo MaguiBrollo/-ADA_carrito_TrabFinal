@@ -12,6 +12,7 @@ import {
 	MenuItem,
 	Menu,
 	CardMedia,
+	Divider,
 } from "@mui/material";
 
 import { FiMoon } from "react-icons/fi";
@@ -64,9 +65,15 @@ export const NavBar = ({ setStateBuscar }) => {
 			open={isMenuOpen}
 			onClose={handleMenuClose}
 		>
-			<MenuItem onClick={handleMenuClose}>Logout</MenuItem>
-			<MenuItem onClick={handleMenuClose}>Mi Cuenta</MenuItem>
-			<MenuItem onClick={handleMenuClose}>Mis Compras</MenuItem>
+			<MenuItem onClick={handleMenuClose}>Iniciar SESIÓN</MenuItem>
+			<Divider />
+			<MenuItem onClick={handleMenuClose}>Crear CUENTA</MenuItem>
+
+			{/* 
+			<MenuItem onClick={handleMenuClose}>Mi perfil</MenuItem>
+			<MenuItem onClick={handleMenuClose}>Mis compras</MenuItem> 
+			<Divider/>
+			<MenuItem onClick={handleMenuClose}>Cerrar sesión</MenuItem>*/}
 		</Menu>
 	);
 

@@ -19,7 +19,6 @@ function App() {
 	const [stateBuscar, setStateBuscar] = React.useState(false);
 	const { mode } = useContext(ColorModeContext);
 
-
 	//---------- Paleta de colores para Modo Claro Oscuro
 	const theme = React.useMemo(
 		() =>
@@ -60,11 +59,16 @@ function App() {
 					bgcolor: "background.default",
 				}}
 			>
+				{/* --------- Mensaje envio gratis ------- */}
 				<Header />
+
+				{/* --------- Barra de Navegación -------- */}
 				<NavBar setStateBuscar={setStateBuscar} />
 
 				{/* --------- Modal Drawer Buscar -------- */}
-				{stateBuscar && <Buscar setStateBuscar={setStateBuscar} stateBuscar={stateBuscar} />}
+				{stateBuscar && (
+					<Buscar setStateBuscar={setStateBuscar} stateBuscar={stateBuscar} />
+				)}
 			</Box>
 		</ThemeProvider>
 	);

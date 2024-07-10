@@ -14,12 +14,11 @@ export const ModoClaro = {
 		paper: "#00899A", // +oscuro - 5   - navbar
 		icons: "#00B4C5", // intermedio - 3  - fondo iconos en xs
 	},
-	/* text: {
+	text: {
 		primary: "#FFFFFF", //blanco
-		secondary: grey[200],
-		iconos: grey[600],
+		secondary: "black",
 	},
-	button: {
+	/*button: {
 		textHover: grey[200],
 		hover: "#2A2239",
 	}, */
@@ -40,12 +39,11 @@ export const ModoOscuro = {
 		paper: grey[800], //- navbar
 		icons: grey[500], //fondo iconos en xs
 	},
-	/* text: {
+	text: {
 		primary: "#FFFFFF", //blanco
-		secondary: grey[200],
-		iconos: grey[800],
+		secondary: "black",
 	},
-	button: {
+	/*button: {
 		textHover: grey[200],
 		hover: grey[900],
 	}, */
