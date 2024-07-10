@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState, useContext } from "react";
 import {
 	AppBar,
 	Box,
@@ -23,16 +23,19 @@ import {
 import { FiMoon } from "react-icons/fi";
 import { TbShoppingCart } from "react-icons/tb";
 
-import { ColorModeContext } from "./ModoClaOscContext";
+import { ColorModeContext } from "./contexts/ModoClaOscContext";
+import { ValoresConstantes } from "./contexts/ConstantesContext";
+
 import Logo_Baby from "../assets/Logo_Baby.png";
 
 //====================================================================
 //------------------ Componente Principal ----------------------------
 export const NavBar = ({ setStateBuscar }) => {
-	const [anchorEl, setAnchorEl] = React.useState(null);
+	const [anchorEl, setAnchorEl] = useState(null);
 
-	const { colorMode, mode } = React.useContext(ColorModeContext);
-
+	const {anchoMaximo} = useContext(ValoresConstantes);
+	const { colorMode, mode } = useContext(ColorModeContext);
+	
 	const isMenuOpen = Boolean(anchorEl);
 
 	const handleProfileMenuOpen = (event) => {
@@ -93,6 +96,8 @@ export const NavBar = ({ setStateBuscar }) => {
 							flexDirection: { xs: "column", md: "row" },
 							justifyContent: "space-between",
 							width: "100%",
+							maxWidth: `${anchoMaximo}px`,
+							margin: "0px auto",
 						}}
 					>
 						<Box

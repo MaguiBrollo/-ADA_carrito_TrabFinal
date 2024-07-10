@@ -1,8 +1,6 @@
-/* eslint-disable no-mixed-spaces-and-tabs */
-import * as React from "react";
+import {useState, useMemo, createContext} from "react";
 
-
-export const ColorModeContext = React.createContext({
+export const ColorModeContext = createContext({
 	toggleColorMode: () => {},
 });
 
@@ -10,12 +8,12 @@ export const ColorModeContext = React.createContext({
 //------------------ Componente Principal ----------------------------
 export const ModoClaOscContext = ({ children }) => {
 	//--------------------- Modo Claro Oscuro
-	const [mode, setMode] = React.useState(
+	const [mode, setMode] = useState(
 		localStorage.getItem("modoClaroOscuro") || "light"
 	);
 	localStorage.setItem("modoClaroOscuro", mode);
 
-	const colorMode = React.useMemo(
+	const colorMode = useMemo(
 		() => ({
 			toggleColorMode: () => {
 				setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
