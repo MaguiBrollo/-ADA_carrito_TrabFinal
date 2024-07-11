@@ -13,6 +13,7 @@ export const ModoClaro = {
 		default: "#B1E1EA", //+clarito - 1  - fondo ppal
 		paper: "#00899A", // +oscuro - 5   - navbar
 		icons: "#00B4C5", // intermedio - 3  - fondo iconos en xs
+		secondary: "#8DD2DD", //clarito - 2  - fondo secundario
 	},
 	text: {
 		primary: "#FFFFFF", //blanco
@@ -38,6 +39,7 @@ export const ModoOscuro = {
 		default: grey[400], // fondo ppal
 		paper: grey[800], //- navbar
 		icons: grey[500], //fondo iconos en xs
+		secondary: grey[500],
 	},
 	text: {
 		primary: "#FFFFFF", //blanco

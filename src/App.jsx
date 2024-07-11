@@ -6,7 +6,7 @@ import { Box } from "@mui/material";
 
 import { Header } from "./componentes/Header";
 import { NavBar } from "./componentes/NavBar";
-import { ColorModeContext } from "./componentes/ModoClaOscContext";
+import { ColorModeContext } from "./componentes/contexts/ModoClaOscContext";
 
 import { ModoClaro } from "./utils/ColoresModo";
 import { ModoOscuro } from "./utils/ColoresModo";
@@ -14,6 +14,9 @@ import { ModoOscuro } from "./utils/ColoresModo";
 import LoraItalicVariableFontwght from "./fonts/LoraItalicVariableFontwght.ttf";
 import { Buscar } from "./componentes/Buscar";
 import { Footer } from "./componentes/Footer";
+import { Nosotros } from "./componentes/Nosotros";
+import { CarruselPpal } from "./componentes/CarruselPpal";
+
 
 //------------------- PRINCIPAL ------------------
 function App() {
@@ -66,8 +69,14 @@ function App() {
 				{/* --------- Barra de Navegación -------- */}
 				<NavBar setStateBuscar={setStateBuscar} />
 
+				{/* --------- Carrusel ------------------- */}
+				<CarruselPpal />
+
+				{/* -------- Información de la empresa---- */}
+				<Nosotros />
+
 				{/* --------- Barra de Footer  ----------- */}
-				<Footer/>
+				<Footer />
 
 				{/* --------- Modal Drawer Buscar -------- */}
 				{stateBuscar && (

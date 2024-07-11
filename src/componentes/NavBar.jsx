@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState, useContext } from "react";
 import {
 	AppBar,
 	Box,
@@ -16,22 +16,25 @@ import {
 import {
 	MdOutlineWbSunny,
 	MdOutlineSearch,
-	MdAccountCircle,
+	MdOutlineAccountCircle,
 	MdOutlineFilterList,
 	MdOutlineHome,
 } from "react-icons/md";
 import { FiMoon } from "react-icons/fi";
 import { TbShoppingCart } from "react-icons/tb";
 
-import { ColorModeContext } from "./ModoClaOscContext";
+import { ColorModeContext } from "./contexts/ModoClaOscContext";
+import { ValoresConstantes } from "./contexts/ConstantesContext";
+
 import Logo_Baby from "../assets/Logo_Baby.png";
 
 //====================================================================
 //------------------ Componente Principal ----------------------------
 export const NavBar = ({ setStateBuscar }) => {
-	const [anchorEl, setAnchorEl] = React.useState(null);
+	const [anchorEl, setAnchorEl] = useState(null);
 
-	const { colorMode, mode } = React.useContext(ColorModeContext);
+	const { anchoMaximo } = useContext(ValoresConstantes);
+	const { colorMode, mode } = useContext(ColorModeContext);
 
 	const isMenuOpen = Boolean(anchorEl);
 
@@ -93,6 +96,8 @@ export const NavBar = ({ setStateBuscar }) => {
 							flexDirection: { xs: "column", md: "row" },
 							justifyContent: "space-between",
 							width: "100%",
+							maxWidth: `${anchoMaximo}px`,
+							margin: "0px auto",
 						}}
 					>
 						<Box
@@ -127,6 +132,8 @@ export const NavBar = ({ setStateBuscar }) => {
 								Baby Store
 							</Typography>
 						</Box>
+
+						{/* ----------------- Iconos----------- */}
 						<Box
 							sx={{
 								display: "flex",
@@ -138,72 +145,162 @@ export const NavBar = ({ setStateBuscar }) => {
 								padding: { xs: "0px", md: "8px" },
 							}}
 						>
-							<Tooltip title="Página Principal">
-								<IconButton
-									size="large"
-									aria-label="Página Principal"
-									color="inherit"
+							<Box
+								sx={{
+									display: "flex",
+									flexDirection: "column",
+									alignItems: "center",
+									margin: "0px 5px",
+								}}
+							>
+								<Tooltip title="Página Principal">
+									<IconButton aria-label="Página Principal" color="inherit">
+										<MdOutlineHome />
+									</IconButton>
+								</Tooltip>
+								<Typography
+									sx={{
+										fontSize: "0.8rem",
+										textAlign: "center",
+									}}
 								>
-									<MdOutlineHome />
-								</IconButton>
-							</Tooltip>
+									Inicio
+								</Typography>
+							</Box>
 
-							<Tooltip title="Buscar artículo">
-								<IconButton
-									size="large"
-									aria-label="Buscar artículos"
-									color="inherit"
-									onClick={abrirCerrarModalBuscar}
+							<Box
+								sx={{
+									display: "flex",
+									flexDirection: "column",
+									alignItems: "center",
+									margin: "0px 5px",
+								}}
+							>
+								<Tooltip title="Buscar artículo">
+									<IconButton
+										aria-label="Buscar artículos"
+										color="inherit"
+										onClick={abrirCerrarModalBuscar}
+									>
+										<MdOutlineSearch />
+									</IconButton>
+								</Tooltip>
+								<Typography
+									sx={{
+										fontSize: "0.8rem",
+										textAlign: "center",
+									}}
 								>
-									<MdOutlineSearch />
-								</IconButton>
-							</Tooltip>
+									Buscar
+								</Typography>
+							</Box>
 
-							<Tooltip title="Filtrar artículos">
-								<IconButton
-									size="large"
-									aria-label="Filtrar artículos"
-									color="inherit"
+							<Box
+								sx={{
+									display: "flex",
+									flexDirection: "column",
+									alignItems: "center",
+									margin: "0px 5px",
+								}}
+							>
+								<Tooltip title="Filtrar artículos">
+									<IconButton aria-label="Filtrar artículos" color="inherit">
+										<MdOutlineFilterList />
+									</IconButton>
+								</Tooltip>
+								<Typography
+									sx={{
+										fontSize: "0.8rem",
+										textAlign: "center",
+									}}
 								>
-									<MdOutlineFilterList />
-								</IconButton>
-							</Tooltip>
+									Artículos
+								</Typography>
+							</Box>
 
-							<Tooltip title="Alternar tema claro/oscuro">
-								<IconButton
-									size="large"
-									aria-label="Alternar tema claro/oscuro"
-									color="inherit"
-									onClick={colorMode.toggleColorMode}
+							<Box
+								sx={{
+									display: "flex",
+									flexDirection: "column",
+									alignItems: "center",
+									margin: "0px 5px",
+								}}
+							>
+								<Tooltip title="Alternar tema claro/oscuro">
+									<IconButton
+										aria-label="Alternar tema claro/oscuro"
+										color="inherit"
+										onClick={colorMode.toggleColorMode}
+									>
+										{mode === "dark" ? <FiMoon /> : <MdOutlineWbSunny />}
+									</IconButton>
+								</Tooltip>
+								<Typography
+									sx={{
+										fontSize: "0.8rem",
+										textAlign: "center",
+									}}
 								>
-									{mode === "dark" ? <FiMoon /> : <MdOutlineWbSunny />}
-								</IconButton>
-							</Tooltip>
+									Modo
+								</Typography>
+							</Box>
 
-							<Tooltip title="Carrito de Compras">
-								<IconButton
-									size="large"
-									aria-label="Carrito de Compras - Cantidad"
-									color="inherit"
+							<Box
+								sx={{
+									display: "flex",
+									flexDirection: "column",
+									alignItems: "center",
+									margin: "0px 5px",
+								}}
+							>
+								<Tooltip title="Carrito de Compras">
+									<IconButton
+										aria-label="Carrito de Compras - Cantidad"
+										color="inherit"
+									>
+										<Badge badgeContent={17} color="error">
+											<TbShoppingCart />
+										</Badge>
+									</IconButton>
+								</Tooltip>
+								<Typography
+									sx={{
+										fontSize: "0.8rem",
+										textAlign: "center",
+									}}
 								>
-									<Badge badgeContent={17} color="error">
-										<TbShoppingCart />
-									</Badge>
-								</IconButton>
-							</Tooltip>
-							<Tooltip title="Login/Logout">
-								<IconButton
-									size="large"
-									edge="end"
-									aria-label="Login/logout"
-									aria-controls={menuId}
-									aria-haspopup="true"
-									onClick={handleProfileMenuOpen}
-									color="inherit"
+									Compras
+								</Typography>
+							</Box>
+
+							<Box
+								sx={{
+									display: "flex",
+									flexDirection: "column",
+									alignItems: "center",
+									margin: "0px 5px",
+								}}
+							>
+								<Tooltip title="Login/Logout">
+									<IconButton
+										aria-label="Login/logout"
+										aria-controls={menuId}
+										aria-haspopup="true"
+										onClick={handleProfileMenuOpen}
+										color="inherit"
+									>
+										<MdOutlineAccountCircle />
+									</IconButton>
+								</Tooltip>
+								<Typography
+									sx={{
+										fontSize: "0.8rem",
+										textAlign: "center",
+									}}
 								>
-									<MdAccountCircle />
-								</IconButton>
-							</Tooltip>
+									Usuario
+								</Typography>
+							</Box>
 						</Box>
 					</Box>
 				</Toolbar>
