@@ -39,6 +39,7 @@ export const ModoOscuro = {
 		default: grey[400], // fondo ppal
 		paper: grey[800], //- navbar
 		icons: grey[500], //fondo iconos en xs
+		secondary: grey[500],
 	},
 	text: {
 		primary: "#FFFFFF", //blanco

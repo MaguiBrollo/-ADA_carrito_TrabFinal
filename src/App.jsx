@@ -15,6 +15,8 @@ import LoraItalicVariableFontwght from "./fonts/LoraItalicVariableFontwght.ttf";
 import { Buscar } from "./componentes/Buscar";
 import { Footer } from "./componentes/Footer";
 import { Nosotros } from "./componentes/Nosotros";
+import { CarruselPpal } from "./componentes/CarruselPpal";
+
 
 //------------------- PRINCIPAL ------------------
 function App() {
@@ -66,6 +68,9 @@ function App() {
 
 				{/* --------- Barra de Navegación -------- */}
 				<NavBar setStateBuscar={setStateBuscar} />
+
+				{/* --------- Carrusel ------------------- */}
+				<CarruselPpal />
 
 				{/* -------- Información de la empresa---- */}
 				<Nosotros />
