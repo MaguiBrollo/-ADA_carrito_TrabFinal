@@ -1,5 +1,7 @@
 import abrigos from "../assets/carruselPpal/abrigos.png";
+import accesorios from "../assets/carruselPpal/accesorios.png";
 import camisas from "../assets/carruselPpal/camisas.png";
+import conjuntos from "../assets/carruselPpal/conjuntos.png";
 
 import gorros from "../assets/carruselPpal/gorros.png";
 import jardineros from "../assets/carruselPpal/jardineros.png";
@@ -15,8 +17,16 @@ export const imagenes = [
 		img: abrigos,
 	},
 	{
+		etiqueta: "Accesorios",
+		img: accesorios,
+	},
+	{
 		etiqueta: "Camisas",
 		img: camisas,
+	},
+	{
+		etiqueta: "Conjuntos",
+		img: conjuntos,
 	},
 	{
 		etiqueta: "Jardineros",

@@ -1,10 +1,16 @@
+//NO BORRAR
 /* eslint-disable react/no-unescaped-entities */
+
 import { useContext } from "react";
 import { Box, Typography } from "@mui/material";
 import { ValoresConstantes } from "./contexts/ConstantesContext";
 
+//====================================================================
+//------------------ Componente Principal ----------------------------
 export const Nosotros = () => {
 	const { anchoMaximo } = useContext(ValoresConstantes);
+
+	//===========================
 	return (
 		<Box
 			sx={{
@@ -31,10 +37,9 @@ export const Nosotros = () => {
 						margin: "15px",
 					}}
 				>
-					"Baby Store" es una tienda online con excelentes artículos
-					para bebes y niños hasta 6 años. Trabajamos con marcas de
-					representación oficial en Argentina, y ofrecemos envíos a todo el
-					país.
+					"Baby Store" es una tienda online con excelentes artículos para bebes
+					y niños hasta 6 años. Trabajamos con marcas de representación oficial
+					en Argentina, y ofrecemos envíos a todo el país.
 				</Typography>
 			</Box>
 		</Box>

@@ -1,14 +1,24 @@
+import { useContext } from "react";
 import { Box } from "@mui/material";
 
-import { Splide, SplideSlide } from "@splidejs/react-splide";
 import { v4 as uuidv4 } from "uuid";
+
+import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 
 import { imagenes } from "../utils/ImagenesCarrusel";
+import { ValoresConstantes } from "./contexts/ConstantesContext";
+import { useTheme } from "@emotion/react";
 
+//====================================================================
+//------------------ Componente Principal ----------------------------
 export const CarruselPpal = () => {
+	const theme = useTheme();
+	const { anchoMaximo } = useContext(ValoresConstantes);
+
+	//===========================
 	return (
-		<Box sx={{ margin: "20px auto" }}>
+		<Box sx={{ margin: "20px auto", maxWidth: `${anchoMaximo}px` }}>
 			<Splide
 				aria-label="Carrusel de Imágenes"
 				style={{
@@ -19,19 +29,25 @@ export const CarruselPpal = () => {
 				options={{
 					start: 0, // índice de inicio
 					rewindByDrag: true, //mover arrastrando
-					pagination: false, //saca los puntitos blancos
+					pagination: true, //saca los puntitos blancos
 					type: "slide", //dejar slide
-					width: "300px", //tiene relación con el width de la img
 					arrows: "true", // Si usa flechas o no
 					keyborad: "global", //habilita atajos teclado
-					perPage: 1, //número de diapositivas que se mostrarán en una página.
-					//gap: "15px",
-					perMove: 1, //número de diapositivas que se moverán a la vez
 					drag: "free", //si se permite al usuario arrastrar el carrusel o no
 					autoplay: true, //reproducción automática o no
 					rewind: true, //si se rebobina
 					pauseOnHover: false,
 					resetProgress: false,
+					//width: "300px", //tiene relación con el width de la img
+					//perPage:xs: 1, //número de diapositivas que se mostrarán en una página.
+					//gap: "15px",
+					//perMove: 1,   //número de diapositivas que se moverán a la vez
+					breakpoints: {
+						600: { perPage: 1, width: "300px" },
+						900: { perPage: 2, width: "600px" },
+						1200: { perPage: 3, width: "900px" },
+						3000: { perPage: 4, width: "1200px" },
+					},
 				}}
 			>
 				{imagenes.map((imagen) => {
@@ -57,8 +73,9 @@ export const CarruselPpal = () => {
 										fontWeight: "900",
 										fontSize: "2rem",
 										color: "text.primary",
-										textShadow:
-											"0px 0px 10px black, 0 0 1em black, 0 0 0.2em black",
+										textShadow: `0px 0px 10px black, 0 0 1em ${theme.palette.background.paper}, 0 0 0.2em ${theme.palette.background.paper}`,
+										/* textShadow:
+											"0px 0px 10px ${background.paper}, 0 0 1em black, 0 0 0.2em black", */
 									}}
 								>
 									{imagen.etiqueta}

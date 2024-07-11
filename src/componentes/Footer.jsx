@@ -2,7 +2,9 @@ import { useContext } from "react";
 
 import { Box, IconButton, Link, Tooltip, Typography } from "@mui/material";
 import { FaInstagram } from "react-icons/fa";
-import { MdOutlineEmail, MdOutlineFacebook } from "react-icons/md";
+import { MdOutlineEmail } from "react-icons/md";
+import { PiFacebookLogoBold } from "react-icons/pi";
+import { PiLinkedinLogoBold } from "react-icons/pi";
 
 import { ValoresConstantes } from "./contexts/ConstantesContext";
 
@@ -37,7 +39,7 @@ export const Footer = () => {
 						color="inherit"
 					>
 						<Tooltip title="Instagram">
-							<IconButton size="large" aria-label="Instagram" color="inherit">
+							<IconButton aria-label="Instagram" color="inherit">
 								<FaInstagram />
 							</IconButton>
 						</Tooltip>
@@ -49,22 +51,31 @@ export const Footer = () => {
 						color="inherit"
 					>
 						<Tooltip title="Facebook">
-							<IconButton size="large" aria-label="Facebook" color="inherit">
-								<MdOutlineFacebook />
+							<IconButton aria-label="Facebook" color="inherit">
+								<PiFacebookLogoBold />
 							</IconButton>
 						</Tooltip>
 					</Link>
+
+					<Link
+						href="https://www.linkedin.com/in/magui-brollo/"
+						target="_blank"
+						color="inherit"
+					>
+						<Tooltip title="Linkedin">
+							<IconButton aria-label="Linkein" color="inherit">
+								<PiLinkedinLogoBold />
+							</IconButton>
+						</Tooltip>
+					</Link>
+
 					<Link
 						href="mailto:maguieb@gmail.com?Subject=Interesado%20en%20los%20productos%20de%20Baby%20Store."
 						target="_blank"
 						color="inherit"
 					>
 						<Tooltip title="Correo Electrónico">
-							<IconButton
-								size="large"
-								aria-label="Correo Electrónico"
-								color="inherit"
-							>
+							<IconButton aria-label="Correo Electrónico" color="inherit">
 								<MdOutlineEmail />
 							</IconButton>
 						</Tooltip>
