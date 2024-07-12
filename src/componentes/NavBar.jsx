@@ -176,6 +176,29 @@ export const NavBar = ({ setStateBuscar }) => {
 									margin: "0px 5px",
 								}}
 							>
+								<Tooltip title="Filtrar artículos">
+									<IconButton aria-label="Filtrar artículos" color="inherit">
+										<MdOutlineFilterList />
+									</IconButton>
+								</Tooltip>
+								<Typography
+									sx={{
+										fontSize: "0.8rem",
+										textAlign: "center",
+									}}
+								>
+									Artículos
+								</Typography>
+							</Box>
+
+							<Box
+								sx={{
+									display: "flex",
+									flexDirection: "column",
+									alignItems: "center",
+									margin: "0px 5px",
+								}}
+							>
 								<Tooltip title="Buscar artículo">
 									<IconButton
 										aria-label="Buscar artículos"
@@ -192,29 +215,6 @@ export const NavBar = ({ setStateBuscar }) => {
 									}}
 								>
 									Buscar
-								</Typography>
-							</Box>
-
-							<Box
-								sx={{
-									display: "flex",
-									flexDirection: "column",
-									alignItems: "center",
-									margin: "0px 5px",
-								}}
-							>
-								<Tooltip title="Filtrar artículos">
-									<IconButton aria-label="Filtrar artículos" color="inherit">
-										<MdOutlineFilterList />
-									</IconButton>
-								</Tooltip>
-								<Typography
-									sx={{
-										fontSize: "0.8rem",
-										textAlign: "center",
-									}}
-								>
-									Artículos
 								</Typography>
 							</Box>
 
@@ -253,34 +253,6 @@ export const NavBar = ({ setStateBuscar }) => {
 									margin: "0px 5px",
 								}}
 							>
-								<Tooltip title="Carrito de Compras">
-									<IconButton
-										aria-label="Carrito de Compras - Cantidad"
-										color="inherit"
-									>
-										<Badge badgeContent={17} color="error">
-											<TbShoppingCart />
-										</Badge>
-									</IconButton>
-								</Tooltip>
-								<Typography
-									sx={{
-										fontSize: "0.8rem",
-										textAlign: "center",
-									}}
-								>
-									Compras
-								</Typography>
-							</Box>
-
-							<Box
-								sx={{
-									display: "flex",
-									flexDirection: "column",
-									alignItems: "center",
-									margin: "0px 5px",
-								}}
-							>
 								<Tooltip title="Login/Logout">
 									<IconButton
 										aria-label="Login/logout"
@@ -299,6 +271,34 @@ export const NavBar = ({ setStateBuscar }) => {
 									}}
 								>
 									Usuario
+								</Typography>
+							</Box>
+
+							<Box
+								sx={{
+									display: "flex",
+									flexDirection: "column",
+									alignItems: "center",
+									margin: "0px 5px",
+								}}
+							>
+								<Tooltip title="Carrito de Compras">
+									<IconButton
+										aria-label="Carrito de Compras - Cantidad"
+										color="inherit"
+									>
+										<Badge badgeContent={17} color="error">
+											<TbShoppingCart />
+										</Badge>
+									</IconButton>
+								</Tooltip>
+								<Typography
+									sx={{
+										fontSize: "0.8rem",
+										textAlign: "center",
+									}}
+								>
+									Compras
 								</Typography>
 							</Box>
 						</Box>
