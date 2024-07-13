@@ -30,7 +30,7 @@ import Logo_Baby from "../assets/Logo_Baby.png";
 
 //====================================================================
 //------------------ Componente Principal ----------------------------
-export const NavBar = ({ setStateBuscar }) => {
+export const NavBar = ({ setStateBuscar, verArticulo, setVerArticulos }) => {
 	const [anchorEl, setAnchorEl] = useState(null);
 
 	const { anchoMaximo } = useContext(ValoresConstantes);
@@ -46,8 +46,16 @@ export const NavBar = ({ setStateBuscar }) => {
 		setAnchorEl(null);
 	};
 
+
+	//--- navbar ---
+	const volverInicio = () => {
+		setVerArticulos(false);
+	};
 	const abrirCerrarModalBuscar = () => {
 		setStateBuscar(true);
+	};
+	const abrirCerrarModalArticulos = () => {
+		setVerArticulos(!verArticulo);
 	};
 
 	//-------- Menú de Login/out
@@ -139,7 +147,7 @@ export const NavBar = ({ setStateBuscar }) => {
 								display: "flex",
 								justifyContent: { xs: "space-around", md: "flex-end" },
 								backgroundColor: {
-									xs: "background.icons",
+									xs: "background.third",
 									md: "background.paper",
 								},
 								padding: { xs: "0px", md: "8px" },
@@ -154,7 +162,11 @@ export const NavBar = ({ setStateBuscar }) => {
 								}}
 							>
 								<Tooltip title="Página Principal">
-									<IconButton aria-label="Página Principal" color="inherit">
+									<IconButton
+										aria-label="Página Principal"
+										color="inherit"
+										onClick={volverInicio}
+									>
 										<MdOutlineHome />
 									</IconButton>
 								</Tooltip>
@@ -177,7 +189,11 @@ export const NavBar = ({ setStateBuscar }) => {
 								}}
 							>
 								<Tooltip title="Filtrar artículos">
-									<IconButton aria-label="Filtrar artículos" color="inherit">
+									<IconButton
+										aria-label="Filtrar artículos"
+										color="inherit"
+										onClick={abrirCerrarModalArticulos}
+									>
 										<MdOutlineFilterList />
 									</IconButton>
 								</Tooltip>
