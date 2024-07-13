@@ -16,11 +16,14 @@ import { Buscar } from "./componentes/Buscar";
 import { Footer } from "./componentes/Footer";
 import { Nosotros } from "./componentes/Nosotros";
 import { CarruselPpal } from "./componentes/CarruselPpal";
+import { ArticulosListar } from "./componentes/ArticulosListar";
 
 
+//====================================================================
 //------------------- PRINCIPAL ------------------
 function App() {
 	const [stateBuscar, setStateBuscar] = React.useState(false);
+	const [verArticulos, setVerArticulos] = React.useState(true);
 	const { mode } = useContext(ColorModeContext);
 
 	//---------- Paleta de colores para Modo Claro Oscuro
@@ -52,6 +55,7 @@ function App() {
 		[mode]
 	);
 
+	//===========================
 	return (
 		<ThemeProvider theme={theme}>
 			<Box
@@ -67,10 +71,17 @@ function App() {
 				<Header />
 
 				{/* --------- Barra de Navegación -------- */}
-				<NavBar setStateBuscar={setStateBuscar} />
+				<NavBar
+					setStateBuscar={setStateBuscar}
+					verArticulos={verArticulos}
+					setVerArticulos={setVerArticulos}
+				/>
 
 				{/* --------- Carrusel ------------------- */}
-				<CarruselPpal />
+				{!verArticulos && <CarruselPpal />}
+
+				{/* --------- Carrusel ------------------- */}
+				{verArticulos && <ArticulosListar />}
 
 				{/* -------- Información de la empresa---- */}
 				<Nosotros />

@@ -3,17 +3,19 @@ import { grey } from "@mui/material/colors";
 //colores, ver img en carpeta: img de los tp
 export const ModoClaro = {
 	primary: {
-		main: "#00899A", // +oscuro - 5
+		main: "#B1E1EA", //+clarito - 1
 	},
 	secondary: {
-		main: "#B1E1EA", //+clarito - 1
+		main: "#00899A", // +oscuro - 5
 	},
 
 	background: {
 		default: "#B1E1EA", //+clarito - 1  - fondo ppal
 		paper: "#00899A", // +oscuro - 5   - navbar
-		icons: "#00B4C5", // intermedio - 3  - fondo iconos en xs
+		
 		secondary: "#8DD2DD", //clarito - 2  - fondo secundario
+		third: "#00B4C5", // intermedio - 3  - fondo iconos en xs
+		fourth: "#009EB0", // +oscuro - 4
 	},
 	text: {
 		primary: "#FFFFFF", //blanco
