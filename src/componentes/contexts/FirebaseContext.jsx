@@ -9,9 +9,18 @@ export const FirebaseContext = createContext();
 export const FirebaseProvider = ({ children }) => {
 	const [filtrarPor, setFiltrarPor] = useState("");
 	const [articulosMostrar, setArticulosMostrar] = useState([]);
+	const [categoria, setCategoria] = useState([]);
 	//-------------
 	//Aquí debería buscar articulos de firebase
 	//y dejarlos en el array "articulos"
+
+	useEffect(() => {
+		const cat = categorias.map((c) => {
+			const cant = articulos.filter((a) => a.categoriaId === c.id);
+			return { ...c, cantidad: cant.length };
+		});
+		setCategoria(cat);
+	}, []);
 
 	useEffect(() => {
 		if (filtrarPor !== "") {
@@ -20,7 +29,7 @@ export const FirebaseProvider = ({ children }) => {
 				articulosFiltrados = [...articulos];
 			} else {
 				articulosFiltrados = articulos.filter(
-					(a) => (a.categoriaId = filtrarPor)
+					(a) => a.categoriaId === filtrarPor
 				);
 			}
 			setArticulosMostrar(articulosFiltrados);
@@ -29,7 +38,7 @@ export const FirebaseProvider = ({ children }) => {
 
 	return (
 		<FirebaseContext.Provider
-			value={{ articulosMostrar, categorias, filtrarPor, setFiltrarPor }}
+			value={{ articulosMostrar, categoria, filtrarPor, setFiltrarPor }}
 		>
 			{children}
 		</FirebaseContext.Provider>

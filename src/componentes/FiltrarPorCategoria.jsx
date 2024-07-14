@@ -7,6 +7,7 @@ import {
 	ListItem,
 	ListItemButton,
 	ListItemText,
+	Button,
 } from "@mui/material";
 import Drawer from "@mui/material/Drawer";
 import Divider from "@mui/material/Divider";
@@ -23,7 +24,7 @@ export const FiltrarPorCategoria = ({
 	abrirFiltrar,
 	setAbrirFiltrar,
 }) => {
-	const { categorias, setFiltrarPor } = useContext(FirebaseContext);
+	const { categoria, setFiltrarPor } = useContext(FirebaseContext);
 
 	const mostraTodosLosArticulos = () => {
 		setAbrirFiltrar(false);
@@ -31,10 +32,9 @@ export const FiltrarPorCategoria = ({
 		setMenu("articulosTodos");
 	};
 
-	const mostraArticulosFiltrados = (e, cat) => {
+	const mostraArticulosFiltrados = (e) => {
 		setAbrirFiltrar(false);
-		console.log(e.target.innerText);
-		setFiltrarPor("TODOS");
+		setFiltrarPor(e.target.value);
 		setMenu("articulosTodos");
 	};
 
@@ -94,20 +94,17 @@ export const FiltrarPorCategoria = ({
 				</List>
 				<Divider />
 				<List>
-					{categorias.map((cat) => (
+					{categoria.map((cat) => (
 						<ListItem key={cat.id} disablePadding>
-							<ListItemButton
-								title={cat.id}
-								onClick={(e, cat) => mostraArticulosFiltrados(e, cat)}
+							<Button
+								disabled={cat.cantidad > 0 ? false : true}
+								value={cat.id}
+								id={cat.id}
+								variant="text"
+								onClick={(e) => mostraArticulosFiltrados(e)}
 							>
-								<ListItemText
-									primary={cat.categoria}
-									primaryTypographyProps={{
-										fontSize: "0.8rem",
-										lineHeight: "1",
-									}}
-								/>
-							</ListItemButton>
+								{cat.categoria} ({cat.cantidad})
+							</Button>
 						</ListItem>
 					))}
 				</List>

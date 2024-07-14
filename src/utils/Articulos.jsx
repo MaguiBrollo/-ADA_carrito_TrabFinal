@@ -2,52 +2,52 @@ import ropa from "../assets/ropa.png";
 
 export const categorias = [
 	{
-		id: 1,
+		id: "1",
 		categoria: "ABRIGOS",
 		cantidad: 0,
 	},
 	{
-		id: 2,
+		id: "2",
 		categoria: "ACCESORIOS",
 		cantidad: 0,
 	},
 	{
-		id: 3,
+		id: "3",
 		categoria: "CAMISAS",
 		cantidad: 0,
 	},
 	{
-		id: 4,
+		id: "4",
 		categoria: "CONJUNTOS",
 		cantidad: 0,
 	},
 	{
-		id: 5,
+		id: "5",
 		categoria: "GORROS",
 		cantidad: 0,
 	},
 	{
-		id: 6,
+		id: "6",
 		categoria: "JARDINEROS",
 		cantidad: 0,
 	},
 	{
-		id: 7,
+		id: "7",
 		categoria: "MONITOS",
 		cantidad: 0,
 	},
 	{
-		id: 8,
+		id: "8",
 		categoria: "PANTALONES",
 		cantidad: 0,
 	},
 	{
-		id: 9,
+		id: "9",
 		categoria: "REMERAS",
 		cantidad: 0,
 	},
 	{
-		id: 10,
+		id: "10",
 		categoria: "VESTIDOS",
 		cantidad: 0,
 	},
@@ -57,7 +57,7 @@ export const articulos = [
 	{
 		ID: 1,
 		nombre: "CAMPERA NENA",
-		categoriaId: 1,
+		categoriaId: "1",
 		precio: 45000.25,
 		descripcion:
 			"CARDIGAN FRISA ESTAMPADA. COMPOSICIÓN: 88% ALGODÓN-12% POLIESTER.",
@@ -69,7 +69,7 @@ export const articulos = [
 	{
 		ID: 2,
 		nombre: "CAMPERA MARRON LINDO PRECIO",
-		categoriaId: 1,
+		categoriaId: "1",
 		precio: 37000.0,
 		descripcion: "CAMPERA CORDERITO DOBLE.",
 		imagen: ropa,
@@ -80,7 +80,7 @@ export const articulos = [
 	{
 		ID: 3,
 		nombre: "CAMPERA VIOLETA",
-		categoriaId: 1,
+		categoriaId: "1",
 		precio: 19900.25,
 		descripcion: "CAMPERA ESTAMPADA CON CAPUCHA.",
 		imagen: ropa,
@@ -91,7 +91,7 @@ export const articulos = [
 	{
 		ID: 4,
 		nombre: "CARDIGAN NENA",
-		categoriaId: 1,
+		categoriaId: "1",
 		precio: 34000.25,
 		descripcion: "CARDIGAN DE PLUSH CON BORDADO.",
 		imagen: ropa,
@@ -102,7 +102,7 @@ export const articulos = [
 	{
 		ID: 5,
 		nombre: "CAMPERA GRIS",
-		categoriaId: 1,
+		categoriaId: "1",
 		precio: 34000.25,
 		descripcion: "CARDIGAN DE FRISA MELANGE.",
 		imagen: ropa,
@@ -113,7 +113,7 @@ export const articulos = [
 	{
 		ID: 6,
 		nombre: "CAMPERA NENA CRUDO",
-		categoriaId: 1,
+		categoriaId: "1",
 		precio: 34000.25,
 		descripcion: "ABRIGO DE PIELCITA.",
 		imagen: ropa,
@@ -125,7 +125,7 @@ export const articulos = [
 	{
 		ID: 7,
 		nombre: "CAMPERA RAYAS COLORES",
-		categoriaId: 1,
+		categoriaId: "1",
 		precio: 34000.25,
 		descripcion: "CAMPERA DE NYLON CON RECORTES.",
 		imagen: ropa,
@@ -136,7 +136,7 @@ export const articulos = [
 	{
 		ID: 8,
 		nombre: "CARDIGAN NENA",
-		categoriaId: 1,
+		categoriaId: "1",
 		precio: 40000.25,
 		descripcion: "CARDIGAN DE FRISA.",
 		imagen: ropa,
@@ -147,7 +147,7 @@ export const articulos = [
 	{
 		ID: 9,
 		nombre: "CARDIGAN NEGRO",
-		categoriaId: 1,
+		categoriaId: "1",
 		precio: 12000.0,
 		descripcion: "CARDIGAN DE FRISA.",
 		imagen: ropa,
@@ -159,12 +159,58 @@ export const articulos = [
 	{
 		ID: 10,
 		nombre: "CARDIGAN VERDE",
-		categoriaId: 1,
+		categoriaId: "2",
 		precio: 35000.25,
 		descripcion: "CARDIGAN DE FRISA.",
 		imagen: ropa,
 		descripcionLarga:
 			"CARDIGAN DE FRISA, TIENE CALCE HOMBRO CAÍDO. ESTAMPA CON ALTURA EN ESPALDA. COMPOSICIÓN: 86% ALGODÓN- 14% POLIESTER.",
+		stock: 20,
+	},
+
+	{
+		ID: 11,
+		nombre: "CARDIGAN NENA",
+		categoriaId: "3",
+		precio: 40000.25,
+		descripcion: "CARDIGAN DE FRISA.",
+		imagen: ropa,
+		descripcionLarga: "CARDIGAN DE FRISA. COMPOSICIÓN: 96% ALGODÓN-4% ELASTANO",
+		stock: 20,
+	},
+
+	{
+		ID: 12,
+		nombre: "CARDIGAN NEGRO",
+		categoriaId: "3",
+		precio: 12000.0,
+		descripcion: "CARDIGAN DE FRISA.",
+		imagen: ropa,
+		descripcionLarga:
+			"CARDIGAN DE FRISA MELANGE UNISEX. COMPOSICIÓN 80 ALGODÓN, 20% POLIESTER. ",
+		stock: 8,
+	},
+
+	{
+		ID: 13,
+		nombre: "CARDIGAN VERDE",
+		categoriaId: "3",
+		precio: 35000.25,
+		descripcion: "CARDIGAN DE FRISA.",
+		imagen: ropa,
+		descripcionLarga:
+			"CARDIGAN DE FRISA, TIENE CALCE HOMBRO CAÍDO. ESTAMPA CON ALTURA EN ESPALDA. COMPOSICIÓN: 86% ALGODÓN- 14% POLIESTER.",
+		stock: 20,
+	},
+	{
+		ID: 14,
+		nombre: "VESTIDOS HERMOSOS",
+		categoriaId: "10",
+		precio: 35000.25,
+		descripcion: "VESTIDO DE FRISA.",
+		imagen: ropa,
+		descripcionLarga:
+			"VESTIDO DE FRISA, TIENE CALCE HOMBRO CAÍDO. ESTAMPA CON ALTURA EN ESPALDA. COMPOSICIÓN: 86% ALGODÓN- 14% POLIESTER.",
 		stock: 20,
 	},
 ];

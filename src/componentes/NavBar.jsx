@@ -94,7 +94,7 @@ export const NavBar = ({
 
 	//===========================
 	return (
-		<Box sx={{ flexGrow: 1, padding: "0px" }}>
+		<Box sx={{  padding: "0px" }}>
 			<AppBar position="static">
 				<Toolbar
 					sx={{

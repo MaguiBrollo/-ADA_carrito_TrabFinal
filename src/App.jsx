@@ -14,11 +14,10 @@ import { ColorModeContext } from "./componentes/contexts/ModoClaOscContext";
 import { ModoClaro } from "./utils/ColoresModo";
 import { ModoOscuro } from "./utils/ColoresModo";
 import { Footer } from "./componentes/Footer";
-import { Nosotros } from "./componentes/Nosotros";
-import { CarruselPpal } from "./componentes/CarruselPpal";
 import { Buscar } from "./componentes/Buscar";
 import { FiltrarPorCategoria } from "./componentes/FiltrarPorCategoria";
 import { ArticulosListar } from "./componentes/ArticulosListar";
+import { Inicio } from "./componentes/Inicio";
 
 //====================================================================
 //------------------- PRINCIPAL ------------------
@@ -81,11 +80,7 @@ function App() {
 				/>
 
 				{/* -- Carrusel / Información de la empresa ------------------ */}
-				{menu === "inicio" && (
-					<>
-						<CarruselPpal /> <Nosotros />
-					</>
-				)}
+				{menu === "inicio" && <Inicio/>}
 
 				{/* --------- Modal Drawer Buscar -------- */}
 				{abrirFiltrar && (
