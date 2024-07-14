@@ -6,7 +6,7 @@ export const ColorModeContext = createContext({
 
 //====================================================================
 //------------------ Componente Principal ----------------------------
-export const ModoClaOscContext = ({ children }) => {
+export const ModoClaOscProvider = ({ children }) => {
 	//--------------------- Modo Claro Oscuro
 	const [mode, setMode] = useState(
 		localStorage.getItem("modoClaroOscuro") || "light"

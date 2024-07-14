@@ -3,12 +3,12 @@
 
 import { useContext } from "react";
 import { Box, Typography } from "@mui/material";
-import { ValoresConstantes } from "./contexts/ConstantesContext";
+import { ConstantesContext } from "./contexts/ConstantesContext";
 
 //====================================================================
 //------------------ Componente Principal ----------------------------
 export const Nosotros = () => {
-	const { anchoMaximo } = useContext(ValoresConstantes);
+	const { anchoMaximo } = useContext(ConstantesContext);
 
 	//===========================
 	return (
