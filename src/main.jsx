@@ -5,16 +5,19 @@ import "./index.css";
 
 import CssBaseline from "@mui/material/CssBaseline";
 
-import { ConstantesContext } from "./componentes/contexts/ConstantesContext.jsx";
-import { ModoClaOscContext } from "./componentes/contexts/ModoClaOscContext.jsx";
+import { ConstantesProvider } from "./componentes/contexts/ConstantesContext.jsx";
+import { ModoClaOscProvider } from "./componentes/contexts/ModoClaOscContext.jsx";
+import { FirebaseProvider } from "./componentes/contexts/FirebaseContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<React.StrictMode>
-		<ConstantesContext>
-			<ModoClaOscContext>
-				<CssBaseline />
-				<App />
-			</ModoClaOscContext>
-		</ConstantesContext>
+		<FirebaseProvider>
+			<ConstantesProvider>
+				<ModoClaOscProvider>
+					<CssBaseline />
+					<App />
+				</ModoClaOscProvider>
+			</ConstantesProvider>
+		</FirebaseProvider>
 	</React.StrictMode>
 );

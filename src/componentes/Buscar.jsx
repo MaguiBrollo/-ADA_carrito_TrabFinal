@@ -38,9 +38,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 //====================================================================
 //------------------ Componente Principal ----------------------------
-export const Buscar = ({ stateBuscar, setStateBuscar }) => {
+export const Buscar = ({ abrirBuscar, setAbrirBuscar }) => {
 	const abrirCerrarModalBuscar = () => {
-		setStateBuscar(false);
+		setAbrirBuscar(false);
 	};
 
 	const list = () => (
@@ -73,7 +73,6 @@ export const Buscar = ({ stateBuscar, setStateBuscar }) => {
 						aria-label="Cerrar buscar"
 						color="inherit"
 						onClick={abrirCerrarModalBuscar}
-						
 					>
 						<MdClose />
 					</IconButton>
@@ -103,7 +102,7 @@ export const Buscar = ({ stateBuscar, setStateBuscar }) => {
 	//===========================
 	return (
 		<div>
-			<Drawer open={stateBuscar} onClose={() => setStateBuscar(false)}>
+			<Drawer open={abrirBuscar} onClose={() => setAbrirBuscar(false)}>
 				{list()}
 			</Drawer>
 		</div>

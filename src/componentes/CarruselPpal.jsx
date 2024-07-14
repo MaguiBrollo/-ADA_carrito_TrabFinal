@@ -7,14 +7,14 @@ import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 
 import { imagenes } from "../utils/ImagenesCarrusel";
-import { ValoresConstantes } from "./contexts/ConstantesContext";
+import { ConstantesContext } from "./contexts/ConstantesContext";
 import { useTheme } from "@emotion/react";
 
 //====================================================================
 //------------------ Componente Principal ----------------------------
 export const CarruselPpal = () => {
 	const theme = useTheme();
-	const { anchoMaximo } = useContext(ValoresConstantes);
+	const { anchoMaximo } = useContext(ConstantesContext);
 
 	//===========================
 	return (

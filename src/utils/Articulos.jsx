@@ -1,6 +1,6 @@
 import ropa from "../assets/ropa.png";
 
-export const categoras = [
+export const categorias = [
 	{
 		id: 1,
 		categoria: "ABRIGOS",
@@ -32,22 +32,22 @@ export const categoras = [
 		cantidad: 0,
 	},
 	{
-		id: 6,
+		id: 7,
 		categoria: "MONITOS",
 		cantidad: 0,
 	},
 	{
-		id: 7,
+		id: 8,
 		categoria: "PANTALONES",
 		cantidad: 0,
 	},
 	{
-		id: 8,
+		id: 9,
 		categoria: "REMERAS",
 		cantidad: 0,
 	},
 	{
-		id: 9,
+		id: 10,
 		categoria: "VESTIDOS",
 		cantidad: 0,
 	},

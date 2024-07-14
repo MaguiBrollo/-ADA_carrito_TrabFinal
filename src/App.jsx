@@ -1,5 +1,9 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import * as React from "react";
+
+//Fuentes
+import LoraItalicVariableFontwght from "./fonts/LoraItalicVariableFontwght.ttf";
+
 import { useContext } from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { Box } from "@mui/material";
@@ -7,23 +11,21 @@ import { Box } from "@mui/material";
 import { Header } from "./componentes/Header";
 import { NavBar } from "./componentes/NavBar";
 import { ColorModeContext } from "./componentes/contexts/ModoClaOscContext";
-
 import { ModoClaro } from "./utils/ColoresModo";
 import { ModoOscuro } from "./utils/ColoresModo";
-
-import LoraItalicVariableFontwght from "./fonts/LoraItalicVariableFontwght.ttf";
-import { Buscar } from "./componentes/Buscar";
 import { Footer } from "./componentes/Footer";
 import { Nosotros } from "./componentes/Nosotros";
 import { CarruselPpal } from "./componentes/CarruselPpal";
+import { Buscar } from "./componentes/Buscar";
+import { FiltrarPorCategoria } from "./componentes/FiltrarPorCategoria";
 import { ArticulosListar } from "./componentes/ArticulosListar";
-
 
 //====================================================================
 //------------------- PRINCIPAL ------------------
 function App() {
-	const [stateBuscar, setStateBuscar] = React.useState(false);
-	const [verArticulos, setVerArticulos] = React.useState(true);
+	const [menu, setMenu] = React.useState("inicio");
+	const [abrirBuscar, setAbrirBuscar] = React.useState(false);
+	const [abrirFiltrar, setAbrirFiltrar] = React.useState(false);
 	const { mode } = useContext(ColorModeContext);
 
 	//---------- Paleta de colores para Modo Claro Oscuro
@@ -72,27 +74,37 @@ function App() {
 
 				{/* --------- Barra de Navegación -------- */}
 				<NavBar
-					setStateBuscar={setStateBuscar}
-					verArticulos={verArticulos}
-					setVerArticulos={setVerArticulos}
+					setMenu={setMenu}
+					setAbrirBuscar={setAbrirBuscar}
+					abrirFiltrar={abrirFiltrar}
+					setAbrirFiltrar={setAbrirFiltrar}
 				/>
 
-				{/* --------- Carrusel ------------------- */}
-				{!verArticulos && <CarruselPpal />}
+				{/* -- Carrusel / Información de la empresa ------------------ */}
+				{menu === "inicio" && (
+					<>
+						<CarruselPpal /> <Nosotros />
+					</>
+				)}
 
+				{/* --------- Modal Drawer Buscar -------- */}
+				{abrirFiltrar && (
+					<FiltrarPorCategoria
+						setMenu={setMenu}
+						abrirFiltrar={abrirFiltrar}
+						setAbrirFiltrar={setAbrirFiltrar}
+					/>
+				)}
 				{/* --------- Carrusel ------------------- */}
-				{verArticulos && <ArticulosListar />}
+				{menu === "articulosTodos" && <ArticulosListar />}
 
-				{/* -------- Información de la empresa---- */}
-				<Nosotros />
+				{/* --------- Modal Drawer Buscar -------- */}
+				{abrirBuscar && (
+					<Buscar abrirBuscar={abrirBuscar} setAbrirBuscar={setAbrirBuscar} />
+				)}
 
 				{/* --------- Barra de Footer  ----------- */}
 				<Footer />
-
-				{/* --------- Modal Drawer Buscar -------- */}
-				{stateBuscar && (
-					<Buscar setStateBuscar={setStateBuscar} stateBuscar={stateBuscar} />
-				)}
 			</Box>
 		</ThemeProvider>
 	);

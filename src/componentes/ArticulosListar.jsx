@@ -1,13 +1,13 @@
 import { useContext } from "react";
 import { Box } from "@mui/material";
 
-import { articulos } from "../utils/Articulos";
 import { ArticuloCard } from "./ArticuloCard";
-
-import { ValoresConstantes } from "./contexts/ConstantesContext";
+import { ConstantesContext } from "./contexts/ConstantesContext";
+import { FirebaseContext } from "./contexts/FirebaseContext";
 
 export const ArticulosListar = () => {
-	const { anchoMaximo } = useContext(ValoresConstantes);
+	const { anchoMaximo } = useContext(ConstantesContext);
+	const { articulosMostrar } = useContext(FirebaseContext);
 
 	//===========================
 	return (
@@ -25,7 +25,7 @@ export const ArticulosListar = () => {
 				},
 			}}
 		>
-			{articulos.map((art) => {
+			{articulosMostrar.map((art) => {
 				return <ArticuloCard key={art.ID} art={art} />;
 			})}
 		</Box>

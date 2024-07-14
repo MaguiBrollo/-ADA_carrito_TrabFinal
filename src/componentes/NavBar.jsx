@@ -24,16 +24,21 @@ import { FiMoon } from "react-icons/fi";
 import { TbShoppingCart } from "react-icons/tb";
 
 import { ColorModeContext } from "./contexts/ModoClaOscContext";
-import { ValoresConstantes } from "./contexts/ConstantesContext";
+import { ConstantesContext } from "./contexts/ConstantesContext";
 
 import Logo_Baby from "../assets/Logo_Baby.png";
 
 //====================================================================
 //------------------ Componente Principal ----------------------------
-export const NavBar = ({ setStateBuscar, verArticulo, setVerArticulos }) => {
+export const NavBar = ({
+	setMenu,
+	setAbrirBuscar,
+	abrirFiltrar,
+	setAbrirFiltrar,
+}) => {
 	const [anchorEl, setAnchorEl] = useState(null);
 
-	const { anchoMaximo } = useContext(ValoresConstantes);
+	const { anchoMaximo } = useContext(ConstantesContext);
 	const { colorMode, mode } = useContext(ColorModeContext);
 
 	const isMenuOpen = Boolean(anchorEl);
@@ -46,16 +51,15 @@ export const NavBar = ({ setStateBuscar, verArticulo, setVerArticulos }) => {
 		setAnchorEl(null);
 	};
 
-
 	//--- navbar ---
 	const volverInicio = () => {
-		setVerArticulos(false);
+		setMenu("inicio");
 	};
 	const abrirCerrarModalBuscar = () => {
-		setStateBuscar(true);
+		setAbrirBuscar(true);
 	};
 	const abrirCerrarModalArticulos = () => {
-		setVerArticulos(!verArticulo);
+		setAbrirFiltrar(!abrirFiltrar);
 	};
 
 	//-------- Menú de Login/out

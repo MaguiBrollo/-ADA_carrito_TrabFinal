@@ -1,17 +1,17 @@
 import { createContext } from "react";
 
-export const ValoresConstantes = createContext();
+export const ConstantesContext = createContext();
 
 //====================================================================
 //------------------ Componente Principal ----------------------------
-export const ConstantesContext = ({ children }) => {
+export const ConstantesProvider = ({ children }) => {
 	const anchoMaximo= '1200';
 	
 
 	//===========================
 	return (
-		<ValoresConstantes.Provider value={{anchoMaximo}}>
+		<ConstantesContext.Provider value={{anchoMaximo}}>
 			{children}
-		</ValoresConstantes.Provider>
+		</ConstantesContext.Provider>
 	);
 };
