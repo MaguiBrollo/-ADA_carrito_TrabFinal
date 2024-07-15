@@ -29,13 +29,13 @@ export const FiltrarPorCategoria = ({
 	const mostraTodosLosArticulos = () => {
 		setAbrirFiltrar(false);
 		setFiltrarPor("TODOS");
-		setMenu("articulosTodos");
+		setMenu("articulos");
 	};
 
 	const mostraArticulosFiltrados = (e) => {
 		setAbrirFiltrar(false);
 		setFiltrarPor(e.target.value);
-		setMenu("articulosTodos");
+		setMenu("articulos");
 	};
 
 	//----------------------------------

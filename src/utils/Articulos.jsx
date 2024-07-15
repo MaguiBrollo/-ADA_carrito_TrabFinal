@@ -56,7 +56,7 @@ export const categorias = [
 export const articulos = [
 	{
 		ID: 1,
-		nombre: "CAMPERA NENA",
+		nombre: "CAMPERA NENA 1",
 		categoriaId: "1",
 		precio: 45000.25,
 		descripcion:
@@ -68,7 +68,7 @@ export const articulos = [
 	},
 	{
 		ID: 2,
-		nombre: "CAMPERA MARRON LINDO PRECIO",
+		nombre: "CAMPERA MARRON LINDO PRECIO 2",
 		categoriaId: "1",
 		precio: 37000.0,
 		descripcion: "CAMPERA CORDERITO DOBLE.",
@@ -79,7 +79,7 @@ export const articulos = [
 	},
 	{
 		ID: 3,
-		nombre: "CAMPERA VIOLETA",
+		nombre: "CAMPERA VIOLETA 3",
 		categoriaId: "1",
 		precio: 19900.25,
 		descripcion: "CAMPERA ESTAMPADA CON CAPUCHA.",
@@ -90,7 +90,7 @@ export const articulos = [
 	},
 	{
 		ID: 4,
-		nombre: "CARDIGAN NENA",
+		nombre: "CARDIGAN NENA 4",
 		categoriaId: "1",
 		precio: 34000.25,
 		descripcion: "CARDIGAN DE PLUSH CON BORDADO.",
@@ -101,7 +101,7 @@ export const articulos = [
 	},
 	{
 		ID: 5,
-		nombre: "CAMPERA GRIS",
+		nombre: "CAMPERA GRIS 5",
 		categoriaId: "1",
 		precio: 34000.25,
 		descripcion: "CARDIGAN DE FRISA MELANGE.",
@@ -112,7 +112,7 @@ export const articulos = [
 	},
 	{
 		ID: 6,
-		nombre: "CAMPERA NENA CRUDO",
+		nombre: "CAMPERA NENA CRUDO 6",
 		categoriaId: "1",
 		precio: 34000.25,
 		descripcion: "ABRIGO DE PIELCITA.",
@@ -124,7 +124,7 @@ export const articulos = [
 
 	{
 		ID: 7,
-		nombre: "CAMPERA RAYAS COLORES",
+		nombre: "CAMPERA RAYAS COLORES 7",
 		categoriaId: "1",
 		precio: 34000.25,
 		descripcion: "CAMPERA DE NYLON CON RECORTES.",
@@ -135,7 +135,7 @@ export const articulos = [
 	},
 	{
 		ID: 8,
-		nombre: "CARDIGAN NENA",
+		nombre: "CARDIGAN NENA 8",
 		categoriaId: "1",
 		precio: 40000.25,
 		descripcion: "CARDIGAN DE FRISA.",
@@ -146,7 +146,7 @@ export const articulos = [
 
 	{
 		ID: 9,
-		nombre: "CARDIGAN NEGRO",
+		nombre: "CARDIGAN NEGRO 9",
 		categoriaId: "1",
 		precio: 12000.0,
 		descripcion: "CARDIGAN DE FRISA.",
@@ -158,7 +158,7 @@ export const articulos = [
 
 	{
 		ID: 10,
-		nombre: "CARDIGAN VERDE",
+		nombre: "CARDIGAN VERDE 10",
 		categoriaId: "2",
 		precio: 35000.25,
 		descripcion: "CARDIGAN DE FRISA.",
@@ -170,7 +170,7 @@ export const articulos = [
 
 	{
 		ID: 11,
-		nombre: "CARDIGAN NENA",
+		nombre: "CARDIGAN NENA 11",
 		categoriaId: "3",
 		precio: 40000.25,
 		descripcion: "CARDIGAN DE FRISA.",
@@ -181,7 +181,7 @@ export const articulos = [
 
 	{
 		ID: 12,
-		nombre: "CARDIGAN NEGRO",
+		nombre: "CARDIGAN NEGRO 12",
 		categoriaId: "3",
 		precio: 12000.0,
 		descripcion: "CARDIGAN DE FRISA.",
@@ -193,7 +193,7 @@ export const articulos = [
 
 	{
 		ID: 13,
-		nombre: "CARDIGAN VERDE",
+		nombre: "CARDIGAN VERDE 13",
 		categoriaId: "3",
 		precio: 35000.25,
 		descripcion: "CARDIGAN DE FRISA.",
@@ -204,7 +204,7 @@ export const articulos = [
 	},
 	{
 		ID: 14,
-		nombre: "VESTIDOS HERMOSOS",
+		nombre: "VESTIDOS HERMOSOS 14",
 		categoriaId: "10",
 		precio: 35000.25,
 		descripcion: "VESTIDO DE FRISA.",

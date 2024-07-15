@@ -1,22 +1,31 @@
 import { Box, Tooltip, IconButton, Typography, TextField } from "@mui/material";
 import Drawer from "@mui/material/Drawer";
 import Divider from "@mui/material/Divider";
-
 import { MdOutlineSearch } from "react-icons/md";
 import { MdClose } from "react-icons/md";
 import { useState } from "react";
 
+import { useContext } from "react";
+
+import { FirebaseContext } from "./contexts/FirebaseContext";
+
 //====================================================================
 //------------------ Componente Principal ----------------------------
-export const Buscar = ({ abrirBuscar, setAbrirBuscar }) => {
+export const Buscar = ({ abrirBuscar, setAbrirBuscar, setMenu }) => {
 	const [error, setError] = useState();
 	const [helperText, setHelperText] = useState(" ");
 	const [buscar, setBuscar] = useState("");
+	const { setBuscarPor } = useContext(FirebaseContext);
 
 	const textoBuscarArticulo = (event) => {
-		setBuscar(event.target.value);
-		setHelperText(" ");
-		setError(false);
+		if (event.target.value.length > 30) {
+			setHelperText("Hsta 30 caracteres.");
+			setError(true);
+		} else {
+			setBuscar(event.target.value);
+			setHelperText(" ");
+			setError(false);
+		}
 	};
 
 	const handleSubmit = (event) => {
@@ -26,6 +35,8 @@ export const Buscar = ({ abrirBuscar, setAbrirBuscar }) => {
 			setHelperText("No puede ser vacío.");
 			setError(true);
 		} else {
+			setBuscarPor(buscar.toUpperCase()); //activa la busqueda en FirebaseContext
+			setMenu("articulos");
 			setHelperText("");
 			setAbrirBuscar(false);
 		}

@@ -33,7 +33,6 @@ import Logo_Baby from "../assets/Logo_Baby.png";
 export const NavBar = ({
 	setMenu,
 	setAbrirBuscar,
-	abrirFiltrar,
 	setAbrirFiltrar,
 }) => {
 	const [anchorEl, setAnchorEl] = useState(null);
@@ -59,11 +58,11 @@ export const NavBar = ({
 		setAbrirBuscar(true);
 	};
 	const abrirCerrarModalArticulos = () => {
-		setAbrirFiltrar(!abrirFiltrar);
+		setAbrirFiltrar(true);
 	};
 
-	//-------- Menú de Login/out
-	const menuId = "primary-search-account-menu";
+	//-------- Menú de Usuario Login/out -----
+	const menuId = "menu-usuario";
 	const renderMenu = (
 		<Menu
 			anchorEl={anchorEl}
@@ -94,7 +93,7 @@ export const NavBar = ({
 
 	//===========================
 	return (
-		<Box sx={{  padding: "0px" }}>
+		<Box sx={{ padding: "0px" }}>
 			<AppBar position="static">
 				<Toolbar
 					sx={{
