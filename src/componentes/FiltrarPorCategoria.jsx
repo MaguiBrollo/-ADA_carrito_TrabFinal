@@ -59,10 +59,10 @@ export const FiltrarPorCategoria = ({
 				>
 					Artículos por Categorías
 				</Typography>
-				<Tooltip title="Cerrar buscar">
+				<Tooltip title="Cerrar categorías">
 					<IconButton
 						size="large"
-						aria-label="Cerrar buscar"
+						aria-label="Cerrar categorías"
 						color="inherit"
 						onClick={() => setAbrirFiltrar(false)}
 					>
@@ -97,9 +97,9 @@ export const FiltrarPorCategoria = ({
 					{categoria.map((cat) => (
 						<ListItem key={cat.id} disablePadding>
 							<Button
+								color="secondary"
 								disabled={cat.cantidad > 0 ? false : true}
 								value={cat.id}
-								id={cat.id}
 								variant="text"
 								onClick={(e) => mostraArticulosFiltrados(e)}
 							>
