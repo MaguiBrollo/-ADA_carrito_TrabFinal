@@ -37,14 +37,24 @@ export const ArticulosListar = () => {
 
 		return (
 			<Stack spacing={2}>
-				<Typography>Página: {pagina}</Typography>
 				<Pagination
+					size="small"
 					count={cantPaginas}
 					page={pagina}
 					onChange={handleChange}
-					variant="outlined"
 					color="primary"
-					sx={{ color: "red" }}
+					sx={{
+						"& .MuiPaginationItem-root": {
+							color: "text.secondary", // Color de los números no activos
+							":hover": {
+								backgroundColor: "button.hoverBack",
+								color: "button.hoverText",
+							},
+						},
+						/* "& .Mui-selected": {
+							color: "blue", // Color de los números activos
+						}, */
+					}}
 				/>
 			</Stack>
 		);
@@ -62,10 +72,22 @@ export const ArticulosListar = () => {
 				alignItems: "center",
 			}}
 		>
-			<Typography sx={{ fontSize: "0.8rem", fontStyle: "italic" }}>
-				{mostrarTitulo}
-			</Typography>
-
+			<Box
+				sx={{
+					width: "100%",
+					maxWidth: `${anchoMaximo}px`,
+					margin: "5px",
+				}}
+			>
+				<Typography sx={{ fontSize: "0.8rem", fontStyle: "italic" }}>
+					{mostrarTitulo}
+				</Typography>
+				<Typography sx={{ fontSize: "0.8rem", fontStyle: "italic" }}>
+					{articulosMostrar.length > cantArtiPorPagina
+						? " (Página: " + pagina + ")"
+						: ""}
+				</Typography>
+			</Box>
 			<Box
 				sx={{
 					display: "grid",
@@ -82,8 +104,15 @@ export const ArticulosListar = () => {
 					return <ArticuloCard key={art.ID} art={art} />;
 				})}
 			</Box>
-			{articulosMostrar.length > 0 ? (
-				<Box sx={{ width: "100%", display: "flex", justifyContent: "center" }}>
+			{articulosMostrar.length > cantArtiPorPagina ? (
+				<Box
+					sx={{
+						width: "100%",
+						margin: "35px 0px 10px 0px",
+						display: "flex",
+						justifyContent: "center",
+					}}
+				>
 					<Paginacion />
 				</Box>
 			) : (

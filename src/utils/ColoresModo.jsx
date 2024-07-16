@@ -21,10 +21,10 @@ export const ModoClaro = {
 		primary: "#FFFFFF", //blanco
 		secondary: "black",
 	},
-	/*button: {
-		textHover: grey[200],
-		hover: "#2A2239",
-	}, */
+	button: {
+		hoverText: grey[800],
+		hoverBack: "#8DD2DD", //clarito - 2
+	},
 	error: {
 		main: "#FFEB3B", //amarillo
 	},
@@ -49,10 +49,10 @@ export const ModoOscuro = {
 		primary: "#FFFFFF", //blanco
 		secondary: "black",
 	},
-	/*button: {
-		textHover: grey[200],
-		hover: grey[900],
-	}, */
+	button: {
+		hoverText: grey[200],
+		hoverBack: grey[400], // intermedio
+	},
 	error: {
 		main: "#FFEB3B", //amarillo
 	},

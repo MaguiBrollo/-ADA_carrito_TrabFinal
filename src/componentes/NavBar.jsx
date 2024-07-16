@@ -30,11 +30,7 @@ import Logo_Baby from "../assets/Logo_Baby.png";
 
 //====================================================================
 //------------------ Componente Principal ----------------------------
-export const NavBar = ({
-	setMenu,
-	setAbrirBuscar,
-	setAbrirFiltrar,
-}) => {
+export const NavBar = ({ setMenu, setAbrirBuscar, setAbrirFiltrar }) => {
 	const [anchorEl, setAnchorEl] = useState(null);
 
 	const { anchoMaximo } = useContext(ConstantesContext);
@@ -65,17 +61,10 @@ export const NavBar = ({
 	const menuId = "menu-usuario";
 	const renderMenu = (
 		<Menu
+			sx={{ position: "absolute", top: "20px", left: "-40px" }}
 			anchorEl={anchorEl}
-			anchorOrigin={{
-				vertical: "top",
-				horizontal: "right",
-			}}
 			id={menuId}
 			keepMounted
-			transformOrigin={{
-				vertical: "top",
-				horizontal: "right",
-			}}
 			open={isMenuOpen}
 			onClose={handleMenuClose}
 		>
@@ -147,6 +136,7 @@ export const NavBar = ({
 						{/* ----------------- Iconos----------- */}
 						<Box
 							sx={{
+								position: "relative",
 								display: "flex",
 								justifyContent: { xs: "space-around", md: "flex-end" },
 								backgroundColor: {
