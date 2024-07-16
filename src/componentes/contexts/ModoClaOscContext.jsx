@@ -1,4 +1,4 @@
-import {useState, useMemo, createContext} from "react";
+import { useState, useMemo, createContext } from "react";
 
 export const ColorModeContext = createContext({
 	toggleColorMode: () => {},
@@ -9,7 +9,7 @@ export const ColorModeContext = createContext({
 export const ModoClaOscProvider = ({ children }) => {
 	//--------------------- Modo Claro Oscuro
 	const [mode, setMode] = useState(
-		localStorage.getItem("modoClaroOscuro") || "light"
+		localStorage.getItem("modoClaroOscuro") || "dark"
 	);
 	localStorage.setItem("modoClaroOscuro", mode);
 

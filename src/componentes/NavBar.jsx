@@ -235,7 +235,13 @@ export const NavBar = ({ setMenu, setAbrirBuscar, setAbrirFiltrar }) => {
 									margin: "0px 5px",
 								}}
 							>
-								<Tooltip title="Alternar tema claro/oscuro">
+								<Tooltip
+									title={
+										mode === "dark"
+											? "Cambiar a modo Oscuro"
+											: "Cambiar a modo Claro"
+									}
+								>
 									<IconButton
 										aria-label="Alternar tema claro/oscuro"
 										color="inherit"
