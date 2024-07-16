@@ -22,7 +22,7 @@ import { Inicio } from "./componentes/Inicio";
 //====================================================================
 //------------------- PRINCIPAL ------------------
 function App() {
-	const [menu, setMenu] = React.useState("inicio");
+	const [menu, setMenu] = React.useState("inicio"); //navbar, filtrarPorCategoria
 	const [abrirBuscar, setAbrirBuscar] = React.useState(false);
 	const [abrirFiltrar, setAbrirFiltrar] = React.useState(false);
 	const { mode } = useContext(ColorModeContext);
@@ -75,12 +75,11 @@ function App() {
 				<NavBar
 					setMenu={setMenu}
 					setAbrirBuscar={setAbrirBuscar}
-					abrirFiltrar={abrirFiltrar}
 					setAbrirFiltrar={setAbrirFiltrar}
 				/>
 
 				{/* -- Carrusel / Información de la empresa ------------------ */}
-				{menu === "inicio" && <Inicio/>}
+				{menu === "inicio" && <Inicio />}
 
 				{/* --------- Modal Drawer Buscar -------- */}
 				{abrirFiltrar && (
@@ -91,11 +90,15 @@ function App() {
 					/>
 				)}
 				{/* --------- Carrusel ------------------- */}
-				{menu === "articulosTodos" && <ArticulosListar />}
+				{menu === "articulos" && <ArticulosListar />}
 
 				{/* --------- Modal Drawer Buscar -------- */}
 				{abrirBuscar && (
-					<Buscar abrirBuscar={abrirBuscar} setAbrirBuscar={setAbrirBuscar} />
+					<Buscar
+						setMenu={setMenu}
+						abrirBuscar={abrirBuscar}
+						setAbrirBuscar={setAbrirBuscar}
+					/>
 				)}
 
 				{/* --------- Barra de Footer  ----------- */}

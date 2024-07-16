@@ -30,12 +30,7 @@ import Logo_Baby from "../assets/Logo_Baby.png";
 
 //====================================================================
 //------------------ Componente Principal ----------------------------
-export const NavBar = ({
-	setMenu,
-	setAbrirBuscar,
-	abrirFiltrar,
-	setAbrirFiltrar,
-}) => {
+export const NavBar = ({ setMenu, setAbrirBuscar, setAbrirFiltrar }) => {
 	const [anchorEl, setAnchorEl] = useState(null);
 
 	const { anchoMaximo } = useContext(ConstantesContext);
@@ -59,24 +54,17 @@ export const NavBar = ({
 		setAbrirBuscar(true);
 	};
 	const abrirCerrarModalArticulos = () => {
-		setAbrirFiltrar(!abrirFiltrar);
+		setAbrirFiltrar(true);
 	};
 
-	//-------- Menú de Login/out
-	const menuId = "primary-search-account-menu";
+	//-------- Menú de Usuario Login/out -----
+	const menuId = "menu-usuario";
 	const renderMenu = (
 		<Menu
+			sx={{ position: "absolute", top: "20px", left: "-40px" }}
 			anchorEl={anchorEl}
-			anchorOrigin={{
-				vertical: "top",
-				horizontal: "right",
-			}}
 			id={menuId}
 			keepMounted
-			transformOrigin={{
-				vertical: "top",
-				horizontal: "right",
-			}}
 			open={isMenuOpen}
 			onClose={handleMenuClose}
 		>
@@ -94,7 +82,7 @@ export const NavBar = ({
 
 	//===========================
 	return (
-		<Box sx={{  padding: "0px" }}>
+		<Box sx={{ padding: "0px" }}>
 			<AppBar position="static">
 				<Toolbar
 					sx={{
@@ -148,6 +136,7 @@ export const NavBar = ({
 						{/* ----------------- Iconos----------- */}
 						<Box
 							sx={{
+								position: "relative",
 								display: "flex",
 								justifyContent: { xs: "space-around", md: "flex-end" },
 								backgroundColor: {
