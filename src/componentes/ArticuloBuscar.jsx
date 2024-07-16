@@ -7,15 +7,19 @@ import { useState } from "react";
 
 import { useContext } from "react";
 
+import { useNavigate } from "react-router-dom";
+
 import { FirebaseContext } from "./contexts/FirebaseContext";
 
 //====================================================================
 //------------------ Componente Principal ----------------------------
-export const Buscar = ({ abrirBuscar, setAbrirBuscar, setMenu }) => {
+export const ArticuloBuscar = ({ abrirBuscar, setAbrirBuscar }) => {
 	const [error, setError] = useState();
 	const [helperText, setHelperText] = useState(" ");
 	const [buscar, setBuscar] = useState("");
 	const { setBuscarPor } = useContext(FirebaseContext);
+
+	const navegar = useNavigate();
 
 	const textoBuscarArticulo = (event) => {
 		if (event.target.value.length > 30) {
@@ -36,9 +40,10 @@ export const Buscar = ({ abrirBuscar, setAbrirBuscar, setMenu }) => {
 			setError(true);
 		} else {
 			setBuscarPor(buscar.toUpperCase()); //activa la busqueda en FirebaseContext
-			setMenu("articulos");
 			setHelperText("");
 			setAbrirBuscar(false);
+
+			navegar("/articulos");
 		}
 	};
 
@@ -56,7 +61,6 @@ export const Buscar = ({ abrirBuscar, setAbrirBuscar, setMenu }) => {
 						width: "340px",
 					}}
 					role="presentation"
-					/* onKeyDown={() => setAbrirBuscar(false)} */
 				>
 					<Box
 						sx={{

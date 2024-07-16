@@ -23,6 +23,8 @@ import {
 import { FiMoon } from "react-icons/fi";
 import { TbShoppingCart } from "react-icons/tb";
 
+import { useNavigate } from "react-router-dom";
+
 import { ColorModeContext } from "./contexts/ModoClaOscContext";
 import { ConstantesContext } from "./contexts/ConstantesContext";
 
@@ -30,13 +32,15 @@ import Logo_Baby from "../assets/Logo_Baby.png";
 
 //====================================================================
 //------------------ Componente Principal ----------------------------
-export const NavBar = ({ setMenu, setAbrirBuscar, setAbrirFiltrar }) => {
+export const NavBar = ({ setAbrirBuscar, setAbrirFiltrar }) => {
 	const [anchorEl, setAnchorEl] = useState(null);
 
 	const { anchoMaximo } = useContext(ConstantesContext);
 	const { colorMode, mode } = useContext(ColorModeContext);
 
 	const isMenuOpen = Boolean(anchorEl);
+	
+	const navegar = useNavigate();
 
 	const handleProfileMenuOpen = (event) => {
 		setAnchorEl(event.currentTarget);
@@ -48,7 +52,7 @@ export const NavBar = ({ setMenu, setAbrirBuscar, setAbrirFiltrar }) => {
 
 	//--- navbar ---
 	const volverInicio = () => {
-		setMenu("inicio");
+		navegar("/");
 	};
 	const abrirCerrarModalBuscar = () => {
 		setAbrirBuscar(true);

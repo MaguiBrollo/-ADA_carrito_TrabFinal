@@ -14,20 +14,21 @@ import { ColorModeContext } from "./componentes/contexts/ModoClaOscContext";
 import { ModoClaro } from "./utils/ColoresModo";
 import { ModoOscuro } from "./utils/ColoresModo";
 import { Footer } from "./componentes/Footer";
-import { Buscar } from "./componentes/Buscar";
+import { ArticuloBuscar } from "./componentes/ArticuloBuscar";
 import { FiltrarPorCategoria } from "./componentes/FiltrarPorCategoria";
 import { ArticulosListar } from "./componentes/ArticulosListar";
 import { Inicio } from "./componentes/Inicio";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Error404 } from "./componentes/Error404";
 
 //====================================================================
 //------------------- PRINCIPAL ------------------
 function App() {
-	const [menu, setMenu] = React.useState("inicio"); //navbar, filtrarPorCategoria
 	const [abrirBuscar, setAbrirBuscar] = React.useState(false);
 	const [abrirFiltrar, setAbrirFiltrar] = React.useState(false);
 	const { mode } = useContext(ColorModeContext);
 
-	//---------- Paleta de colores para Modo Claro Oscuro
+	//--------- Paleta de colores para Modo Claro Oscuro / Fuente
 	const theme = React.useMemo(
 		() =>
 			createTheme({
@@ -59,51 +60,52 @@ function App() {
 	//===========================
 	return (
 		<ThemeProvider theme={theme}>
-			<Box
-				sx={{
-					width: "100%",
-					minHeight: "100vh",
-					display: "flex",
-					flexDirection: "column",
-					bgcolor: "background.default",
-				}}
-			>
-				{/* --------- Mensaje envio gratis ------- */}
-				<Header />
+			<BrowserRouter>
+				<Box
+					sx={{
+						width: "100%",
+						minHeight: "100vh",
+						display: "flex",
+						flexDirection: "column",
+						bgcolor: "background.default",
+					}}
+				>
+					{/* --------- Mensaje envio gratis ------- */}
+					<Header />
 
-				{/* --------- Barra de Navegación -------- */}
-				<NavBar
-					setMenu={setMenu}
-					setAbrirBuscar={setAbrirBuscar}
-					setAbrirFiltrar={setAbrirFiltrar}
-				/>
-
-				{/* -- Carrusel / Información de la empresa ------------------ */}
-				{menu === "inicio" && <Inicio />}
-
-				{/* --------- Modal Drawer Buscar -------- */}
-				{abrirFiltrar && (
-					<FiltrarPorCategoria
-						setMenu={setMenu}
-						abrirFiltrar={abrirFiltrar}
+					{/* --------- Barra de Navegación -------- */}
+					<NavBar
+						setAbrirBuscar={setAbrirBuscar}
 						setAbrirFiltrar={setAbrirFiltrar}
 					/>
-				)}
-				{/* --------- Carrusel ------------------- */}
-				{menu === "articulos" && <ArticulosListar />}
 
-				{/* --------- Modal Drawer Buscar -------- */}
-				{abrirBuscar && (
-					<Buscar
-						setMenu={setMenu}
-						abrirBuscar={abrirBuscar}
-						setAbrirBuscar={setAbrirBuscar}
-					/>
-				)}
+					<Routes>
+						<Route index path="/" element={<Inicio />} />
 
-				{/* --------- Barra de Footer  ----------- */}
-				<Footer />
-			</Box>
+						<Route path="/articulos" element={<ArticulosListar />} />
+
+						<Route path="*" element={<Error404 />} />
+					</Routes>
+
+					{/* --------- Modal Drawer Buscar -------- */}
+					{abrirFiltrar && (
+						<FiltrarPorCategoria
+							abrirFiltrar={abrirFiltrar}
+							setAbrirFiltrar={setAbrirFiltrar}
+						/>
+					)}
+					{/* --------- Modal Drawer Buscar -------- */}
+					{abrirBuscar && (
+						<ArticuloBuscar
+							abrirBuscar={abrirBuscar}
+							setAbrirBuscar={setAbrirBuscar}
+						/>
+					)}
+
+					{/* --------- Barra de Footer  ----------- */}
+					<Footer />
+				</Box>
+			</BrowserRouter>
 		</ThemeProvider>
 	);
 }

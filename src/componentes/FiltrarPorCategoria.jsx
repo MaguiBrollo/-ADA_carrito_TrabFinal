@@ -16,26 +16,27 @@ import { MdClose } from "react-icons/md";
 
 import { FirebaseContext } from "./contexts/FirebaseContext";
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 //====================================================================
 //------------------ Componente Principal ----------------------------
-export const FiltrarPorCategoria = ({
-	setMenu,
-	abrirFiltrar,
-	setAbrirFiltrar,
-}) => {
+export const FiltrarPorCategoria = ({ abrirFiltrar, setAbrirFiltrar }) => {
 	const { categoria, setFiltrarPor } = useContext(FirebaseContext);
+
+	const navegar = useNavigate();
 
 	const mostraTodosLosArticulos = () => {
 		setAbrirFiltrar(false);
 		setFiltrarPor("TODOS");
-		setMenu("articulos");
+
+		navegar("/articulos");
 	};
 
 	const mostraArticulosFiltrados = (e) => {
 		setAbrirFiltrar(false);
 		setFiltrarPor(e.target.value);
-		setMenu("articulos");
+
+		navegar("/articulos");
 	};
 
 	//----------------------------------
