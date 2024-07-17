@@ -96,11 +96,11 @@ export const FiltrarPorCategoria = ({ abrirFiltrar, setAbrirFiltrar }) => {
 				<Divider />
 				<List>
 					{categoria.map((cat) => (
-						<ListItem key={cat.id} disablePadding>
+						<ListItem key={cat.idCateg} disablePadding>
 							<Button
 								color="secondary"
 								disabled={cat.cantidad > 0 ? false : true}
-								value={cat.id}
+								value={cat.idCateg}
 								variant="text"
 								onClick={(e) => mostraArticulosFiltrados(e)}
 							>

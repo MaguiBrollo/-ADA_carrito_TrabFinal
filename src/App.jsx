@@ -20,6 +20,7 @@ import { ArticulosListar } from "./componentes/ArticulosListar";
 import { Inicio } from "./componentes/Inicio";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Error404 } from "./componentes/Error404";
+import { CarritoModal } from "./componentes/CarritoModal";
 
 
 //====================================================================
@@ -27,6 +28,7 @@ import { Error404 } from "./componentes/Error404";
 function App() {
 	const [abrirBuscar, setAbrirBuscar] = React.useState(false);
 	const [abrirFiltrar, setAbrirFiltrar] = React.useState(false);
+	const [abrirCarrito, setAbrirCarrito] = React.useState(false);
 
 	const { mode } = useContext(ColorModeContext);
 
@@ -79,15 +81,13 @@ function App() {
 					<NavBar
 						setAbrirBuscar={setAbrirBuscar}
 						setAbrirFiltrar={setAbrirFiltrar}
+						setAbrirCarrito={setAbrirCarrito}
 					/>
 
 					<Routes>
 						<Route index path="/" element={<Inicio />} />
 
-						<Route
-							path="/articulos"
-							element={<ArticulosListar />}
-						/>
+						<Route path="/articulos" element={<ArticulosListar />} />
 
 						<Route path="*" element={<Error404 />} />
 					</Routes>
@@ -107,7 +107,13 @@ function App() {
 						/>
 					)}
 
-					
+					{/* --------- Modal Drawer Carrito -------- */}
+					{abrirCarrito && (
+						<CarritoModal
+							abrirCarrito={abrirCarrito}
+							setAbrirCarrito={setAbrirCarrito}
+						/>
+					)}
 
 					{/* --------- Barra de Footer  ----------- */}
 					<Footer />

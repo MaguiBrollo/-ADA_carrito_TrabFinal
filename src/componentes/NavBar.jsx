@@ -27,28 +27,22 @@ import { useNavigate } from "react-router-dom";
 
 import { ColorModeContext } from "./contexts/ModoClaOscContext";
 import { ConstantesContext } from "./contexts/ConstantesContext";
+import { FirebaseContext } from "./contexts/FirebaseContext";
 
 import Logo_Baby from "../assets/Logo_Baby.png";
 
 //====================================================================
 //------------------ Componente Principal ----------------------------
-export const NavBar = ({ setAbrirBuscar, setAbrirFiltrar }) => {
+export const NavBar = ({ setAbrirBuscar, setAbrirFiltrar, setAbrirCarrito }) => {
 	const [anchorEl, setAnchorEl] = useState(null);
 
 	const { anchoMaximo } = useContext(ConstantesContext);
 	const { colorMode, mode } = useContext(ColorModeContext);
+	const { setUsusarioId, cantArtCarrito } = useContext(FirebaseContext);
 
 	const isMenuOpen = Boolean(anchorEl);
-	
+
 	const navegar = useNavigate();
-
-	const handleProfileMenuOpen = (event) => {
-		setAnchorEl(event.currentTarget);
-	};
-
-	const handleMenuClose = () => {
-		setAnchorEl(null);
-	};
 
 	//--- navbar ---
 	const volverInicio = () => {
@@ -59,6 +53,25 @@ export const NavBar = ({ setAbrirBuscar, setAbrirFiltrar }) => {
 	};
 	const abrirCerrarModalArticulos = () => {
 		setAbrirFiltrar(true);
+	};
+
+	const abrirCerrarModalCarrito = () => {
+		setAbrirCarrito(true);
+	};
+
+	//Controles de Menu Usuario login logout
+	const handleMenuUsuario = (event) => {
+		setAnchorEl(event.currentTarget);
+	};
+
+	const iniciarSesion = () => {
+		setUsusarioId(1); //-------- aqui usuario ID
+		setAnchorEl(null);
+		console.log("set usuario ");
+	};
+
+	const handleMenuClose = () => {
+		setAnchorEl(null);
 	};
 
 	//-------- Menú de Usuario Login/out -----
@@ -72,7 +85,7 @@ export const NavBar = ({ setAbrirBuscar, setAbrirFiltrar }) => {
 			open={isMenuOpen}
 			onClose={handleMenuClose}
 		>
-			<MenuItem onClick={handleMenuClose}>Iniciar SESIÓN</MenuItem>
+			<MenuItem onClick={iniciarSesion}>Iniciar SESIÓN</MenuItem>
 			<Divider />
 			<MenuItem onClick={handleMenuClose}>Crear CUENTA</MenuItem>
 
@@ -277,7 +290,7 @@ export const NavBar = ({ setAbrirBuscar, setAbrirFiltrar }) => {
 										aria-label="Login/logout"
 										aria-controls={menuId}
 										aria-haspopup="true"
-										onClick={handleProfileMenuOpen}
+										onClick={handleMenuUsuario}
 										color="inherit"
 									>
 										<MdOutlineAccountCircle />
@@ -303,10 +316,11 @@ export const NavBar = ({ setAbrirBuscar, setAbrirFiltrar }) => {
 							>
 								<Tooltip title="Carrito de Compras">
 									<IconButton
+										onClick={abrirCerrarModalCarrito}
 										aria-label="Carrito de Compras - Cantidad"
 										color="inherit"
 									>
-										<Badge badgeContent={17} color="error">
+										<Badge badgeContent={cantArtCarrito} color="error">
 											<TbShoppingCart />
 										</Badge>
 									</IconButton>

@@ -47,89 +47,83 @@ export const ArticuloBuscar = ({ abrirBuscar, setAbrirBuscar }) => {
 		}
 	};
 
-	const abrirCerrarModalBuscar = () => {
-		setAbrirBuscar(false);
-	};
-
 	//===========================
 	return (
-		<div>
-			<Drawer open={abrirBuscar} onClose={() => setAbrirBuscar(false)}>
+		<Drawer open={abrirBuscar} onClose={() => setAbrirBuscar(false)}>
+			<Box
+				sx={{
+					paddingTop: "15px",
+					width: "340px",
+				}}
+				role="presentation"
+			>
 				<Box
 					sx={{
-						paddingTop: "15px",
-						width: "340px",
+						margin: "15px",
+						display: "flex",
+						alignItems: "center",
+						justifyContent: "space-between",
 					}}
-					role="presentation"
 				>
-					<Box
+					<Typography
 						sx={{
-							margin: "15px",
-							display: "flex",
-							alignItems: "center",
-							justifyContent: "space-between",
+							fontSize: "1.5rem",
+							fontStyle: "italic",
+							textShadow: "0px 0px 15px black",
+							padding: "15px",
 						}}
 					>
-						<Typography
-							sx={{
-								fontSize: "1.5rem",
-								fontStyle: "italic",
-								textShadow: "0px 0px 15px black",
-								padding: "15px",
-							}}
+						Buscar
+					</Typography>
+					<Tooltip title="Cerrar buscar">
+						<IconButton
+							size="large"
+							aria-label="Cerrar buscar"
+							color="inherit"
+							onClick={() => setAbrirBuscar(false)}
 						>
-							Buscar
-						</Typography>
-						<Tooltip title="Cerrar buscar">
-							<IconButton
-								size="large"
-								aria-label="Cerrar buscar"
-								color="inherit"
-								onClick={abrirCerrarModalBuscar}
-							>
-								<MdClose />
-							</IconButton>
-						</Tooltip>
-					</Box>
-					<Divider sx={{ margin: "15px" }} />
-
-					<Box
-						component="form"
-						onSubmit={handleSubmit}
-						sx={{
-							display: "flex",
-							flexDirection: "row",
-							alignItems: "flex-start",
-							margin: "15px",
-						}}
-						autoComplete="off"
-					>
-						<TextField
-							value={buscar}
-							error={error}
-							id="buscar-articulo"
-							label="Buscar artículo..."
-							helperText={helperText}
-							fullWidth
-							variant="outlined"
-							color="secondary"
-							onChange={textoBuscarArticulo}
-						/>
-
-						<Tooltip title="Buscar...">
-							<IconButton
-								type="submit"
-								size="large"
-								aria-label="Buscar..."
-								color="inherit"
-							>
-								<MdOutlineSearch />
-							</IconButton>
-						</Tooltip>
-					</Box>
-					<Divider sx={{ margin: "15px" }} />
+							<MdClose />
+						</IconButton>
+					</Tooltip>
 				</Box>
-			</Drawer>
-		</div>
+				<Divider sx={{ margin: "15px" }} />
+
+				<Box
+					component="form"
+					onSubmit={handleSubmit}
+					sx={{
+						display: "flex",
+						flexDirection: "row",
+						alignItems: "flex-start",
+						margin: "15px",
+					}}
+					autoComplete="off"
+				>
+					<TextField
+						value={buscar}
+						error={error}
+						id="buscar-articulo"
+						label="Buscar artículo..."
+						helperText={helperText}
+						fullWidth
+						variant="outlined"
+						color="secondary"
+						onChange={textoBuscarArticulo}
+					/>
+
+					<Tooltip title="Buscar...">
+						<IconButton
+							type="submit"
+							size="large"
+							aria-label="Buscar..."
+							color="inherit"
+						>
+							<MdOutlineSearch />
+						</IconButton>
+					</Tooltip>
+				</Box>
+				<Divider sx={{ margin: "15px" }} />
+			</Box>
+		</Drawer>
 	);
 };
