@@ -49,7 +49,6 @@ export const FirebaseProvider = ({ children }) => {
 			}
 			setArticulosMostrar(articulosFiltrados);
 		}
-		console.log("paso por context");
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [filtrarPor]);
 

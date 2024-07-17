@@ -21,11 +21,13 @@ import { Inicio } from "./componentes/Inicio";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Error404 } from "./componentes/Error404";
 
+
 //====================================================================
 //------------------- PRINCIPAL ------------------
 function App() {
 	const [abrirBuscar, setAbrirBuscar] = React.useState(false);
 	const [abrirFiltrar, setAbrirFiltrar] = React.useState(false);
+
 	const { mode } = useContext(ColorModeContext);
 
 	//--------- Paleta de colores para Modo Claro Oscuro / Fuente
@@ -82,7 +84,10 @@ function App() {
 					<Routes>
 						<Route index path="/" element={<Inicio />} />
 
-						<Route path="/articulos" element={<ArticulosListar />} />
+						<Route
+							path="/articulos"
+							element={<ArticulosListar />}
+						/>
 
 						<Route path="*" element={<Error404 />} />
 					</Routes>
@@ -101,6 +106,8 @@ function App() {
 							setAbrirBuscar={setAbrirBuscar}
 						/>
 					)}
+
+					
 
 					{/* --------- Barra de Footer  ----------- */}
 					<Footer />

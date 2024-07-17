@@ -2,12 +2,16 @@ import { useContext, useState, useMemo, useEffect } from "react";
 import { Box, Pagination, Stack, Typography } from "@mui/material";
 
 import { ArticuloCard } from "./ArticuloCard";
+import { ArticuloVerMas } from "./ArticuloVerMas";
+
 import { ConstantesContext } from "./contexts/ConstantesContext";
 import { FirebaseContext } from "./contexts/FirebaseContext";
 
 //====================================================================
 //------------------ Componente Principal ----------------------------
 export const ArticulosListar = () => {
+	const [artParaVerMas, setArtParaVerMas] = useState({});
+	const [abrirVerMas, setAbrirVerMas] = useState(false);
 	const [pagina, setPagina] = useState(1);
 	const [cantPaginas, setCantPaginas] = useState(0);
 	const { anchoMaximo, altoMinimo } = useContext(ConstantesContext);
@@ -101,7 +105,14 @@ export const ArticulosListar = () => {
 				}}
 			>
 				{articulosPorPagina.map((art) => {
-					return <ArticuloCard key={art.ID} art={art} />;
+					return (
+						<ArticuloCard
+							key={art.ID}
+							art={art}
+							setAbrirVerMas={setAbrirVerMas}
+							setArtParaVerMas={setArtParaVerMas}
+						/>
+					);
 				})}
 			</Box>
 			{articulosMostrar.length > cantArtiPorPagina ? (
@@ -117,6 +128,15 @@ export const ArticulosListar = () => {
 				</Box>
 			) : (
 				""
+			)}
+
+			{/* ------ Modal Ver más detalles/Comprar un art. -------- */}
+			{abrirVerMas && (
+				<ArticuloVerMas
+					abrirVerMas={abrirVerMas}
+					setAbrirVerMas={setAbrirVerMas}
+					artParaVerMas={artParaVerMas}
+				/>
 			)}
 		</Box>
 	);

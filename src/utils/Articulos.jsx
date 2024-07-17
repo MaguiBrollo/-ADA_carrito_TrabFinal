@@ -60,7 +60,7 @@ export const articulos = [
 		categoriaId: "1",
 		precio: 45000.25,
 		descripcion:
-			"CARDIGAN FRISA ESTAMPADA. COMPOSICIÓN: 88% ALGODÓN-12% POLIESTER.",
+			"CARDIGAN FRISA ESTAMPADA.",
 		imagen: ropa,
 		descripcionLarga:
 			"CARDIGAN FRISA ESTAMPADA. COMPOSICIÓN: 88% ALGODÓN-12% POLIESTER.",
@@ -130,7 +130,7 @@ export const articulos = [
 		descripcion: "CAMPERA DE NYLON CON RECORTES.",
 		imagen: ropa,
 		descripcionLarga:
-			"CAMPERA DE NYLON CON RECORTES,FORRERIA EN TAFETA. COMPOSICION: 100% POLIESTER.",
+			"CAMPERA DE NYLON CON RECORTES, FORRERIA EN TAFETA. COMPOSICION: 100% POLIESTER.",
 		stock: 12,
 	},
 	{
