@@ -40,13 +40,15 @@ const style = {
 	top: "50%",
 	left: "50%",
 	transform: "translate(-50%, -50%)",
-	width: 400,
+	width: "200",
 	bgcolor: "background.default",
 	border: "2px solid #000",
 	boxShadow: 24,
-	p: 4,
+	p: 2,
+	display: "flex",
+	flexDirection: "column",
+	justifyContent: "center",
 };
-
 
 //====================================================================
 //------------------ Componente Principal ----------------------------
@@ -54,16 +56,17 @@ export const ArticuloVerMas = ({
 	abrirVerMas,
 	setAbrirVerMas,
 	artParaVerMas,
+	setAbrirAgregadoCarrito,
 }) => {
-	const [openError, setOpenError] = useState(false);
+	const [avisoNoInicioSesion, setAvisoNoInicioSesion] = useState(false);
 	const [cantidad, setCantidad] = useState(1);
 	const [abrirCantidad, setAbrirCantidad] = useState(false);
-	const { usuarioId } = useContext(FirebaseContext);
+	const { usuarioId, setArtiParaAgregarCarrito } = useContext(FirebaseContext);
 
 	const theme = useTheme();
 
 	const guardarCantidad = (event) => {
-		setCantidad(event.target.value);
+		setCantidad(parseInt(event.target.value));
 	};
 	const handleCloseCantidad = () => {
 		setAbrirCantidad(false);
@@ -80,11 +83,13 @@ export const ArticuloVerMas = ({
 	const agregarAlCarrito = () => {
 		//si hay un usuario
 		if (usuarioId !== 0) {
-			//guardar en el carrito artParaVerMas y cantidad
+			//guardar en el carrito artParaVerMas y cantidadPedida
+			setArtiParaAgregarCarrito({ ...artParaVerMas, cantidad: cantidad });
+
 			setAbrirVerMas(false);
+			setAbrirAgregadoCarrito(true);
 		} else {
-			setOpenError(true);
-			
+			setAvisoNoInicioSesion(true);
 		}
 	};
 	//===========================
@@ -140,19 +145,23 @@ export const ArticuloVerMas = ({
 
 							<Divider sx={{ margin: "10px 0px" }} />
 
-							<Typography>Stock: {artParaVerMas.stock}</Typography>
-
-							<Divider sx={{ margin: "10px 0px" }} />
-
-							<Typography
+							<Box
 								sx={{
-									fontWeight: "900",
-									textAlign: "end",
+									display: "flex",
+									flexDirection: "row",
+									justifyContent: "space-around",
 								}}
 							>
-								${formatPesos(artParaVerMas.precio)}
-							</Typography>
-
+								<Typography>Stock: {artParaVerMas.stock}</Typography>
+								<Typography
+									sx={{
+										fontWeight: "900",
+										textAlign: "end",
+									}}
+								>
+									${formatPesos(artParaVerMas.precio)}
+								</Typography>
+							</Box>
 							<Divider sx={{ margin: "10px 0px" }} />
 
 							<Box sx={{ margin: "10px" }}>
@@ -204,21 +213,35 @@ export const ArticuloVerMas = ({
 					</DialogActions>
 				</Box>
 			</Dialog>
-			{openError && (
+
+			{/* ---- Modal de aviso que NO inició sesión, No puede comprar --- */}
+			{avisoNoInicioSesion && (
 				<Modal
-					open={openError}
-					onClose={() => setOpenError(false)}
-					aria-labelledby="modal-modal-title"
-					aria-describedby="modal-modal-description"
+					open={avisoNoInicioSesion}
+					onClose={() => setAvisoNoInicioSesion(false)}
+					aria-labelledby="aviso-inicio-sesion-titulo"
+					aria-describedby="aviso-inicio-sesion-descripcion"
 				>
 					<Box sx={style}>
-						<Typography id="modal-modal-title" variant="h6" component="h2">
+						<Typography
+							id="aviso-inicio-sesion-titulo"
+							variant="h6"
+							component="h2"
+							color={theme.palette.error.main}
+						>
 							Inicio de Sesión
 						</Typography>
-						<Typography id="modal-modal-description" sx={{ m: 4 }}>
+						<Typography
+							id="aviso-inicio-sesion-descripcion"
+							sx={{ m: 1, fontSize: "0.7rem" }}
+						>
 							Debe iniciar sesión para realizar compras.
 						</Typography>
-						<Button variant="contained" onClick={() => setOpenError(false)}>
+						<Button
+							size="small"
+							variant="contained"
+							onClick={() => setAvisoNoInicioSesion(false)}
+						>
 							Cerrar
 						</Button>
 					</Box>

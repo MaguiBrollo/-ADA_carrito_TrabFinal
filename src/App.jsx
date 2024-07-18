@@ -22,7 +22,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Error404 } from "./componentes/Error404";
 import { CarritoModal } from "./componentes/CarritoModal";
 
-
 //====================================================================
 //------------------- PRINCIPAL ------------------
 function App() {

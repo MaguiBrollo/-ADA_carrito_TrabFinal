@@ -315,6 +315,7 @@ export const NavBar = ({
 												sx={{
 													width: "25px",
 													borderRadius: "50%",
+													aspectRatio: 1/1,
 												}}
 											/>
 										) : (
@@ -330,7 +331,7 @@ export const NavBar = ({
 									}}
 								>
 									{Object.keys(usuarioLogin).length !== 0
-										? usuarioLogin.nombre
+										? usuarioLogin.nombre.substring(0,10)
 										: "Usuario"}
 								</Typography>
 							</Box>

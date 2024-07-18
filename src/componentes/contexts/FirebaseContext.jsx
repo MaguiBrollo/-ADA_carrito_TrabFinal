@@ -1,5 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 
+import dayjs from "dayjs";
+
 import { articulos } from "../../utils/Articulos.jsx";
 import { categorias } from "../../utils/Articulos.jsx";
 import { usuarios } from "../../utils/Articulos.jsx";
@@ -11,18 +13,20 @@ export const FirebaseContext = createContext();
 //------------------ Componente Principal ----------------------------
 export const FirebaseProvider = ({ children }) => {
 	const [filtrarPor, setFiltrarPor] = useState("");
+	const [categoria, setCategoria] = useState([]);
+
 	const [buscarPor, setBuscarPor] = useState("");
 
-	const [mostrarTitulo, setMostrarTitulo] = useState("");
-
-	const [articulosMostrar, setArticulosMostrar] = useState([]);
-	const [categoria, setCategoria] = useState([]);
+	const [mostrarTitulo, setMostrarTitulo] = useState(""); //articuloListar.jsx
 
 	const [usuarioId, setUsusarioId] = useState(0);
 	const [usuarioLogin, setUsusarioLogin] = useState(0);
 	const [carrito, setCarrito] = useState({});
 	const [cantArtCarrito, setCantArtCarrito] = useState(0);
 	const [artiBrorrarCarrito, setArtiBrorrarCarrito] = useState(0);
+
+	const [articulosMostrar, setArticulosMostrar] = useState([]);
+	const [artiParaAgregarCarrito, setArtiParaAgregarCarrito] = useState({});
 
 	// se hizo LogIn, con email y contraseña.
 	// con el ID se busca de la DBf usuario, sus datos, por
@@ -50,28 +54,94 @@ export const FirebaseProvider = ({ children }) => {
 		} else {
 			setCarrito({});
 			setCantArtCarrito(0);
-			setUsusarioLogin({})
+			setUsusarioLogin({});
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [usuarioId]);
 
-	//solo cuando se borrar un articulo del carrito
+	// BORRAR un artículo del carrito
 	useEffect(() => {
 		if (cantArtCarrito > 0) {
-			const nuevo = carrito.articulos.filter(
-				(a) => a.idArticulo !== artiBrorrarCarrito
-			);
+			if (artiBrorrarCarrito === "T") {
+				setCarrito({});
+				setCantArtCarrito(0);
+				setArtiBrorrarCarrito(0);
+			} else {
+				const nuevo = carrito.articulos.filter(
+					(a) => a.idArticulo !== artiBrorrarCarrito
+				);
 
-			let suma = nuevo.reduce(function (total, art) {
+				let suma = nuevo.reduce(function (total, art) {
+					return total + art.precio * art.cantidad;
+				}, 0);
+
+				setCarrito({ ...carrito, articulos: nuevo, total: suma });
+				setCantArtCarrito(nuevo.length);
+			}
+		}
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [artiBrorrarCarrito]);
+
+	// AGREGAR un artículo al carrito
+	useEffect(() => {
+		if (Object.keys(artiParaAgregarCarrito).length !== 0) {
+			let nuevo = [];
+			if (cantArtCarrito > 0) {
+				let indice = carrito.articulos.findIndex(
+					(art) => art.idArticulo === artiParaAgregarCarrito.ID
+				);
+				if (indice > -1) {
+					if (
+						carrito.articulos[indice].cantidad +
+							artiParaAgregarCarrito.cantidad >
+						5
+					) {
+						carrito.articulos[indice].cantidad = 5;
+					} else {
+						carrito.articulos[indice].cantidad +=
+							artiParaAgregarCarrito.cantidad;
+					}
+
+					nuevo = [...carrito.articulos];
+				} else {
+					nuevo = [
+						...carrito.articulos,
+						{
+							idArticulo: artiParaAgregarCarrito.ID,
+							nombre: artiParaAgregarCarrito.nombre,
+							precio: artiParaAgregarCarrito.precio,
+							cantidad: artiParaAgregarCarrito.cantidad,
+						},
+					];
+				}
+			} else {
+				nuevo = [
+					{
+						idArticulo: artiParaAgregarCarrito.ID,
+						nombre: artiParaAgregarCarrito.nombre,
+						precio: artiParaAgregarCarrito.precio,
+						cantidad: artiParaAgregarCarrito.cantidad,
+					},
+				];
+				setCarrito({
+					idOrden: dayjs(), //una fecha como ID
+					fecha: dayjs().format("DD/MM/YYYY"),
+					total: 0,
+					cerrado: false,
+					articulos: [],
+				});
+			}
+			let suma = 0;
+			suma = nuevo.reduce(function (total, art) {
 				return total + art.precio * art.cantidad;
 			}, 0);
 
 			setCarrito({ ...carrito, articulos: nuevo, total: suma });
 			setCantArtCarrito(nuevo.length);
 		}
-
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [artiBrorrarCarrito]);
+	}, [artiParaAgregarCarrito]);
 
 	//-------------
 	//Aquí debería buscar articulos de firebase
@@ -145,6 +215,8 @@ export const FirebaseProvider = ({ children }) => {
 				cantArtCarrito,
 				carrito,
 				setArtiBrorrarCarrito,
+				artiParaAgregarCarrito,
+				setArtiParaAgregarCarrito,
 			}}
 		>
 			{children}

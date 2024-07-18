@@ -1,10 +1,11 @@
-import Logo_Baby from "../assets/Logo_Baby.png";
+import magui from "../assets/magui.png";
+import maria from "../assets/maria.png";
 
 export const usuarios = [
 	{
 		idUsuario: 1,
-		nombre: "ROSA",
-		imagen:  Logo_Baby ,
+		nombre: "ROSA MARIA ANA",
+		imagen:  maria ,
 		email: "rosa@gmail.com",
 		password: "123",
 		carritoAbierto: 2,
@@ -12,8 +13,8 @@ export const usuarios = [
 	},
 	{
 		idUsuario: 2,
-		nombre: "MARIA",
-		imagen:  Logo_Baby ,
+		nombre: "MAGUI",
+		imagen:  magui ,
 		email: "maria@gmail.com",
 		password: "123",
 		carritoAbierto: 0,

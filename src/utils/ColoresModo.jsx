@@ -28,7 +28,7 @@ export const ModoClaro = {
 		hoverBack: "#006064", //intermedio - 3
 	},
 	error: {
-		main: "#FFEB3B", //amarillo
+		main: "#DD2C00", ////Deep Orange A700
 	},
 };
 
@@ -40,7 +40,7 @@ export const ModoOscuro = {
 		main: grey[400],
 	},
 	background: {
-		default: grey[600],
+		default: grey[300],
 		paper: grey[800],
 
 		secondary: grey[400],
@@ -55,9 +55,9 @@ export const ModoOscuro = {
 		primaryText: "black",
 		primaryBack: grey[100], //clarito (otro)
 		hoverText: grey[200],
-		hoverBack: grey[600], 
+		hoverBack: grey[600],
 	},
 	error: {
-		main: "#FFEB3B", //amarillo
+		main: "#DD2C00", //Deep Orange A700
 	},
 };

@@ -26,8 +26,12 @@ export const CarritoModal = ({ abrirCarrito, setAbrirCarrito }) => {
 	const anchor = "right";
 
 	const borrarArtCarrito = (idBorrar) => {
-		console.log("idborrar ",idBorrar);
 		setArtiBrorrarCarrito(idBorrar);
+	};
+
+	const borrarTodoCarrito = () => {
+		//para borrar todos
+		setArtiBrorrarCarrito("T");
 	};
 
 	//===========================
@@ -83,8 +87,10 @@ export const CarritoModal = ({ abrirCarrito, setAbrirCarrito }) => {
 											alignItems: "center",
 										}}
 									>
-										<Typography sx={{ width: "40%", fontSize: "0.8rem" }}>
-											Cant.: {arti.cantidad}
+										<Typography
+											sx={{ width: "35%", fontSize: "0.8rem", ml: 2 }}
+										>
+											{arti.cantidad + " x  $" + formatPesos(arti.precio)}
 										</Typography>
 										<Typography
 											sx={{
@@ -93,7 +99,7 @@ export const CarritoModal = ({ abrirCarrito, setAbrirCarrito }) => {
 												textAlign: "end",
 											}}
 										>
-											${formatPesos(arti.precio)}
+											${formatPesos(arti.cantidad * arti.precio)}
 										</Typography>
 
 										<Box
@@ -150,8 +156,7 @@ export const CarritoModal = ({ abrirCarrito, setAbrirCarrito }) => {
 							<Button
 								variant="outline"
 								sx={{ width: "80%" }}
-
-								/* onClick={cerrarModalVerMas} */
+								onClick={borrarTodoCarrito}
 							>
 								Eliminar Carrito
 							</Button>
