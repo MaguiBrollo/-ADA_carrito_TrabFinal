@@ -8,7 +8,12 @@ import { formatPesos } from "../utils/Funciones.js";
 
 //====================================================================
 //------------------ Componente Principal ----------------------------
-export const ArticuloCard = ({ art }) => {
+export const ArticuloCard = ({ art, setAbrirVerMas, setArtParaVerMas }) => {
+	const handleClickOpen = () => {
+		setArtParaVerMas(art);
+		setAbrirVerMas(true);
+	};
+
 	//===========================
 	return (
 		<Card sx={{ width: "270px" }}>
@@ -75,6 +80,7 @@ export const ArticuloCard = ({ art }) => {
 				}}
 			>
 				<Button
+					onClick={handleClickOpen}
 					size="small"
 					sx={{
 						color: "text.primary",

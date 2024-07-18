@@ -23,38 +23,64 @@ import {
 import { FiMoon } from "react-icons/fi";
 import { TbShoppingCart } from "react-icons/tb";
 
+import { useNavigate } from "react-router-dom";
+
 import { ColorModeContext } from "./contexts/ModoClaOscContext";
 import { ConstantesContext } from "./contexts/ConstantesContext";
+import { FirebaseContext } from "./contexts/FirebaseContext";
 
 import Logo_Baby from "../assets/Logo_Baby.png";
 
 //====================================================================
 //------------------ Componente Principal ----------------------------
-export const NavBar = ({ setMenu, setAbrirBuscar, setAbrirFiltrar }) => {
+export const NavBar = ({
+	setAbrirBuscar,
+	setAbrirFiltrar,
+	setAbrirCarrito,
+}) => {
 	const [anchorEl, setAnchorEl] = useState(null);
 
 	const { anchoMaximo } = useContext(ConstantesContext);
 	const { colorMode, mode } = useContext(ColorModeContext);
+	const { setUsusarioId, cantArtCarrito, usuarioLogin } =
+		useContext(FirebaseContext);
 
 	const isMenuOpen = Boolean(anchorEl);
 
-	const handleProfileMenuOpen = (event) => {
-		setAnchorEl(event.currentTarget);
-	};
-
-	const handleMenuClose = () => {
-		setAnchorEl(null);
-	};
+	const navegar = useNavigate();
 
 	//--- navbar ---
 	const volverInicio = () => {
-		setMenu("inicio");
+		navegar("/");
 	};
 	const abrirCerrarModalBuscar = () => {
 		setAbrirBuscar(true);
 	};
 	const abrirCerrarModalArticulos = () => {
 		setAbrirFiltrar(true);
+	};
+
+	const abrirCerrarModalCarrito = () => {
+		setAbrirCarrito(true);
+	};
+
+	//Controles de Menu Usuario login logout
+	const handleMenuUsuario = (event) => {
+		setAnchorEl(event.currentTarget);
+	};
+
+	const iniciarSesion = () => {
+		setUsusarioId(1); //-------- aqui usuario ID
+		setAnchorEl(null);
+	};
+
+	const cerrarSesion = () => {
+		setUsusarioId(0);
+		setAnchorEl(null);
+	};
+
+	const handleMenuClose = () => {
+		setAnchorEl(null);
 	};
 
 	//-------- Menú de Usuario Login/out -----
@@ -68,15 +94,20 @@ export const NavBar = ({ setMenu, setAbrirBuscar, setAbrirFiltrar }) => {
 			open={isMenuOpen}
 			onClose={handleMenuClose}
 		>
-			<MenuItem onClick={handleMenuClose}>Iniciar SESIÓN</MenuItem>
-			<Divider />
-			<MenuItem onClick={handleMenuClose}>Crear CUENTA</MenuItem>
-
-			{/* 
-			<MenuItem onClick={handleMenuClose}>Mi perfil</MenuItem>
-			<MenuItem onClick={handleMenuClose}>Mis compras</MenuItem> 
-			<Divider/>
-			<MenuItem onClick={handleMenuClose}>Cerrar sesión</MenuItem>*/}
+			{Object.keys(usuarioLogin).length === 0 ? (
+				<Box>
+					<MenuItem onClick={iniciarSesion}>Iniciar SESIÓN</MenuItem>
+					<Divider />
+					<MenuItem onClick={handleMenuClose}>Crear CUENTA</MenuItem>
+				</Box>
+			) : (
+				<Box>
+					<MenuItem onClick={handleMenuClose}>Mi perfil</MenuItem>
+					<MenuItem onClick={handleMenuClose}>Mis compras</MenuItem>
+					<Divider />
+					<MenuItem onClick={cerrarSesion}>Cerrar sesión</MenuItem>
+				</Box>
+			)}
 		</Menu>
 	);
 
@@ -235,7 +266,13 @@ export const NavBar = ({ setMenu, setAbrirBuscar, setAbrirFiltrar }) => {
 									margin: "0px 5px",
 								}}
 							>
-								<Tooltip title="Alternar tema claro/oscuro">
+								<Tooltip
+									title={
+										mode === "dark"
+											? "Cambiar a modo Oscuro"
+											: "Cambiar a modo Claro"
+									}
+								>
 									<IconButton
 										aria-label="Alternar tema claro/oscuro"
 										color="inherit"
@@ -267,19 +304,35 @@ export const NavBar = ({ setMenu, setAbrirBuscar, setAbrirFiltrar }) => {
 										aria-label="Login/logout"
 										aria-controls={menuId}
 										aria-haspopup="true"
-										onClick={handleProfileMenuOpen}
+										onClick={handleMenuUsuario}
 										color="inherit"
 									>
-										<MdOutlineAccountCircle />
+										{Object.keys(usuarioLogin).length !== 0 ? (
+											<CardMedia
+												component="img"
+												image={usuarioLogin.imagen}
+												alt="Usuario"
+												sx={{
+													width: "25px",
+													borderRadius: "50%",
+													aspectRatio: 1/1,
+												}}
+											/>
+										) : (
+											<MdOutlineAccountCircle />
+										)}
 									</IconButton>
 								</Tooltip>
+
 								<Typography
 									sx={{
 										fontSize: "0.8rem",
 										textAlign: "center",
 									}}
 								>
-									Usuario
+									{Object.keys(usuarioLogin).length !== 0
+										? usuarioLogin.nombre.substring(0,10)
+										: "Usuario"}
 								</Typography>
 							</Box>
 
@@ -293,10 +346,11 @@ export const NavBar = ({ setMenu, setAbrirBuscar, setAbrirFiltrar }) => {
 							>
 								<Tooltip title="Carrito de Compras">
 									<IconButton
+										onClick={abrirCerrarModalCarrito}
 										aria-label="Carrito de Compras - Cantidad"
 										color="inherit"
 									>
-										<Badge badgeContent={17} color="error">
+										<Badge badgeContent={cantArtCarrito} color="error">
 											<TbShoppingCart />
 										</Badge>
 									</IconButton>

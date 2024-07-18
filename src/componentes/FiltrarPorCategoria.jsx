@@ -16,26 +16,27 @@ import { MdClose } from "react-icons/md";
 
 import { FirebaseContext } from "./contexts/FirebaseContext";
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 //====================================================================
 //------------------ Componente Principal ----------------------------
-export const FiltrarPorCategoria = ({
-	setMenu,
-	abrirFiltrar,
-	setAbrirFiltrar,
-}) => {
+export const FiltrarPorCategoria = ({ abrirFiltrar, setAbrirFiltrar }) => {
 	const { categoria, setFiltrarPor } = useContext(FirebaseContext);
+
+	const navegar = useNavigate();
 
 	const mostraTodosLosArticulos = () => {
 		setAbrirFiltrar(false);
 		setFiltrarPor("TODOS");
-		setMenu("articulos");
+
+		navegar("/articulos");
 	};
 
 	const mostraArticulosFiltrados = (e) => {
 		setAbrirFiltrar(false);
 		setFiltrarPor(e.target.value);
-		setMenu("articulos");
+
+		navegar("/articulos");
 	};
 
 	//----------------------------------
@@ -95,11 +96,11 @@ export const FiltrarPorCategoria = ({
 				<Divider />
 				<List>
 					{categoria.map((cat) => (
-						<ListItem key={cat.id} disablePadding>
+						<ListItem key={cat.idCateg} disablePadding>
 							<Button
 								color="secondary"
 								disabled={cat.cantidad > 0 ? false : true}
-								value={cat.id}
+								value={cat.idCateg}
 								variant="text"
 								onClick={(e) => mostraArticulosFiltrados(e)}
 							>

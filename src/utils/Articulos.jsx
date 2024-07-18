@@ -1,53 +1,126 @@
+import magui from "../assets/magui.png";
+import maria from "../assets/maria.png";
+
+export const usuarios = [
+	{
+		idUsuario: 1,
+		nombre: "ROSA MARIA ANA",
+		imagen:  maria ,
+		email: "rosa@gmail.com",
+		password: "123",
+		carritoAbierto: 2,
+		carritoCerrado: [1],
+	},
+	{
+		idUsuario: 2,
+		nombre: "MAGUI",
+		imagen:  magui ,
+		email: "maria@gmail.com",
+		password: "123",
+		carritoAbierto: 0,
+		carritoCerrado: [],
+	},
+];
+
+export const ordenes = [
+	{
+		idOrden: 1,
+		fecha: "2024/07/01",
+		total: 82000.25,
+		cerrado: true,
+		articulos: [
+			{
+				idArticulo: 1,
+				nombre: "CAMPERA NENA 1",
+				precio: 45000.25,
+				cantidad: 1,
+			},
+			{
+				idArticulo: 2,
+				nombre: "CAMPERA MARRON LINDO PRECIO 2",
+				precio: 37000.0,
+				cantidad: 1,
+			},
+		],
+	},
+	{
+		idOrden: 2,
+		fecha: "2024/07/02",
+		total: 102000.25,
+		cerrado: false,
+		articulos: [
+			{
+				idArticulo: 1,
+				nombre: "CAMPERA NENA 1",
+				precio: 45000.25,
+				cantidad: 1,
+			},
+			{
+				idArticulo: 2,
+				nombre: "CAMPERA MARRON LINDA 2",
+				precio: 37000.0,
+				cantidad: 1,
+			},
+			{
+				idArticulo: 4,
+				nombre: "CARDIGAN NENA 4",
+				precio: 20000.0,
+				cantidad: 2,
+			},
+		],
+	},
+];
+
 import ropa from "../assets/ropa.png";
 
 export const categorias = [
 	{
-		id: "1",
+		idCateg: "1",
 		categoria: "ABRIGOS",
 		cantidad: 0,
 	},
 	{
-		id: "2",
+		idCateg: "2",
 		categoria: "ACCESORIOS",
 		cantidad: 0,
 	},
 	{
-		id: "3",
+		idCateg: "3",
 		categoria: "CAMISAS",
 		cantidad: 0,
 	},
 	{
-		id: "4",
+		idCateg: "4",
 		categoria: "CONJUNTOS",
 		cantidad: 0,
 	},
 	{
-		id: "5",
+		idCateg: "5",
 		categoria: "GORROS",
 		cantidad: 0,
 	},
 	{
-		id: "6",
+		idCateg: "6",
 		categoria: "JARDINEROS",
 		cantidad: 0,
 	},
 	{
-		id: "7",
+		idCateg: "7",
 		categoria: "MONITOS",
 		cantidad: 0,
 	},
 	{
-		id: "8",
+		idCateg: "8",
 		categoria: "PANTALONES",
 		cantidad: 0,
 	},
 	{
-		id: "9",
+		idCateg: "9",
 		categoria: "REMERAS",
 		cantidad: 0,
 	},
 	{
-		id: "10",
+		idCateg: "10",
 		categoria: "VESTIDOS",
 		cantidad: 0,
 	},
@@ -59,8 +132,7 @@ export const articulos = [
 		nombre: "CAMPERA NENA 1",
 		categoriaId: "1",
 		precio: 45000.25,
-		descripcion:
-			"CARDIGAN FRISA ESTAMPADA. COMPOSICIÓN: 88% ALGODÓN-12% POLIESTER.",
+		descripcion: "CARDIGAN FRISA ESTAMPADA.",
 		imagen: ropa,
 		descripcionLarga:
 			"CARDIGAN FRISA ESTAMPADA. COMPOSICIÓN: 88% ALGODÓN-12% POLIESTER.",
@@ -130,7 +202,7 @@ export const articulos = [
 		descripcion: "CAMPERA DE NYLON CON RECORTES.",
 		imagen: ropa,
 		descripcionLarga:
-			"CAMPERA DE NYLON CON RECORTES,FORRERIA EN TAFETA. COMPOSICION: 100% POLIESTER.",
+			"CAMPERA DE NYLON CON RECORTES, FORRERIA EN TAFETA. COMPOSICION: 100% POLIESTER.",
 		stock: 12,
 	},
 	{

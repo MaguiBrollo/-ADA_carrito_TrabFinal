@@ -70,8 +70,6 @@ export const CarruselPpal = () => {
 									fontSize: "2rem",
 									color: "text.primary",
 									textShadow: `0px 0px 10px black, 0 0 1em ${theme.palette.background.paper}, 0 0 0.2em ${theme.palette.background.paper}`,
-									/* textShadow:
-											"0px 0px 10px ${background.paper}, 0 0 1em black, 0 0 0.2em black", */
 								}}
 							>
 								{imagen.etiqueta}
