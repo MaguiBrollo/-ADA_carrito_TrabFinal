@@ -24,8 +24,8 @@ export const ModoClaro = {
 	button: {
 		primaryText: "black",
 		primaryBack: "#B1E1EA", //+clarito - 1
-		hoverText: grey[800],
-		hoverBack: "#8DD2DD", //clarito - 2
+		hoverText: "white",
+		hoverBack: "#006064", //intermedio - 3
 	},
 	error: {
 		main: "#FFEB3B", //amarillo
@@ -55,7 +55,7 @@ export const ModoOscuro = {
 		primaryText: "black",
 		primaryBack: grey[100], //clarito (otro)
 		hoverText: grey[200],
-		hoverBack: grey[400], // intermedio
+		hoverBack: grey[600], 
 	},
 	error: {
 		main: "#FFEB3B", //amarillo

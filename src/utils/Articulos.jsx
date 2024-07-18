@@ -1,7 +1,10 @@
+import Logo_Baby from "../assets/Logo_Baby.png";
+
 export const usuarios = [
 	{
 		idUsuario: 1,
 		nombre: "ROSA",
+		imagen:  Logo_Baby ,
 		email: "rosa@gmail.com",
 		password: "123",
 		carritoAbierto: 2,
@@ -10,6 +13,7 @@ export const usuarios = [
 	{
 		idUsuario: 2,
 		nombre: "MARIA",
+		imagen:  Logo_Baby ,
 		email: "maria@gmail.com",
 		password: "123",
 		carritoAbierto: 0,
@@ -41,7 +45,7 @@ export const ordenes = [
 	{
 		idOrden: 2,
 		fecha: "2024/07/02",
-		total: 82000.25,
+		total: 102000.25,
 		cerrado: false,
 		articulos: [
 			{
@@ -51,10 +55,16 @@ export const ordenes = [
 				cantidad: 1,
 			},
 			{
-				idArticulo: 1,
-				nombre: "CAMPERA MARRON LINDO PRECIO 2",
+				idArticulo: 2,
+				nombre: "CAMPERA MARRON LINDA 2",
 				precio: 37000.0,
 				cantidad: 1,
+			},
+			{
+				idArticulo: 4,
+				nombre: "CARDIGAN NENA 4",
+				precio: 20000.0,
+				cantidad: 2,
 			},
 		],
 	},

@@ -9,16 +9,26 @@ import {
 	Tooltip,
 	Typography,
 	Button,
+	CardMedia,
+	ListItemIcon,
 } from "@mui/material";
 
 import { FirebaseContext } from "./contexts/FirebaseContext";
+import { formatPesos } from "../utils/Funciones.js";
+import carritoVacioImg from "../assets/carritovacio.png";
 
 //====================================================================
 //------------------ Componente Principal ----------------------------
 export const CarritoModal = ({ abrirCarrito, setAbrirCarrito }) => {
-	const { carrito } = useContext(FirebaseContext);
+	const { carrito, cantArtCarrito, setArtiBrorrarCarrito } =
+		useContext(FirebaseContext);
 
 	const anchor = "right";
+
+	const borrarArtCarrito = (idBorrar) => {
+		console.log("idborrar ",idBorrar);
+		setArtiBrorrarCarrito(idBorrar);
+	};
 
 	//===========================
 	return (
@@ -27,10 +37,10 @@ export const CarritoModal = ({ abrirCarrito, setAbrirCarrito }) => {
 			open={abrirCarrito}
 			onClose={() => setAbrirCarrito(false)}
 		>
-			<Box sx={{ width: "350px" }} role="presentation">
+			<Box sx={{ width: "350px", padding: "10px" }} role="presentation">
 				<Box
 					sx={{
-						margin: "15px",
+						margin: "10px",
 						display: "flex",
 						alignItems: "center",
 						justifyContent: "space-between",
@@ -41,10 +51,9 @@ export const CarritoModal = ({ abrirCarrito, setAbrirCarrito }) => {
 							fontSize: "1.5rem",
 							fontStyle: "italic",
 							textShadow: "0px 0px 15px black",
-							padding: "15px",
 						}}
 					>
-						Carrito
+						Carrito de Compras
 					</Typography>
 					<Tooltip title="Cerrar buscar">
 						<IconButton
@@ -57,71 +66,119 @@ export const CarritoModal = ({ abrirCarrito, setAbrirCarrito }) => {
 						</IconButton>
 					</Tooltip>
 				</Box>
-				<Divider sx={{ margin: "15px" }} />
+				<Divider sx={{ margin: "10px0px" }} />
 
-				<Box sx={{ margin: "5px 10px" }}>
-					{carrito.articulos.map((arti) => (
-						<Box key={arti.id}>
-							<Typography sx={{ fontSize: "0.9rem" }}>{arti.nombre}</Typography>
-							<Box
+				{cantArtCarrito > 0 ? (
+					<>
+						<Box sx={{ margin: "5px 10px" }}>
+							{carrito.articulos.map((arti) => (
+								<Box key={arti.idArticulo}>
+									<Typography sx={{ fontSize: "0.8rem" }}>
+										{arti.nombre}
+									</Typography>
+									<Box
+										sx={{
+											display: "flex",
+											flexDirection: "row",
+											alignItems: "center",
+										}}
+									>
+										<Typography sx={{ width: "40%", fontSize: "0.8rem" }}>
+											Cant.: {arti.cantidad}
+										</Typography>
+										<Typography
+											sx={{
+												width: "40%",
+												fontSize: "0.8rem",
+												textAlign: "end",
+											}}
+										>
+											${formatPesos(arti.precio)}
+										</Typography>
+
+										<Box
+											sx={{
+												width: "20%",
+												display: "flex",
+												justifyContent: "flex-end",
+											}}
+										>
+											<ListItemIcon
+												sx={{ minWidth: "20px" }}
+												onClick={() => borrarArtCarrito(arti.idArticulo)}
+											>
+												<IconButton size="small" sx={{ color: "text.primary" }}>
+													<MdDeleteOutline />
+												</IconButton>
+											</ListItemIcon>
+										</Box>
+									</Box>
+									<Divider sx={{ margin: "5px 0px" }} />
+								</Box>
+							))}
+
+							<Typography sx={{ display: "flex", justifyContent: "center" }}>
+								Total de la compra: {"  $"} {formatPesos(carrito.total)}
+							</Typography>
+						</Box>
+
+						<Divider sx={{ margin: "10px 0px" }} />
+
+						<Box
+							sx={{
+								display: "flex",
+								flexDirection: "column",
+								alignItems: "center",
+							}}
+						>
+							<Button
+								variant="contained"
+								/* onClick={agregarAlCarrito} */
 								sx={{
-									display: "flex",
-									flexDirection: "row",
-									alignItems: "center",
+									width: "80%",
+									color: "button.primaryText",
+									backgroundColor: "button.primaryBack",
+									":hover": {
+										color: "button.hoverText",
+										backgroundColor: "button.hoverBack",
+									},
 								}}
 							>
-								<Typography sx={{ width: "43%" }}>
-									Cant.: {arti.cantidad}
-								</Typography>
-								<Typography sx={{ width: "43%" }}>${arti.precio}</Typography>
+								Finalizar Compra
+							</Button>
 
-								<Tooltip title="Borrar artículo">
-									<IconButton>
-										<MdDeleteOutline />
-									</IconButton>
-								</Tooltip>
-							</Box>
-							<Divider sx={{ margin: "10px" }} />
+							<Button
+								variant="outline"
+								sx={{ width: "80%" }}
+
+								/* onClick={cerrarModalVerMas} */
+							>
+								Eliminar Carrito
+							</Button>
 						</Box>
-					))}
-
-					<Typography>Total de la compra:{carrito.total}</Typography>
-				</Box>
-
-				<Divider sx={{ margin: "15px" }} />
-
-				<Box
-					sx={{
-						display: "flex",
-						flexDirection: "column",
-						alignItems: "center",
-					}}
-				>
-					<Button
-						variant="contained"
-						/* onClick={agregarAlCarrito} */
+					</>
+				) : (
+					<Box
 						sx={{
-							width: "80%",
-							color: "button.primaryText",
-							backgroundColor: "button.primaryBack",
-							":hover": {
-								color: "button.hoverText",
-								backgroundColor: "button.hoverBack",
-							},
+							margin: "20px",
+							display: "flex",
+							flexDirection: "column",
+							alignItems: "center",
 						}}
 					>
-						Finalizar Compra
-					</Button>
-
-					<Button
-						variant="outline"
-						sx={{ width: "80%" }}
-
-						/* onClick={cerrarModalVerMas} */
-					>
-						Eliminar Carrito
-					</Button>
-				</Box>
+						<CardMedia
+							component="img"
+							image={carritoVacioImg}
+							alt="Carrito vacío"
+							sx={{
+								maxWidth: "150px",
+								margin: "10px",
+								borderRadius: "50%",
+								boxShadow: "0px 0px 15px black",
+							}}
+						/>
+					</Box>
+				)}
 			</Box>
 		</Drawer>
 	);

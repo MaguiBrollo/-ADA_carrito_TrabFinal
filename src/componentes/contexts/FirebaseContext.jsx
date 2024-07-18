@@ -19,31 +19,59 @@ export const FirebaseProvider = ({ children }) => {
 	const [categoria, setCategoria] = useState([]);
 
 	const [usuarioId, setUsusarioId] = useState(0);
-	const [carrito, setCarrito] = useState([]);
+	const [usuarioLogin, setUsusarioLogin] = useState(0);
+	const [carrito, setCarrito] = useState({});
 	const [cantArtCarrito, setCantArtCarrito] = useState(0);
+	const [artiBrorrarCarrito, setArtiBrorrarCarrito] = useState(0);
 
 	// se hizo LogIn, con email y contraseña.
 	// con el ID se busca de la DBf usuario, sus datos, por
 	// ahora en al array "usuarios"
 	useEffect(() => {
 		if (usuarioId !== 0) {
-			const usuarioLogin = usuarios.find((usu) => {
+			console.log("usuario: ", usuarioId);
+			const usuLogin = usuarios.find((usu) => {
 				return usu.idUsuario === usuarioId;
 			});
+			setUsusarioLogin(usuLogin);
 
-			console.log("usuario", usuarioLogin.nombre);
 			//con el objeto usuario.. si tiene carritoAbierto
 			// se lo busca en "ordenes" y se lo carga
-			if (usuarioLogin.carritoAbierto > 0) {
+			if (usuLogin.carritoAbierto > 0) {
 				const car = ordenes.find((ord) => {
-					return ord.idOrden === usuarioLogin.carritoAbierto;
+					return ord.idOrden === usuLogin.carritoAbierto;
 				});
-				console.log("carrito", car);
 				setCarrito(car);
 				setCantArtCarrito(car.articulos.length);
+			} else {
+				setCarrito({});
+				setCantArtCarrito(0);
 			}
+		} else {
+			setCarrito({});
+			setCantArtCarrito(0);
+			setUsusarioLogin({})
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [usuarioId]);
+
+	//solo cuando se borrar un articulo del carrito
+	useEffect(() => {
+		if (cantArtCarrito > 0) {
+			const nuevo = carrito.articulos.filter(
+				(a) => a.idArticulo !== artiBrorrarCarrito
+			);
+
+			let suma = nuevo.reduce(function (total, art) {
+				return total + art.precio * art.cantidad;
+			}, 0);
+
+			setCarrito({ ...carrito, articulos: nuevo, total: suma });
+			setCantArtCarrito(nuevo.length);
+		}
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [artiBrorrarCarrito]);
 
 	//-------------
 	//Aquí debería buscar articulos de firebase
@@ -111,9 +139,12 @@ export const FirebaseProvider = ({ children }) => {
 				setFiltrarPor,
 				setBuscarPor,
 				mostrarTitulo,
+				usuarioId,
 				setUsusarioId,
+				usuarioLogin,
 				cantArtCarrito,
 				carrito,
+				setArtiBrorrarCarrito,
 			}}
 		>
 			{children}

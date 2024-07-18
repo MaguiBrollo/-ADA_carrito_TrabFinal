@@ -33,12 +33,17 @@ import Logo_Baby from "../assets/Logo_Baby.png";
 
 //====================================================================
 //------------------ Componente Principal ----------------------------
-export const NavBar = ({ setAbrirBuscar, setAbrirFiltrar, setAbrirCarrito }) => {
+export const NavBar = ({
+	setAbrirBuscar,
+	setAbrirFiltrar,
+	setAbrirCarrito,
+}) => {
 	const [anchorEl, setAnchorEl] = useState(null);
 
 	const { anchoMaximo } = useContext(ConstantesContext);
 	const { colorMode, mode } = useContext(ColorModeContext);
-	const { setUsusarioId, cantArtCarrito } = useContext(FirebaseContext);
+	const { setUsusarioId, cantArtCarrito, usuarioLogin } =
+		useContext(FirebaseContext);
 
 	const isMenuOpen = Boolean(anchorEl);
 
@@ -67,7 +72,11 @@ export const NavBar = ({ setAbrirBuscar, setAbrirFiltrar, setAbrirCarrito }) => 
 	const iniciarSesion = () => {
 		setUsusarioId(1); //-------- aqui usuario ID
 		setAnchorEl(null);
-		console.log("set usuario ");
+	};
+
+	const cerrarSesion = () => {
+		setUsusarioId(0);
+		setAnchorEl(null);
 	};
 
 	const handleMenuClose = () => {
@@ -85,15 +94,20 @@ export const NavBar = ({ setAbrirBuscar, setAbrirFiltrar, setAbrirCarrito }) => 
 			open={isMenuOpen}
 			onClose={handleMenuClose}
 		>
-			<MenuItem onClick={iniciarSesion}>Iniciar SESIÓN</MenuItem>
-			<Divider />
-			<MenuItem onClick={handleMenuClose}>Crear CUENTA</MenuItem>
-
-			{/* 
-			<MenuItem onClick={handleMenuClose}>Mi perfil</MenuItem>
-			<MenuItem onClick={handleMenuClose}>Mis compras</MenuItem> 
-			<Divider/>
-			<MenuItem onClick={handleMenuClose}>Cerrar sesión</MenuItem>*/}
+			{Object.keys(usuarioLogin).length === 0 ? (
+				<Box>
+					<MenuItem onClick={iniciarSesion}>Iniciar SESIÓN</MenuItem>
+					<Divider />
+					<MenuItem onClick={handleMenuClose}>Crear CUENTA</MenuItem>
+				</Box>
+			) : (
+				<Box>
+					<MenuItem onClick={handleMenuClose}>Mi perfil</MenuItem>
+					<MenuItem onClick={handleMenuClose}>Mis compras</MenuItem>
+					<Divider />
+					<MenuItem onClick={cerrarSesion}>Cerrar sesión</MenuItem>
+				</Box>
+			)}
 		</Menu>
 	);
 
@@ -293,16 +307,31 @@ export const NavBar = ({ setAbrirBuscar, setAbrirFiltrar, setAbrirCarrito }) => 
 										onClick={handleMenuUsuario}
 										color="inherit"
 									>
-										<MdOutlineAccountCircle />
+										{Object.keys(usuarioLogin).length !== 0 ? (
+											<CardMedia
+												component="img"
+												image={usuarioLogin.imagen}
+												alt="Usuario"
+												sx={{
+													width: "25px",
+													borderRadius: "50%",
+												}}
+											/>
+										) : (
+											<MdOutlineAccountCircle />
+										)}
 									</IconButton>
 								</Tooltip>
+
 								<Typography
 									sx={{
 										fontSize: "0.8rem",
 										textAlign: "center",
 									}}
 								>
-									Usuario
+									{Object.keys(usuarioLogin).length !== 0
+										? usuarioLogin.nombre
+										: "Usuario"}
 								</Typography>
 							</Box>
 
