@@ -21,6 +21,7 @@ import { Inicio } from "./componentes/Inicio";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Error404 } from "./componentes/Error404";
 import { CarritoModal } from "./componentes/CarritoModal";
+import { MisCompras } from "./componentes/MisCompras";
 
 //====================================================================
 //------------------- PRINCIPAL ------------------
@@ -87,6 +88,8 @@ function App() {
 						<Route index path="/" element={<Inicio />} />
 
 						<Route path="/articulos" element={<ArticulosListar />} />
+
+						<Route path="/miscompras" element={<MisCompras />} />
 
 						<Route path="*" element={<Error404 />} />
 					</Routes>

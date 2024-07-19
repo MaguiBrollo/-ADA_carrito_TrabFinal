@@ -17,23 +17,26 @@ export const FirebaseProvider = ({ children }) => {
 
 	const [buscarPor, setBuscarPor] = useState("");
 
-	const [mostrarTitulo, setMostrarTitulo] = useState(""); //articuloListar.jsx
-
 	const [usuarioId, setUsusarioId] = useState(0);
 	const [usuarioLogin, setUsusarioLogin] = useState(0);
+
+	const [articulosMostrar, setArticulosMostrar] = useState([]);
+	const [mostrarTitulo, setMostrarTitulo] = useState(""); //articuloListar.jsx
+
 	const [carrito, setCarrito] = useState({});
 	const [cantArtCarrito, setCantArtCarrito] = useState(0);
 	const [artiBrorrarCarrito, setArtiBrorrarCarrito] = useState(0);
-
-	const [articulosMostrar, setArticulosMostrar] = useState([]);
 	const [artiParaAgregarCarrito, setArtiParaAgregarCarrito] = useState({});
+
+	const [misCompras, setMisCompras] = useState([]);
+	const [buscarMisCompras, setBuscarMisCompras] = useState(false);
 
 	// se hizo LogIn, con email y contraseña.
 	// con el ID se busca de la DBf usuario, sus datos, por
 	// ahora en al array "usuarios"
 	useEffect(() => {
+		console.log("buscar dato us y su carrito");
 		if (usuarioId !== 0) {
-			console.log("usuario: ", usuarioId);
 			const usuLogin = usuarios.find((usu) => {
 				return usu.idUsuario === usuarioId;
 			});
@@ -52,15 +55,19 @@ export const FirebaseProvider = ({ children }) => {
 				setCantArtCarrito(0);
 			}
 		} else {
+			//Usuario deslogueado, se limpian array/varibales con datos
 			setCarrito({});
 			setCantArtCarrito(0);
 			setUsusarioLogin({});
+			//setMisCompras([]);
+			//setBuscarMisCompras(false);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [usuarioId]);
 
 	// BORRAR un artículo del carrito
 	useEffect(() => {
+		console.log("borrar carrito uno/t");
 		if (cantArtCarrito > 0) {
 			if (artiBrorrarCarrito === "T") {
 				setCarrito({});
@@ -85,6 +92,7 @@ export const FirebaseProvider = ({ children }) => {
 
 	// AGREGAR un artículo al carrito
 	useEffect(() => {
+		console.log("agregar carrito");
 		if (Object.keys(artiParaAgregarCarrito).length !== 0) {
 			let nuevo = [];
 			if (cantArtCarrito > 0) {
@@ -111,6 +119,7 @@ export const FirebaseProvider = ({ children }) => {
 							idArticulo: artiParaAgregarCarrito.ID,
 							nombre: artiParaAgregarCarrito.nombre,
 							precio: artiParaAgregarCarrito.precio,
+							imagen: artiParaAgregarCarrito.imagen,
 							cantidad: artiParaAgregarCarrito.cantidad,
 						},
 					];
@@ -121,12 +130,13 @@ export const FirebaseProvider = ({ children }) => {
 						idArticulo: artiParaAgregarCarrito.ID,
 						nombre: artiParaAgregarCarrito.nombre,
 						precio: artiParaAgregarCarrito.precio,
+						imagen: artiParaAgregarCarrito.imagen,
 						cantidad: artiParaAgregarCarrito.cantidad,
 					},
 				];
 				setCarrito({
 					idOrden: dayjs(), //una fecha como ID
-					fecha: dayjs().format("DD/MM/YYYY"),
+					fecha: dayjs().format("YYYY/MM/DD"),
 					total: 0,
 					cerrado: false,
 					articulos: [],
@@ -149,6 +159,7 @@ export const FirebaseProvider = ({ children }) => {
 
 	//Contar cantidad de artículos por categoría
 	useEffect(() => {
+		console.log("cant art x cat");
 		const cat = categorias.map((c) => {
 			const cant = articulos.filter((a) => a.categoriaId === c.idCateg);
 			return { ...c, cantidad: cant.length };
@@ -158,6 +169,7 @@ export const FirebaseProvider = ({ children }) => {
 
 	//Filtrar por categoría
 	useEffect(() => {
+		console.log("filtrar por cat");
 		if (filtrarPor !== "") {
 			let articulosFiltrados = [];
 
@@ -181,6 +193,7 @@ export const FirebaseProvider = ({ children }) => {
 
 	//Buscar artíciculos
 	useEffect(() => {
+		console.log("buscar los articulos");
 		if (buscarPor !== undefined && buscarPor.trim() !== "") {
 			const articulosBuscados = articulos.filter((a) => {
 				return (
@@ -198,6 +211,40 @@ export const FirebaseProvider = ({ children }) => {
 			}
 		}
 	}, [buscarPor]);
+
+	//Buscar Mis Compras
+	useEffect(() => {
+		console.log("buscar mis compras");
+		if (buscarMisCompras) {
+			console.log(" hizo clci");
+			//se hizo clic en el menú usuario "mis compras"
+			if (usuarioLogin.carritoCerrado.length > 0) {
+				console.log(
+					"carrito cerrado tiene algo",
+					usuarioLogin.carritoCerrado.length
+				);
+				//Por cada elemento del array carritoCerrado,
+				//hay que bucar en "ordenes", la orden del Carrito.
+				const compras = [];
+				usuarioLogin.carritoCerrado.forEach((cc) => {
+					console.log("adentro de forEach", cc);
+					const car = ordenes.find((ord) => {
+						console.log("adentro de find", ord);
+						return ord.idOrden === cc;
+					});
+					compras.push(car);
+				});
+
+				//hay algo
+				setMisCompras(compras);
+			} else {
+				//no tiene compras
+				setMisCompras([]);
+			}
+		}
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [buscarMisCompras]);
 
 	//==============================
 	return (
@@ -217,6 +264,8 @@ export const FirebaseProvider = ({ children }) => {
 				setArtiBrorrarCarrito,
 				artiParaAgregarCarrito,
 				setArtiParaAgregarCarrito,
+				setBuscarMisCompras,
+				misCompras,
 			}}
 		>
 			{children}

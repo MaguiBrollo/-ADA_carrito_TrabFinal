@@ -34,6 +34,16 @@ export const CarritoModal = ({ abrirCarrito, setAbrirCarrito }) => {
 		setArtiBrorrarCarrito("T");
 	};
 
+	const finalizarCompraCarrito = () => {
+		alert("Finlizó");
+		setAbrirCarrito(false);
+		//Antes de Borrar Carrito, debe:
+		// pasar el IDcarrito de la propiedad carritoAbierto a carritoCerrado.
+		// poner la propiedad de  cerrado=True, en carrito.
+		// descontar el stock de los artículos.
+		setArtiBrorrarCarrito("T");
+	};
+
 	//===========================
 	return (
 		<Drawer
@@ -77,9 +87,6 @@ export const CarritoModal = ({ abrirCarrito, setAbrirCarrito }) => {
 						<Box sx={{ margin: "5px 10px" }}>
 							{carrito.articulos.map((arti) => (
 								<Box key={arti.idArticulo}>
-									<Typography sx={{ fontSize: "0.8rem" }}>
-										{arti.nombre}
-									</Typography>
 									<Box
 										sx={{
 											display: "flex",
@@ -87,36 +94,69 @@ export const CarritoModal = ({ abrirCarrito, setAbrirCarrito }) => {
 											alignItems: "center",
 										}}
 									>
-										<Typography
-											sx={{ width: "35%", fontSize: "0.8rem", ml: 2 }}
-										>
-											{arti.cantidad + " x  $" + formatPesos(arti.precio)}
-										</Typography>
-										<Typography
+										<CardMedia
+											component="img"
 											sx={{
-												width: "40%",
-												fontSize: "0.8rem",
-												textAlign: "end",
+												maxWidth: "50px",
 											}}
-										>
-											${formatPesos(arti.cantidad * arti.precio)}
-										</Typography>
+											image={arti.imagen}
+										/>
 
 										<Box
 											sx={{
-												width: "20%",
 												display: "flex",
-												justifyContent: "flex-end",
+												flexDirection: "column",
+												width: "100%",
 											}}
 										>
-											<ListItemIcon
-												sx={{ minWidth: "20px" }}
-												onClick={() => borrarArtCarrito(arti.idArticulo)}
+											<Typography
+												sx={{ fontSize: "0.7rem", marginLeft: "10px" }}
 											>
-												<IconButton size="small" sx={{ color: "text.primary" }}>
-													<MdDeleteOutline />
-												</IconButton>
-											</ListItemIcon>
+												{arti.nombre}
+											</Typography>
+
+											<Box
+												sx={{
+													display: "flex",
+													flexDirection: "row",
+													alignItems: "center",
+												}}
+											>
+												<Typography
+													sx={{ width: "35%", fontSize: "0.8rem", ml: 2 }}
+												>
+													{arti.cantidad + " x  $" + formatPesos(arti.precio)}
+												</Typography>
+												<Typography
+													sx={{
+														width: "40%",
+														fontSize: "0.8rem",
+														textAlign: "end",
+													}}
+												>
+													${formatPesos(arti.cantidad * arti.precio)}
+												</Typography>
+
+												<Box
+													sx={{
+														width: "20%",
+														display: "flex",
+														justifyContent: "flex-end",
+													}}
+												>
+													<ListItemIcon
+														sx={{ minWidth: "20px" }}
+														onClick={() => borrarArtCarrito(arti.idArticulo)}
+													>
+														<IconButton
+															size="small"
+															sx={{ color: "text.primary" }}
+														>
+															<MdDeleteOutline />
+														</IconButton>
+													</ListItemIcon>
+												</Box>
+											</Box>
 										</Box>
 									</Box>
 									<Divider sx={{ margin: "5px 0px" }} />
@@ -139,7 +179,7 @@ export const CarritoModal = ({ abrirCarrito, setAbrirCarrito }) => {
 						>
 							<Button
 								variant="contained"
-								/* onClick={agregarAlCarrito} */
+								onClick={finalizarCompraCarrito}
 								sx={{
 									width: "80%",
 									color: "button.primaryText",

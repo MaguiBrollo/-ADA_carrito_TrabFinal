@@ -18,6 +18,7 @@ import {
 	MenuItem,
 	FormHelperText,
 	Modal,
+	Alert,
 } from "@mui/material";
 import { useTheme } from "@emotion/react";
 
@@ -61,12 +62,21 @@ export const ArticuloVerMas = ({
 	const [avisoNoInicioSesion, setAvisoNoInicioSesion] = useState(false);
 	const [cantidad, setCantidad] = useState(1);
 	const [abrirCantidad, setAbrirCantidad] = useState(false);
+	const [alertaStock, setAlertaStock] = useState(false);
 	const { usuarioId, setArtiParaAgregarCarrito } = useContext(FirebaseContext);
 
 	const theme = useTheme();
 
 	const guardarCantidad = (event) => {
-		setCantidad(parseInt(event.target.value));
+		if (parseInt(event.target.value) > artParaVerMas.stock) {
+			setAlertaStock(true);
+			setCantidad(artParaVerMas.stock);
+			setTimeout(() => {
+				setAlertaStock(false);
+			}, 4000);
+		} else {
+			setCantidad(parseInt(event.target.value));
+		}
 	};
 	const handleCloseCantidad = () => {
 		setAbrirCantidad(false);
@@ -188,6 +198,15 @@ export const ArticuloVerMas = ({
 										Compras por menor, hasta 5 artículos.
 									</FormHelperText>
 								</FormControl>
+								{alertaStock && (
+									<Alert
+										variant="outlined"
+										severity="warning"
+										onClose={() => setAlertaStock(false)}
+									>
+										Stock insuficiente.
+									</Alert>
+								)}
 							</Box>
 						</Box>
 					</Box>
