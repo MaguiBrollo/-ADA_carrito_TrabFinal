@@ -81,16 +81,14 @@ export const MisCompras = () => {
 														display: "flex",
 														flexDirection: "row",
 														alignItems: "center",
+														justifyContent: "space-between",
 													}}
 												>
-													<Typography
-														sx={{ width: "35%", fontSize: "0.8rem", ml: 2 }}
-													>
+													<Typography sx={{ fontSize: "0.8rem", ml: 2 }}>
 														{arti.cantidad + " x  $" + formatPesos(arti.precio)}
 													</Typography>
 													<Typography
 														sx={{
-															width: "40%",
 															fontSize: "0.8rem",
 															textAlign: "end",
 														}}
@@ -104,7 +102,13 @@ export const MisCompras = () => {
 									</Box>
 								))}
 
-								<Typography sx={{ display: "flex", justifyContent: "center" }}>
+								<Typography
+									sx={{
+										fontSize: "0.8rem",
+										display: "flex",
+										justifyContent: "center",
+									}}
+								>
 									Total de la compra: {"  $"} {formatPesos(mis.total)}
 								</Typography>
 							</Box>

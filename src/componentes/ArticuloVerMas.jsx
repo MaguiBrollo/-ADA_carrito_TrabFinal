@@ -98,6 +98,9 @@ export const ArticuloVerMas = ({
 
 			setAbrirVerMas(false);
 			setAbrirAgregadoCarrito(true);
+			setTimeout(() => {
+					setAbrirAgregadoCarrito(false);
+			}, 3000);
 		} else {
 			setAvisoNoInicioSesion(true);
 		}
