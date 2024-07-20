@@ -7,10 +7,10 @@ import LoraItalicVariableFontwght from "./fonts/LoraItalicVariableFontwght.ttf";
 import { useContext } from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { Box } from "@mui/material";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import { Header } from "./componentes/Header";
 import { NavBar } from "./componentes/NavBar";
-import { ColorModeContext } from "./componentes/contexts/ModoClaOscContext";
 import { ModoClaro } from "./utils/ColoresModo";
 import { ModoOscuro } from "./utils/ColoresModo";
 import { Footer } from "./componentes/Footer";
@@ -18,9 +18,14 @@ import { ArticuloBuscar } from "./componentes/ArticuloBuscar";
 import { FiltrarPorCategoria } from "./componentes/FiltrarPorCategoria";
 import { ArticulosListar } from "./componentes/ArticulosListar";
 import { Inicio } from "./componentes/Inicio";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Error404 } from "./componentes/Error404";
 import { CarritoModal } from "./componentes/CarritoModal";
+import { MisCompras } from "./componentes/MisCompras";
+import { IniciarSesion } from "./componentes/IniciarSesion";
+import { CerrarSesion } from "./componentes/CerrarSesion";
+
+import { ColorModeContext } from "./contexts/ModoClaOscContext";
+import { FirebaseContext } from "./contexts/FirebaseContext";
 
 //====================================================================
 //------------------- PRINCIPAL ------------------
@@ -30,6 +35,7 @@ function App() {
 	const [abrirCarrito, setAbrirCarrito] = React.useState(false);
 
 	const { mode } = useContext(ColorModeContext);
+	const { usuarioId } = useContext(FirebaseContext);
 
 	//--------- Paleta de colores para Modo Claro Oscuro / Fuente
 	const theme = React.useMemo(
@@ -88,8 +94,27 @@ function App() {
 
 						<Route path="/articulos" element={<ArticulosListar />} />
 
+						<Route
+							path="/miscompras"
+							element={usuarioId !== 0 ? <MisCompras /> : <Navigate to="/" />}
+						/>
+
+						<Route
+							path="/iniciarsesion"
+							element={
+								usuarioId === 0 ? <IniciarSesion /> : <Navigate to="/" />
+							}
+						/>
+
+						<Route
+							path="/cerrarsesion"
+							element={usuarioId !== 0 ? <CerrarSesion /> : <Navigate to="/" />}
+						/>
+
 						<Route path="*" element={<Error404 />} />
 					</Routes>
+
+					<Footer />
 
 					{/* --------- Modal Drawer Buscar -------- */}
 					{abrirFiltrar && (
@@ -115,7 +140,6 @@ function App() {
 					)}
 
 					{/* --------- Barra de Footer  ----------- */}
-					<Footer />
 				</Box>
 			</BrowserRouter>
 		</ThemeProvider>

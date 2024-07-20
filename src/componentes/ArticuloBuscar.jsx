@@ -9,7 +9,7 @@ import { useContext } from "react";
 
 import { useNavigate } from "react-router-dom";
 
-import { FirebaseContext } from "./contexts/FirebaseContext";
+import { FirebaseContext } from "../contexts/FirebaseContext";
 
 //====================================================================
 //------------------ Componente Principal ----------------------------

@@ -3,18 +3,18 @@ import maria from "../assets/maria.png";
 
 export const usuarios = [
 	{
-		idUsuario: 1,
-		nombre: "ROSA MARIA ANA",
-		imagen:  maria ,
+		idUsuario: "LYi40iHIj7OYuy9muY9wiwlNi4x1",
+		nombre: "MAGUI",
+		imagen: magui,
 		email: "rosa@gmail.com",
 		password: "123",
 		carritoAbierto: 2,
-		carritoCerrado: [1],
+		carritoCerrado: [1, 2],
 	},
 	{
-		idUsuario: 2,
-		nombre: "MAGUI",
-		imagen:  magui ,
+		idUsuario: "bwNjElhPZ8MtBPkfqLO0NXwxuj02",
+		nombre: "MARIA ROSA",
+		imagen: maria,
 		email: "maria@gmail.com",
 		password: "123",
 		carritoAbierto: 0,
@@ -25,7 +25,7 @@ export const usuarios = [
 export const ordenes = [
 	{
 		idOrden: 1,
-		fecha: "2024/07/01",
+		fecha: "2024/06/15",
 		total: 82000.25,
 		cerrado: true,
 		articulos: [
@@ -34,12 +34,14 @@ export const ordenes = [
 				nombre: "CAMPERA NENA 1",
 				precio: 45000.25,
 				cantidad: 1,
+				imagen: ropa,
 			},
 			{
 				idArticulo: 2,
 				nombre: "CAMPERA MARRON LINDO PRECIO 2",
 				precio: 37000.0,
 				cantidad: 1,
+				imagen: ropa,
 			},
 		],
 	},
@@ -54,18 +56,21 @@ export const ordenes = [
 				nombre: "CAMPERA NENA 1",
 				precio: 45000.25,
 				cantidad: 1,
+				imagen: ropa,
 			},
 			{
 				idArticulo: 2,
 				nombre: "CAMPERA MARRON LINDA 2",
 				precio: 37000.0,
 				cantidad: 1,
+				imagen: ropa,
 			},
 			{
 				idArticulo: 4,
 				nombre: "CARDIGAN NENA 4",
 				precio: 20000.0,
 				cantidad: 2,
+				imagen: ropa,
 			},
 		],
 	},
@@ -136,7 +141,7 @@ export const articulos = [
 		imagen: ropa,
 		descripcionLarga:
 			"CARDIGAN FRISA ESTAMPADA. COMPOSICIÓN: 88% ALGODÓN-12% POLIESTER.",
-		stock: 15,
+		stock: 1,
 	},
 	{
 		ID: 2,
@@ -147,7 +152,7 @@ export const articulos = [
 		imagen: ropa,
 		descripcionLarga:
 			"CAMPERA CORDERITO DOBLE. LA MEJOR OPCIÓN PARA MANTENER ABRIGADO AL BEBE. MUY CALENTITA POR SU CORDERITO DOBLE SHERPA.",
-		stock: 12,
+		stock: 2,
 	},
 	{
 		ID: 3,

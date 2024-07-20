@@ -25,9 +25,9 @@ import { TbShoppingCart } from "react-icons/tb";
 
 import { useNavigate } from "react-router-dom";
 
-import { ColorModeContext } from "./contexts/ModoClaOscContext";
-import { ConstantesContext } from "./contexts/ConstantesContext";
-import { FirebaseContext } from "./contexts/FirebaseContext";
+import { ColorModeContext } from "../contexts/ModoClaOscContext";
+import { ConstantesContext } from "../contexts/ConstantesContext";
+import { FirebaseContext } from "../contexts/FirebaseContext";
 
 import Logo_Baby from "../assets/Logo_Baby.png";
 
@@ -42,7 +42,7 @@ export const NavBar = ({
 
 	const { anchoMaximo } = useContext(ConstantesContext);
 	const { colorMode, mode } = useContext(ColorModeContext);
-	const { setUsusarioId, cantArtCarrito, usuarioLogin } =
+	const { cantArtCarrito, usuarioLogin, setBuscarMisCompras } =
 		useContext(FirebaseContext);
 
 	const isMenuOpen = Boolean(anchorEl);
@@ -61,7 +61,12 @@ export const NavBar = ({
 	};
 
 	const abrirCerrarModalCarrito = () => {
-		setAbrirCarrito(true);
+		if (Object.keys(usuarioLogin).length !== 0) {
+			setAbrirCarrito(true);
+		} else {
+			//mandar a login
+			navegar("/iniciarsesion");
+		}
 	};
 
 	//Controles de Menu Usuario login logout
@@ -70,19 +75,24 @@ export const NavBar = ({
 	};
 
 	const iniciarSesion = () => {
-		setUsusarioId(1); //-------- aqui usuario ID
 		setAnchorEl(null);
+		navegar("/iniciarsesion");
 	};
 
 	const cerrarSesion = () => {
-		setUsusarioId(0);
+		setAnchorEl(null);
+		navegar("/cerrarsesion");
+	};
+
+	const abrirCerrarMenuUsuario = () => {
 		setAnchorEl(null);
 	};
 
-	const handleMenuClose = () => {
+	const verMisCompras = () => {
+		setBuscarMisCompras(true), //solo busca la compras con este estado
+			navegar("/miscompras");
 		setAnchorEl(null);
 	};
-
 	//-------- Menú de Usuario Login/out -----
 	const menuId = "menu-usuario";
 	const renderMenu = (
@@ -92,18 +102,18 @@ export const NavBar = ({
 			id={menuId}
 			keepMounted
 			open={isMenuOpen}
-			onClose={handleMenuClose}
+			onClose={abrirCerrarMenuUsuario}
 		>
 			{Object.keys(usuarioLogin).length === 0 ? (
 				<Box>
 					<MenuItem onClick={iniciarSesion}>Iniciar SESIÓN</MenuItem>
 					<Divider />
-					<MenuItem onClick={handleMenuClose}>Crear CUENTA</MenuItem>
+					<MenuItem onClick={abrirCerrarMenuUsuario}>Crear CUENTA</MenuItem>
 				</Box>
 			) : (
 				<Box>
-					<MenuItem onClick={handleMenuClose}>Mi perfil</MenuItem>
-					<MenuItem onClick={handleMenuClose}>Mis compras</MenuItem>
+					<MenuItem onClick={abrirCerrarMenuUsuario}>Mi perfil</MenuItem>
+					<MenuItem onClick={verMisCompras}>Mis compras</MenuItem>
 					<Divider />
 					<MenuItem onClick={cerrarSesion}>Cerrar sesión</MenuItem>
 				</Box>
@@ -315,7 +325,7 @@ export const NavBar = ({
 												sx={{
 													width: "25px",
 													borderRadius: "50%",
-													aspectRatio: 1/1,
+													aspectRatio: 1 / 1,
 												}}
 											/>
 										) : (
@@ -331,7 +341,7 @@ export const NavBar = ({
 									}}
 								>
 									{Object.keys(usuarioLogin).length !== 0
-										? usuarioLogin.nombre.substring(0,10)
+										? usuarioLogin.nombre.substring(0, 10)
 										: "Usuario"}
 								</Typography>
 							</Box>

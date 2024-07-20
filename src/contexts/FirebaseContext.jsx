@@ -1,11 +1,15 @@
 import { createContext, useEffect, useState } from "react";
 
+//Importar módulos defirebas
+import appFirebase from "../Firebase/FirebaseCredenciales.js";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+
 import dayjs from "dayjs";
 
-import { articulos } from "../../utils/Articulos.jsx";
-import { categorias } from "../../utils/Articulos.jsx";
-import { usuarios } from "../../utils/Articulos.jsx";
-import { ordenes } from "../../utils/Articulos.jsx";
+import { articulos } from "../utils/Articulos.jsx";
+import { categorias } from "../utils/Articulos.jsx";
+import { usuarios } from "../utils/Articulos.jsx";
+import { ordenes } from "../utils/Articulos.jsx";
 
 export const FirebaseContext = createContext();
 
@@ -17,50 +21,81 @@ export const FirebaseProvider = ({ children }) => {
 
 	const [buscarPor, setBuscarPor] = useState("");
 
-	const [mostrarTitulo, setMostrarTitulo] = useState(""); //articuloListar.jsx
+	//const [usuario, setUsuario] = useState(null); //firebase
 
 	const [usuarioId, setUsusarioId] = useState(0);
 	const [usuarioLogin, setUsusarioLogin] = useState(0);
+
+	const [articulosMostrar, setArticulosMostrar] = useState([]);
+	const [mostrarTitulo, setMostrarTitulo] = useState(""); //articuloListar.jsx
+
 	const [carrito, setCarrito] = useState({});
 	const [cantArtCarrito, setCantArtCarrito] = useState(0);
 	const [artiBrorrarCarrito, setArtiBrorrarCarrito] = useState(0);
-
-	const [articulosMostrar, setArticulosMostrar] = useState([]);
 	const [artiParaAgregarCarrito, setArtiParaAgregarCarrito] = useState({});
+
+	const [misCompras, setMisCompras] = useState([]);
+	const [buscarMisCompras, setBuscarMisCompras] = useState(false);
+
+	const auth = getAuth(appFirebase);
+
+	//-----------------------------------------
+	//Verificar si hay o no un usuario logueado
+	useEffect(() => {
+		console.log("----------busca logueo firebase");
+		onAuthStateChanged(auth, (usuFirebase) => {
+			if (usuFirebase) {
+				setUsusarioId(usuFirebase.uid);
+			} else {
+				setUsusarioId(0);
+			}
+		});
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	// se hizo LogIn, con email y contraseña.
 	// con el ID se busca de la DBf usuario, sus datos, por
 	// ahora en al array "usuarios"
 	useEffect(() => {
+		console.log("buscar dato us y su carrito");
 		if (usuarioId !== 0) {
-			console.log("usuario: ", usuarioId);
 			const usuLogin = usuarios.find((usu) => {
 				return usu.idUsuario === usuarioId;
 			});
-			setUsusarioLogin(usuLogin);
 
-			//con el objeto usuario.. si tiene carritoAbierto
-			// se lo busca en "ordenes" y se lo carga
-			if (usuLogin.carritoAbierto > 0) {
-				const car = ordenes.find((ord) => {
-					return ord.idOrden === usuLogin.carritoAbierto;
-				});
-				setCarrito(car);
-				setCantArtCarrito(car.articulos.length);
+			if (usuLogin) {
+				setUsusarioLogin(usuLogin);
+				if (usuLogin.carritoAbierto > 0) {
+					const car = ordenes.find((ord) => {
+						return ord.idOrden === usuLogin.carritoAbierto;
+					});
+					setCarrito(car);
+					setCantArtCarrito(car.articulos.length);
+				} else {
+					setCarrito({});
+					setCantArtCarrito(0);
+				}
 			} else {
+				//El usuario se logueo, pero no se encontró sus datos
+				signOut(auth); //se cierra sesión
+				setUsusarioLogin(0);
 				setCarrito({});
 				setCantArtCarrito(0);
 			}
 		} else {
+			//Usuario deslogueado, se limpian array/varibales con datos
 			setCarrito({});
 			setCantArtCarrito(0);
 			setUsusarioLogin({});
+			setMisCompras([]);
+			setBuscarMisCompras(false);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [usuarioId]);
 
 	// BORRAR un artículo del carrito
 	useEffect(() => {
+		console.log("borrar carrito uno/t");
 		if (cantArtCarrito > 0) {
 			if (artiBrorrarCarrito === "T") {
 				setCarrito({});
@@ -85,6 +120,7 @@ export const FirebaseProvider = ({ children }) => {
 
 	// AGREGAR un artículo al carrito
 	useEffect(() => {
+		console.log("agregar carrito");
 		if (Object.keys(artiParaAgregarCarrito).length !== 0) {
 			let nuevo = [];
 			if (cantArtCarrito > 0) {
@@ -111,6 +147,7 @@ export const FirebaseProvider = ({ children }) => {
 							idArticulo: artiParaAgregarCarrito.ID,
 							nombre: artiParaAgregarCarrito.nombre,
 							precio: artiParaAgregarCarrito.precio,
+							imagen: artiParaAgregarCarrito.imagen,
 							cantidad: artiParaAgregarCarrito.cantidad,
 						},
 					];
@@ -121,12 +158,13 @@ export const FirebaseProvider = ({ children }) => {
 						idArticulo: artiParaAgregarCarrito.ID,
 						nombre: artiParaAgregarCarrito.nombre,
 						precio: artiParaAgregarCarrito.precio,
+						imagen: artiParaAgregarCarrito.imagen,
 						cantidad: artiParaAgregarCarrito.cantidad,
 					},
 				];
 				setCarrito({
 					idOrden: dayjs(), //una fecha como ID
-					fecha: dayjs().format("DD/MM/YYYY"),
+					fecha: dayjs().format("YYYY/MM/DD"),
 					total: 0,
 					cerrado: false,
 					articulos: [],
@@ -149,6 +187,7 @@ export const FirebaseProvider = ({ children }) => {
 
 	//Contar cantidad de artículos por categoría
 	useEffect(() => {
+		console.log("cant art x cat");
 		const cat = categorias.map((c) => {
 			const cant = articulos.filter((a) => a.categoriaId === c.idCateg);
 			return { ...c, cantidad: cant.length };
@@ -158,6 +197,7 @@ export const FirebaseProvider = ({ children }) => {
 
 	//Filtrar por categoría
 	useEffect(() => {
+		console.log("filtrar por cat");
 		if (filtrarPor !== "") {
 			let articulosFiltrados = [];
 
@@ -181,6 +221,7 @@ export const FirebaseProvider = ({ children }) => {
 
 	//Buscar artíciculos
 	useEffect(() => {
+		console.log("buscar los articulos");
 		if (buscarPor !== undefined && buscarPor.trim() !== "") {
 			const articulosBuscados = articulos.filter((a) => {
 				return (
@@ -198,6 +239,30 @@ export const FirebaseProvider = ({ children }) => {
 			}
 		}
 	}, [buscarPor]);
+
+	//Buscar Mis Compras
+	useEffect(() => {
+		console.log("buscar mis compras");
+		if (buscarMisCompras) {
+			if (usuarioLogin.carritoCerrado.length > 0) {
+				//Por cada elemento del array carritoCerrado,
+				//hay que bucar en "ordenes", la orden del Carrito.
+				const compras = [];
+				usuarioLogin.carritoCerrado.forEach((cc) => {
+					const car = ordenes.find((ord) => {
+						return ord.idOrden === cc;
+					});
+					compras.push(car);
+				});
+				setMisCompras(compras);
+			} else {
+				//No tiene compras
+				setMisCompras([]);
+			}
+		}
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [buscarMisCompras]);
 
 	//==============================
 	return (
@@ -217,6 +282,8 @@ export const FirebaseProvider = ({ children }) => {
 				setArtiBrorrarCarrito,
 				artiParaAgregarCarrito,
 				setArtiParaAgregarCarrito,
+				setBuscarMisCompras,
+				misCompras,
 			}}
 		>
 			{children}

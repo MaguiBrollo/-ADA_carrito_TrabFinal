@@ -1,16 +1,16 @@
-import React from "react";
+//import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
 
 import CssBaseline from "@mui/material/CssBaseline";
 
-import { ConstantesProvider } from "./componentes/contexts/ConstantesContext.jsx";
-import { ModoClaOscProvider } from "./componentes/contexts/ModoClaOscContext.jsx";
-import { FirebaseProvider } from "./componentes/contexts/FirebaseContext.jsx";
+import { ConstantesProvider } from "./contexts/ConstantesContext.jsx";
+import { ModoClaOscProvider } from "./contexts/ModoClaOscContext.jsx";
+import { FirebaseProvider } from "./contexts/FirebaseContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-	<React.StrictMode>
+	//<React.StrictMode>
 		<FirebaseProvider>
 			<ConstantesProvider>
 				<ModoClaOscProvider>
@@ -19,5 +19,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 				</ModoClaOscProvider>
 			</ConstantesProvider>
 		</FirebaseProvider>
-	</React.StrictMode>
+//	</React.StrictMode>
 );
