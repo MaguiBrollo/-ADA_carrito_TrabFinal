@@ -14,7 +14,7 @@ export const loginUsuario = async (correo, contrasenia, setMensajeError) => {
 	await signInWithEmailAndPassword(auth, correo, contrasenia)
 		.then((credencial) => {
 			const usuario = credencial.user;
-			console.log(usuario);
+			console.log("login:", usuario);
 		})
 		.catch((err) => {
 			console.log(err.message);
@@ -28,20 +28,26 @@ export const logoutUsuario = () => {
 	signOut(auth);
 };
 
-//Registrar Usuario
-export const registroUsuario = (formData, setFormData) => {
-	const { correo, contrasenia } = formData;
+//Crear una cuenta
+export const crearCuentaUsuario = async (
+	correo,
+	contrasenia,
+	setMensajeError
+) => {
 	const auth = getAuth(appFirebase);
 
-	if (!correo || !contrasenia) return;
-
-	createUserWithEmailAndPassword(auth, correo, contrasenia)
-		.then((result) => console.log(result))
-		.catch((err) =>
-			setFormData({ ...formData, error: handleError(err.code, err.message) })
-		);
+	await createUserWithEmailAndPassword(auth, correo, contrasenia)
+		.then((credencial) => {
+			const usuario = credencial.user;
+			console.log("Nuevo: ", usuario);
+		})
+		.catch((err) => {
+			console.log(err.message);
+			setMensajeError(handleError(err.code, err.message));
+		});
 };
 
+//Manejo de Errores
 function handleError(code, message) {
 	switch (code) {
 		case "auth/wrong-password":

@@ -21,8 +21,6 @@ export const FirebaseProvider = ({ children }) => {
 
 	const [buscarPor, setBuscarPor] = useState("");
 
-	//const [usuario, setUsuario] = useState(null); //firebase
-
 	const [usuarioId, setUsusarioId] = useState(0);
 	const [usuarioLogin, setUsusarioLogin] = useState(0);
 

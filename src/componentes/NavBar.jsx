@@ -74,18 +74,21 @@ export const NavBar = ({
 		setAnchorEl(event.currentTarget);
 	};
 
+	const abrirCerrarMenuUsuario = () => {
+		setAnchorEl(null);
+	};
+
 	const iniciarSesion = () => {
 		setAnchorEl(null);
 		navegar("/iniciarsesion");
 	};
-
+	const crearCuenta = () => {
+		setAnchorEl(null);
+		navegar("/crearcuenta");
+	};
 	const cerrarSesion = () => {
 		setAnchorEl(null);
 		navegar("/cerrarsesion");
-	};
-
-	const abrirCerrarMenuUsuario = () => {
-		setAnchorEl(null);
 	};
 
 	const verMisCompras = () => {
@@ -108,11 +111,10 @@ export const NavBar = ({
 				<Box>
 					<MenuItem onClick={iniciarSesion}>Iniciar SESIÓN</MenuItem>
 					<Divider />
-					<MenuItem onClick={abrirCerrarMenuUsuario}>Crear CUENTA</MenuItem>
+					<MenuItem onClick={crearCuenta}>Crear CUENTA</MenuItem>
 				</Box>
 			) : (
 				<Box>
-					<MenuItem onClick={abrirCerrarMenuUsuario}>Mi perfil</MenuItem>
 					<MenuItem onClick={verMisCompras}>Mis compras</MenuItem>
 					<Divider />
 					<MenuItem onClick={cerrarSesion}>Cerrar sesión</MenuItem>

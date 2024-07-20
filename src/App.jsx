@@ -26,6 +26,7 @@ import { CerrarSesion } from "./componentes/CerrarSesion";
 
 import { ColorModeContext } from "./contexts/ModoClaOscContext";
 import { FirebaseContext } from "./contexts/FirebaseContext";
+import { CrearCuenta } from "./componentes/CrearCuenta";
 
 //====================================================================
 //------------------- PRINCIPAL ------------------
@@ -103,6 +104,13 @@ function App() {
 							path="/iniciarsesion"
 							element={
 								usuarioId === 0 ? <IniciarSesion /> : <Navigate to="/" />
+							}
+						/>
+
+						<Route
+							path="/crearcuenta"
+							element={
+								usuarioId === 0 ? <CrearCuenta/> : <Navigate to="/" />
 							}
 						/>
 

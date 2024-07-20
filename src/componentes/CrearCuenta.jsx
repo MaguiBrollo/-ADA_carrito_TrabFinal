@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from "react";
-import Typography from "@mui/material/Typography";
 
 import {
 	Button,
@@ -7,18 +6,60 @@ import {
 	CardContent,
 	Box,
 	TextField,
+	Typography,
 	Alert,
 } from "@mui/material";
+import { styled } from "@mui/material/styles";
 
 import { useNavigate } from "react-router-dom";
 
 import { ConstantesContext } from "../contexts/ConstantesContext";
 
-import { loginUsuario } from "../Firebase/Autenticacion";
+import { crearCuentaUsuario } from "../Firebase/Autenticacion";
+import { IoCloudUploadOutline } from "react-icons/io5";
+
+const VisuallyHiddenInput = styled("input")({
+	clip: "rect(0 0 0 0)",
+	clipPath: "inset(50%)",
+	height: 1,
+	overflow: "hidden",
+	position: "absolute",
+	bottom: 0,
+	left: 0,
+	whiteSpace: "nowrap",
+	width: 1,
+});
+
+const controlarDatos = (event, setMensajeError) => {
+	if (event.target[0].value === "") {
+		setMensajeError("Email vacío.");
+		return false;
+	}
+
+	if (event.target[2].value === "" || event.target[4].value === "") {
+		setMensajeError("Contraseña vacía.");
+		return false;
+	}
+
+	if (event.target[2].value.length < 6) {
+		setMensajeError("La contraseña debe tener seis o más caracteres.");
+		return false;
+	}
+
+	if (event.target[2].value !== event.target[4].value) {
+		setMensajeError("Contraseña y confirmar contraseña no coinicen.");
+		return false;
+	}
+	if (event.target[6].value === "") {
+		setMensajeError("Nombre vacío.");
+		return false;
+	}
+   return true;
+};
 
 //====================================================================
 //------------------ Componente Principal ----------------------------
-export const IniciarSesion = () => {
+export const CrearCuenta = () => {
 	const [alertaError, setAlertaError] = useState(false);
 	const [mensajeError, setMensajeError] = useState("");
 
@@ -26,22 +67,21 @@ export const IniciarSesion = () => {
 
 	const navegar = useNavigate();
 
-	//Iiniciar SS
+	//Iniciar SS
 	const iniciarSesion = (event) => {
 		event.preventDefault();
 		setMensajeError("");
-		if (event.target[0].value === "" || event.target[2].value === "") {
-			setMensajeError("Email o contraseña vacío.");
-			setAlertaError(true);
-			setTimeout(() => {
-				setAlertaError(false);
-			}, 4000);
-		} else {
-			loginUsuario(
+		if (controlarDatos(event, setMensajeError)) {
+			crearCuentaUsuario(
 				event.target[0].value,
 				event.target[2].value,
 				setMensajeError
 			);
+		} else {
+			setAlertaError(true);
+			setTimeout(() => {
+				setAlertaError(false);
+			}, 4000);
 		}
 	};
 
@@ -58,8 +98,8 @@ export const IniciarSesion = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [mensajeError]);
 
-	const quiereCrearCuenta = () => {
-		navegar("/crearcuenta");
+	const quiereIniciarSesion = () => {
+		navegar("/iniciarsesion");
 	};
 
 	const cancelar = () => {
@@ -107,7 +147,7 @@ export const IniciarSesion = () => {
 						padding: "0px 10px",
 					}}
 				>
-					Inicio de Sesión
+					Crear una cuenta
 				</Typography>
 
 				<CardContent>
@@ -137,6 +177,53 @@ export const IniciarSesion = () => {
 							/>
 						</Box>
 
+						<Box sx={{ margin: "20px 0px" }}>
+							<TextField
+								type="password"
+								id="confirmarcontrasenia"
+								label=" Confirmar Contraseña "
+								helperText="Repita la contraseña."
+								fullWidth
+								inputProps={{ style: { color: "black" } }}
+								autoComplete="off"
+							/>
+						</Box>
+
+						<Box sx={{ margin: "20px 0px" }}>
+							<TextField
+								type="text"
+								id="nombre"
+								label=" Nombre "
+								helperText="Ingrese su nombre."
+								fullWidth
+								inputProps={{ style: { color: "black" } }}
+								autoComplete="off"
+							/>
+						</Box>
+
+						<Box
+							sx={{
+								display: "Flex",
+								flexDirection: "row",
+								alignItems: "center",
+								margin: "10px 10px 20px 10px",
+							}}
+						>
+							<Typography sx={{ marginRight: "10px" }}>
+								Subir imagen de usuario:
+							</Typography>
+							<Button
+								variant="outlined"
+								component="label"
+								role={undefined}
+								tabIndex={-1}
+								startIcon={<IoCloudUploadOutline />}
+							>
+								Archivo de imagen
+								<VisuallyHiddenInput type="file" />
+							</Button>
+						</Box>
+
 						{alertaError && (
 							<Alert
 								sx={{ margin: "25px auto" }}
@@ -163,7 +250,7 @@ export const IniciarSesion = () => {
 								Cancelar
 							</Button>
 							<Button type="submit" variant="contained">
-								Iniciar Sesión
+								Crear Cuenta
 							</Button>
 						</Box>
 					</Box>
@@ -177,10 +264,10 @@ export const IniciarSesion = () => {
 					}}
 				>
 					<Typography sx={{ fontSize: "0.8rem" }}>
-						¿No tiene cuenta aún?
+						¿Tiene una cuenta?
 					</Typography>
-					<Button size="small" variant="text" onClick={quiereCrearCuenta}>
-						Crear una Cuenta
+					<Button size="small" variant="text" onClick={quiereIniciarSesion}>
+						Inicia Sesión
 					</Button>
 				</Box>
 			</Card>
