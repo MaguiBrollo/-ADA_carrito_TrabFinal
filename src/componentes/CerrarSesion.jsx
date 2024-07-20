@@ -3,10 +3,7 @@ import { Box, Button, Card, Typography } from "@mui/material";
 
 import { useNavigate } from "react-router-dom";
 
-//Importar módulos defirebas
-import appFirebase from "./FirebaseCredenciales";
-import { getAuth, signOut } from "firebase/auth";
-const auth = getAuth(appFirebase);
+import { logoutUsuario } from "../Firebase/Autenticacion";
 
 import { ConstantesContext } from "../contexts/ConstantesContext";
 
@@ -17,10 +14,10 @@ export const CerrarSesion = () => {
 
 	const navegar = useNavigate();
 
-	const cerrarSesion = async (event) => {
+	const cerrarSesion = (event) => {
 		event.preventDefault();
-		await signOut(auth);
-      navegar("/");
+		logoutUsuario();
+		navegar("/");
 	};
 
 	const cancelar = () => {
@@ -85,7 +82,7 @@ export const CerrarSesion = () => {
 					}}
 				>
 					<Button
-						sx={{ width: "160px", marginRight:"20px" }}
+						sx={{ width: "160px", marginRight: "20px" }}
 						onClick={cerrarSesion}
 						variant="outlined"
 					>

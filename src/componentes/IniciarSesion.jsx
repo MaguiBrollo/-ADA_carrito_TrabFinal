@@ -1,32 +1,62 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import Typography from "@mui/material/Typography";
 
-import { Button, Card, CardContent, Box, TextField } from "@mui/material";
+import {
+	Button,
+	Card,
+	CardContent,
+	Box,
+	TextField,
+	Alert,
+} from "@mui/material";
 
 import { useNavigate } from "react-router-dom";
 
 import { ConstantesContext } from "../contexts/ConstantesContext";
-//Importar módulos defirebas
-import appFirebase from "./FirebaseCredenciales";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-const auth = getAuth(appFirebase);
+
+import { loginUsuario } from "../Firebase/Autenticacion";
 
 //====================================================================
 //------------------ Componente Principal ----------------------------
 export const IniciarSesion = () => {
+	const [alertaError, setAlertaError] = useState(false);
+	const [mensajeError, setMensajeError] = useState("");
+
 	const { anchoMaximo, altoMinimo } = useContext(ConstantesContext);
 
 	const navegar = useNavigate();
 
-	const iniciarSesion = async (event) => {
+	//Iiniciar SS
+	const iniciarSesion = (event) => {
 		event.preventDefault();
-
-		const correo = event.target[0].value;
-		const contrasenia = event.target[2].value;
-
-		await signInWithEmailAndPassword(auth, correo, contrasenia);
-		navegar("/");
+		setMensajeError("");
+		if (event.target[2].value === "") {
+			setMensajeError("Email o contraseña vacío..");
+			setAlertaError(true);
+			setTimeout(() => {
+				setAlertaError(false);
+			}, 4000);
+		} else {
+			loginUsuario(
+				event.target[0].value,
+				event.target[2].value,
+				setMensajeError
+			);
+		}
 	};
+
+	useEffect(() => {
+		if (mensajeError.length > 0) {
+			setAlertaError(true);
+
+			setTimeout(() => {
+				setAlertaError(false);
+			}, 4000);
+		} else {
+			setAlertaError(false);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [mensajeError]);
 
 	const cancelar = () => {
 		navegar("/");
@@ -81,10 +111,10 @@ export const IniciarSesion = () => {
 						<Box sx={{ margin: "20px 0px" }}>
 							<TextField
 								type="email"
-								error={false}
+								/* error={false} */
 								id="email"
 								label=" Email "
-								helperText="Email no existe"
+								helperText="Ingrese email."
 								fullWidth
 								inputProps={{ style: { color: "black" } }}
 								autoComplete="off"
@@ -94,15 +124,25 @@ export const IniciarSesion = () => {
 						<Box sx={{ margin: "20px 0px" }}>
 							<TextField
 								type="password"
-								error={false}
 								id="contrasenia"
 								label=" Contraseña "
-								helperText="Contraseña incorrecta"
+								helperText="Ingrese contraseña."
 								fullWidth
 								inputProps={{ style: { color: "black" } }}
 								autoComplete="off"
 							/>
 						</Box>
+
+						{alertaError && (
+							<Alert
+								sx={{ margin: "25px auto" }}
+								variant="outlined"
+								severity="warning"
+								onClose={() => setAlertaError(false)}
+							>
+								{mensajeError}
+							</Alert>
+						)}
 						<Box
 							sx={{
 								display: "flex",
@@ -112,13 +152,13 @@ export const IniciarSesion = () => {
 							}}
 						>
 							<Button
-								sx={{ width: "160px", marginRight: "20px" }}
+								sx={{ marginRight: "15px" }}
 								variant="outlined"
 								onClick={cancelar}
 							>
 								Cancelar
 							</Button>
-							<Button type="submit" sx={{ width: "160px" }} variant="contained">
+							<Button type="submit" variant="contained">
 								Iniciar Sesión
 							</Button>
 						</Box>

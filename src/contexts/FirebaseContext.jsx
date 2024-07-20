@@ -1,9 +1,8 @@
 import { createContext, useEffect, useState } from "react";
 
 //Importar módulos defirebas
-import appFirebase from "../componentes/FirebaseCredenciales.js";
+import appFirebase from "../Firebase/FirebaseCredenciales.js";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
-const auth = getAuth(appFirebase);
 
 import dayjs from "dayjs";
 
@@ -38,10 +37,12 @@ export const FirebaseProvider = ({ children }) => {
 	const [misCompras, setMisCompras] = useState([]);
 	const [buscarMisCompras, setBuscarMisCompras] = useState(false);
 
+	const auth = getAuth(appFirebase);
+
 	//-----------------------------------------
 	//Verificar si hay o no un usuario logueado
 	useEffect(() => {
-		console.log("busca logueo firebase");
+		console.log("----------busca logueo firebase");
 		onAuthStateChanged(auth, (usuFirebase) => {
 			if (usuFirebase) {
 				setUsusarioId(usuFirebase.uid);
@@ -49,6 +50,7 @@ export const FirebaseProvider = ({ children }) => {
 				setUsusarioId(0);
 			}
 		});
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	// se hizo LogIn, con email y contraseña.
