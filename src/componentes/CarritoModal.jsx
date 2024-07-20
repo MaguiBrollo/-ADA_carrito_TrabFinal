@@ -13,7 +13,7 @@ import {
 	ListItemIcon,
 } from "@mui/material";
 
-import { FirebaseContext } from "./contexts/FirebaseContext";
+import { FirebaseContext } from "../contexts/FirebaseContext";
 import { formatPesos } from "../utils/Funciones.js";
 import carritoVacioImg from "../assets/carritovacio.png";
 
@@ -31,6 +31,7 @@ export const CarritoModal = ({ abrirCarrito, setAbrirCarrito }) => {
 
 	const borrarTodoCarrito = () => {
 		//para borrar todos
+		setAbrirCarrito(false);
 		setArtiBrorrarCarrito("T");
 	};
 

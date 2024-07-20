@@ -7,10 +7,11 @@ import LoraItalicVariableFontwght from "./fonts/LoraItalicVariableFontwght.ttf";
 import { useContext } from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { Box } from "@mui/material";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import { Header } from "./componentes/Header";
 import { NavBar } from "./componentes/NavBar";
-import { ColorModeContext } from "./componentes/contexts/ModoClaOscContext";
+import { ColorModeContext } from "./contexts/ModoClaOscContext";
 import { ModoClaro } from "./utils/ColoresModo";
 import { ModoOscuro } from "./utils/ColoresModo";
 import { Footer } from "./componentes/Footer";
@@ -18,10 +19,11 @@ import { ArticuloBuscar } from "./componentes/ArticuloBuscar";
 import { FiltrarPorCategoria } from "./componentes/FiltrarPorCategoria";
 import { ArticulosListar } from "./componentes/ArticulosListar";
 import { Inicio } from "./componentes/Inicio";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Error404 } from "./componentes/Error404";
 import { CarritoModal } from "./componentes/CarritoModal";
 import { MisCompras } from "./componentes/MisCompras";
+import { IniciarSesion } from "./componentes/IniciarSesion";
+import { CerrarSesion } from "./componentes/IniciarSesion";
 
 //====================================================================
 //------------------- PRINCIPAL ------------------
@@ -91,8 +93,14 @@ function App() {
 
 						<Route path="/miscompras" element={<MisCompras />} />
 
+						<Route path="/iniciarsesion" element={<IniciarSesion />} />
+
+						<Route path="/cerrarsesion" element={<CerrarSesion />} />
+
 						<Route path="*" element={<Error404 />} />
 					</Routes>
+
+					<Footer />
 
 					{/* --------- Modal Drawer Buscar -------- */}
 					{abrirFiltrar && (
@@ -118,7 +126,6 @@ function App() {
 					)}
 
 					{/* --------- Barra de Footer  ----------- */}
-					<Footer />
 				</Box>
 			</BrowserRouter>
 		</ThemeProvider>

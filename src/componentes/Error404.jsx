@@ -3,8 +3,8 @@
 
 import { useContext } from "react";
 import { Box, Button, CardMedia, Typography } from "@mui/material";
-import { ConstantesContext } from "./contexts/ConstantesContext";
-import { ColorModeContext } from "./contexts/ModoClaOscContext";
+import { ConstantesContext } from "../contexts/ConstantesContext";
+import { ColorModeContext } from "../contexts/ModoClaOscContext";
 
 import Error404img from "../assets/Error404.png";
 import Error404img_n from "../assets/Error404_n.png";

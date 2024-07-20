@@ -25,9 +25,9 @@ import { TbShoppingCart } from "react-icons/tb";
 
 import { useNavigate } from "react-router-dom";
 
-import { ColorModeContext } from "./contexts/ModoClaOscContext";
-import { ConstantesContext } from "./contexts/ConstantesContext";
-import { FirebaseContext } from "./contexts/FirebaseContext";
+import { ColorModeContext } from "../contexts/ModoClaOscContext";
+import { ConstantesContext } from "../contexts/ConstantesContext";
+import { FirebaseContext } from "../contexts/FirebaseContext";
 
 import Logo_Baby from "../assets/Logo_Baby.png";
 
@@ -42,7 +42,7 @@ export const NavBar = ({
 
 	const { anchoMaximo } = useContext(ConstantesContext);
 	const { colorMode, mode } = useContext(ColorModeContext);
-	const { setUsusarioId, cantArtCarrito, usuarioLogin, setBuscarMisCompras } =
+	const { cantArtCarrito, usuarioLogin, setBuscarMisCompras } =
 		useContext(FirebaseContext);
 
 	const isMenuOpen = Boolean(anchorEl);
@@ -65,7 +65,7 @@ export const NavBar = ({
 			setAbrirCarrito(true);
 		} else {
 			//mandar a login
-			//navegar("/login");
+			navegar("/iniciarsesion");
 		}
 	};
 
@@ -75,24 +75,24 @@ export const NavBar = ({
 	};
 
 	const iniciarSesion = () => {
-		setUsusarioId(1); //-------- aqui usuario ID
 		setAnchorEl(null);
+		navegar("/iniciarsesion");
 	};
 
 	const cerrarSesion = () => {
-		setUsusarioId(0);
 		setAnchorEl(null);
+		navegar("/cerrarsesion");
 	};
 
 	const abrirCerrarMenuUsuario = () => {
 		setAnchorEl(null);
 	};
 
-	const verMisCompras =()=>{
+	const verMisCompras = () => {
 		setBuscarMisCompras(true), //solo busca la compras con este estado
-		navegar("/miscompras");
+			navegar("/miscompras");
 		setAnchorEl(null);
-	}
+	};
 	//-------- Menú de Usuario Login/out -----
 	const menuId = "menu-usuario";
 	const renderMenu = (

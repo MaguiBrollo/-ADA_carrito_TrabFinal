@@ -1,11 +1,16 @@
 import { createContext, useEffect, useState } from "react";
 
+//Importar módulos defirebas
+import appFirebase from "../componentes/FirebaseCredenciales.js";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+const auth = getAuth(appFirebase);
+
 import dayjs from "dayjs";
 
-import { articulos } from "../../utils/Articulos.jsx";
-import { categorias } from "../../utils/Articulos.jsx";
-import { usuarios } from "../../utils/Articulos.jsx";
-import { ordenes } from "../../utils/Articulos.jsx";
+import { articulos } from "../utils/Articulos.jsx";
+import { categorias } from "../utils/Articulos.jsx";
+import { usuarios } from "../utils/Articulos.jsx";
+import { ordenes } from "../utils/Articulos.jsx";
 
 export const FirebaseContext = createContext();
 
@@ -16,6 +21,8 @@ export const FirebaseProvider = ({ children }) => {
 	const [categoria, setCategoria] = useState([]);
 
 	const [buscarPor, setBuscarPor] = useState("");
+
+	//const [usuario, setUsuario] = useState(null); //firebase
 
 	const [usuarioId, setUsusarioId] = useState(0);
 	const [usuarioLogin, setUsusarioLogin] = useState(0);
@@ -31,6 +38,19 @@ export const FirebaseProvider = ({ children }) => {
 	const [misCompras, setMisCompras] = useState([]);
 	const [buscarMisCompras, setBuscarMisCompras] = useState(false);
 
+	//-----------------------------------------
+	//Verificar si hay o no un usuario logueado
+	useEffect(() => {
+		console.log("busca logueo firebase");
+		onAuthStateChanged(auth, (usuFirebase) => {
+			if (usuFirebase) {
+				setUsusarioId(usuFirebase.uid);
+			} else {
+				setUsusarioId(0);
+			}
+		});
+	}, []);
+
 	// se hizo LogIn, con email y contraseña.
 	// con el ID se busca de la DBf usuario, sus datos, por
 	// ahora en al array "usuarios"
@@ -40,17 +60,23 @@ export const FirebaseProvider = ({ children }) => {
 			const usuLogin = usuarios.find((usu) => {
 				return usu.idUsuario === usuarioId;
 			});
-			setUsusarioLogin(usuLogin);
 
-			//con el objeto usuario.. si tiene carritoAbierto
-			// se lo busca en "ordenes" y se lo carga
-			if (usuLogin.carritoAbierto > 0) {
-				const car = ordenes.find((ord) => {
-					return ord.idOrden === usuLogin.carritoAbierto;
-				});
-				setCarrito(car);
-				setCantArtCarrito(car.articulos.length);
+			if (usuLogin) {
+				setUsusarioLogin(usuLogin);
+				if (usuLogin.carritoAbierto > 0) {
+					const car = ordenes.find((ord) => {
+						return ord.idOrden === usuLogin.carritoAbierto;
+					});
+					setCarrito(car);
+					setCantArtCarrito(car.articulos.length);
+				} else {
+					setCarrito({});
+					setCantArtCarrito(0);
+				}
 			} else {
+				//El usuario se logueo, pero no se encontró sus datos
+				signOut(auth); //se cierra sesión
+				setUsusarioLogin(0);
 				setCarrito({});
 				setCantArtCarrito(0);
 			}
@@ -59,8 +85,8 @@ export const FirebaseProvider = ({ children }) => {
 			setCarrito({});
 			setCantArtCarrito(0);
 			setUsusarioLogin({});
-			//setMisCompras([]);
-			//setBuscarMisCompras(false);
+			setMisCompras([]);
+			setBuscarMisCompras(false);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [usuarioId]);
@@ -216,29 +242,19 @@ export const FirebaseProvider = ({ children }) => {
 	useEffect(() => {
 		console.log("buscar mis compras");
 		if (buscarMisCompras) {
-			console.log(" hizo clci");
-			//se hizo clic en el menú usuario "mis compras"
 			if (usuarioLogin.carritoCerrado.length > 0) {
-				console.log(
-					"carrito cerrado tiene algo",
-					usuarioLogin.carritoCerrado.length
-				);
 				//Por cada elemento del array carritoCerrado,
 				//hay que bucar en "ordenes", la orden del Carrito.
 				const compras = [];
 				usuarioLogin.carritoCerrado.forEach((cc) => {
-					console.log("adentro de forEach", cc);
 					const car = ordenes.find((ord) => {
-						console.log("adentro de find", ord);
 						return ord.idOrden === cc;
 					});
 					compras.push(car);
 				});
-
-				//hay algo
 				setMisCompras(compras);
 			} else {
-				//no tiene compras
+				//No tiene compras
 				setMisCompras([]);
 			}
 		}

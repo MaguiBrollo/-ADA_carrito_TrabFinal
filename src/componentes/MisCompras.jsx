@@ -1,9 +1,9 @@
 import { useContext } from "react";
-import { ConstantesContext } from "./contexts/ConstantesContext.jsx";
+import { ConstantesContext } from "../contexts/ConstantesContext.jsx";
 import { Box, CardMedia, Divider, Typography } from "@mui/material";
 import { useTheme } from "@emotion/react";
 
-import { FirebaseContext } from "./contexts/FirebaseContext.jsx";
+import { FirebaseContext } from "../contexts/FirebaseContext.jsx";
 
 import { formatPesos } from "../utils/Funciones.js";
 

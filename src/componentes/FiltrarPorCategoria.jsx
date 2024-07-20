@@ -14,7 +14,7 @@ import Divider from "@mui/material/Divider";
 
 import { MdClose } from "react-icons/md";
 
-import { FirebaseContext } from "./contexts/FirebaseContext";
+import { FirebaseContext } from "../contexts/FirebaseContext";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 

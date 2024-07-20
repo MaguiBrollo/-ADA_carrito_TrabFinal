@@ -3,18 +3,18 @@ import maria from "../assets/maria.png";
 
 export const usuarios = [
 	{
-		idUsuario: 1,
-		nombre: "ROSA MARIA ANA",
-		imagen:  maria ,
+		idUsuario: "LYi40iHIj7OYuy9muY9wiwlNi4x1",
+		nombre: "MAGUI",
+		imagen: magui,
 		email: "rosa@gmail.com",
 		password: "123",
 		carritoAbierto: 2,
-		carritoCerrado: [1,2],
+		carritoCerrado: [1, 2],
 	},
 	{
-		idUsuario: 2,
-		nombre: "MAGUI",
-		imagen:  magui ,
+		idUsuario: "bwNjElhPZ8MtBPkfqLO0NXwxuj02",
+		nombre: "MARIA ROSA",
+		imagen: maria,
 		email: "maria@gmail.com",
 		password: "123",
 		carritoAbierto: 0,

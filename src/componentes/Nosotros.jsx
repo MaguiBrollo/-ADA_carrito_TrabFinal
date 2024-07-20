@@ -3,7 +3,7 @@
 
 import { useContext } from "react";
 import { Box, Typography } from "@mui/material";
-import { ConstantesContext } from "./contexts/ConstantesContext";
+import { ConstantesContext } from "../contexts/ConstantesContext";
 
 //====================================================================
 //------------------ Componente Principal ----------------------------

@@ -12,8 +12,8 @@ import {
 import { ArticuloCard } from "./ArticuloCard";
 import { ArticuloVerMas } from "./ArticuloVerMas";
 
-import { ConstantesContext } from "./contexts/ConstantesContext";
-import { FirebaseContext } from "./contexts/FirebaseContext";
+import { ConstantesContext } from "../contexts/ConstantesContext";
+import { FirebaseContext } from "../contexts/FirebaseContext";
 import { MdClose } from "react-icons/md";
 
 const style = {

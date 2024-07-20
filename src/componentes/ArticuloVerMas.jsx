@@ -23,7 +23,7 @@ import {
 import { useTheme } from "@emotion/react";
 
 import { formatPesos } from "../utils/Funciones.js";
-import { FirebaseContext } from "./contexts/FirebaseContext";
+import { FirebaseContext } from "../contexts/FirebaseContext";
 
 function PaperComponent(props) {
 	return (

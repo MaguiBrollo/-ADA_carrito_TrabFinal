@@ -6,7 +6,7 @@ import { MdOutlineEmail } from "react-icons/md";
 import { PiFacebookLogoBold } from "react-icons/pi";
 import { PiLinkedinLogoBold } from "react-icons/pi";
 
-import { ConstantesContext } from "./contexts/ConstantesContext";
+import { ConstantesContext } from "../contexts/ConstantesContext";
 
 //====================================================================
 //------------------ Componente Principal ----------------------------
