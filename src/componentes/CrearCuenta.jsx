@@ -8,6 +8,7 @@ import {
 	TextField,
 	Typography,
 	Alert,
+	CardMedia,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
@@ -54,7 +55,7 @@ const controlarDatos = (event, setMensajeError) => {
 		setMensajeError("Nombre vacío.");
 		return false;
 	}
-   return true;
+	return true;
 };
 
 //====================================================================
@@ -62,21 +63,42 @@ const controlarDatos = (event, setMensajeError) => {
 export const CrearCuenta = () => {
 	const [alertaError, setAlertaError] = useState(false);
 	const [mensajeError, setMensajeError] = useState("");
+	const [datosUsuario, setDatosUsuario] = useState({
+		imagen:
+			"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsBAMAAACLU5NGAAAAG1BMVEXMzMyWlpa3t7eqqqqcnJyjo6PFxcWxsbG+vr6NAD6nAAAACXBIWXMAAA7EAAAOxAGVKw4bAAACjklEQVR4nO3XO2/bMBDA8fNTGn2OlGS00S8QAWnnaKi7xnBQdJSBFl3joY/RRpHv3SNFykYtdKOm/w8BHOkOIM3HkRYBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/uddvWvsI38sj+7xT/2lJ2n8WH64iMbkdCaqurTPteqda98eX6+zKnu9OkdDckIH3W21kbmWlR5F9rrT+6ukTMv3ettFY3JC9UZyfZBJ0czrZxuWjXwtr5KmRSOnmy4ak9PJ3bc+PMveJvJ0a+OwslfNv1knG6Ks7KIhOaGxulYXsl7YmNy1j/XV4nLRXLtoSE4oczN2epLK5mRSuj/x/7tuPImfOfHDKXnRRUNyaq6l17bhu7aX/q1N1fY8Va7TIRqSE/tuS2a78i3Nludu7QsbsW4+54dlFw3JadVqM1Uf3b6XqSsO+4V/n+nrtGt7qrZdYzQkp6WuFLUtNW3DYebqzXoZk0ZqWzZGQ3LqblmLvhFtRq5Ho9Ct9c25OI1c52M0JKftlrzpc+9ozfSilOfbctjRsv226FtbtuBvLpJmOuza8hW7Zyfa4lpeJFl5H24nZr/Fz4srReNQt9ahW5nGpn8d/azFaEhOyJ8hNi+HtnBn5yrvClcsW+44slmL0UPyKj8Jh0/fmVjd12HxV+3hM+CZ6DZUFW4Q9+GOcPShuT6sw5o/3PovEKMhOaG5frZBWPXdt2a2xkMV2JeNuNI62H1LqmJXF9J3O7XbQ65t4xP9+OguFMPdTr9Zkd9I313eLaxt28X5VtUuqAPe5eVH/ckalPyl/THzFn/5jF0H9qEMZC/Fz4toTAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEjpL514clJrNSt2AAAAAElFTkSuQmCC",
+	});
 
 	const { anchoMaximo, altoMinimo } = useContext(ConstantesContext);
 
 	const navegar = useNavigate();
 
-	//Iniciar SS
-	const iniciarSesion = (event) => {
+	const manejarImagen = (e) => {
+		e.preventDefault();
+
+		var file = e.target.files[0];
+		var reader = new FileReader();
+		reader.onloadend = function () {
+			setDatosUsuario({ ...datosUsuario, imagen: `${reader.result}` });
+		};
+
+		reader.readAsDataURL(file);
+	};
+
+	//Crear una cuenta
+	const crearCuenta = (event) => {
 		event.preventDefault();
 		setMensajeError("");
 		if (controlarDatos(event, setMensajeError)) {
-			crearCuentaUsuario(
-				event.target[0].value,
-				event.target[2].value,
-				setMensajeError
-			);
+			const datos = datosUsuario;
+			datos.idUsuario = "";
+			datos.correo = event.target[0].value;
+			datos.contrasenia = event.target[2].value;
+			datos.nombre = event.target[6].value;
+			//imagen: se guarda en manejarImagen
+			datos.carritoAbierto = 0;
+			datos.carritoCerrado = [];
+
+			crearCuentaUsuario(datos, setMensajeError);
 		} else {
 			setAlertaError(true);
 			setTimeout(() => {
@@ -103,6 +125,7 @@ export const CrearCuenta = () => {
 	};
 
 	const cancelar = () => {
+		setDatosUsuario({});
 		navegar("/");
 	};
 
@@ -151,7 +174,7 @@ export const CrearCuenta = () => {
 				</Typography>
 
 				<CardContent>
-					<Box component="form" onSubmit={iniciarSesion}>
+					<Box component="form" onSubmit={crearCuenta}>
 						<Box sx={{ margin: "20px 0px" }}>
 							<TextField
 								type="email"
@@ -206,24 +229,39 @@ export const CrearCuenta = () => {
 								display: "Flex",
 								flexDirection: "row",
 								alignItems: "center",
+								justifyContent: "space-around",
 								margin: "10px 10px 20px 10px",
 							}}
 						>
-							<Typography sx={{ marginRight: "10px" }}>
-								Subir imagen de usuario:
-							</Typography>
-							<Button
-								variant="outlined"
-								component="label"
-								role={undefined}
-								tabIndex={-1}
-								startIcon={<IoCloudUploadOutline />}
-							>
-								Archivo de imagen
-								<VisuallyHiddenInput type="file" />
-							</Button>
-						</Box>
+							<Box>
+								<Typography sx={{ marginBottom: "10px" }}>
+									Imagen de perfil
+								</Typography>
 
+								<Button
+									onChange={manejarImagen}
+									variant="outlined"
+									component="label"
+									role={undefined}
+									tabIndex={-1}
+									startIcon={<IoCloudUploadOutline />}
+								>
+									Imagen
+									<VisuallyHiddenInput type="file" />
+								</Button>
+							</Box>
+							<CardMedia
+								component="img"
+								image={datosUsuario.imagen}
+								alt="Imagen de usuario"
+								sx={{
+									maxWidth: "80px",
+									margin: "10px",
+									borderRadius: "50%",
+									boxShadow: "0px 0px 15px black",
+								}}
+							/>
+						</Box>
 						{alertaError && (
 							<Alert
 								sx={{ margin: "25px auto" }}
@@ -234,6 +272,7 @@ export const CrearCuenta = () => {
 								{mensajeError}
 							</Alert>
 						)}
+
 						<Box
 							sx={{
 								display: "flex",

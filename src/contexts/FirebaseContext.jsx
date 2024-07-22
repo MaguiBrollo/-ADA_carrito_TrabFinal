@@ -1,9 +1,5 @@
 import { createContext, useEffect, useState } from "react";
 
-//Importar módulos defirebas
-import appFirebase from "../Firebase/FirebaseCredenciales.js";
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
-
 import dayjs from "dayjs";
 
 import { articulos } from "../utils/Articulos.jsx";
@@ -13,6 +9,8 @@ import { ordenes } from "../utils/Articulos.jsx";
 
 export const FirebaseContext = createContext();
 
+import { onChangeUser } from "../Firebase/Autenticacion.js";
+//, logoutUsuario
 //====================================================================
 //------------------ Componente Principal ----------------------------
 export const FirebaseProvider = ({ children }) => {
@@ -35,27 +33,19 @@ export const FirebaseProvider = ({ children }) => {
 	const [misCompras, setMisCompras] = useState([]);
 	const [buscarMisCompras, setBuscarMisCompras] = useState(false);
 
-	const auth = getAuth(appFirebase);
-
 	//-----------------------------------------
 	//Verificar si hay o no un usuario logueado
 	useEffect(() => {
 		console.log("----------busca logueo firebase");
-		onAuthStateChanged(auth, (usuFirebase) => {
-			if (usuFirebase) {
-				setUsusarioId(usuFirebase.uid);
-			} else {
-				setUsusarioId(0);
-			}
-		});
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		onChangeUser(setUsusarioId);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	// se hizo LogIn, con email y contraseña.
 	// con el ID se busca de la DBf usuario, sus datos, por
 	// ahora en al array "usuarios"
 	useEffect(() => {
-		console.log("buscar dato us y su carrito");
+		console.log("buscar dato Usuario, y su carrito");
 		if (usuarioId !== 0) {
 			const usuLogin = usuarios.find((usu) => {
 				return usu.idUsuario === usuarioId;
@@ -75,16 +65,16 @@ export const FirebaseProvider = ({ children }) => {
 				}
 			} else {
 				//El usuario se logueo, pero no se encontró sus datos
-				signOut(auth); //se cierra sesión
-				setUsusarioLogin(0);
+				//logoutUsuario(); //se cierra sesión
 				setCarrito({});
+				setUsusarioLogin({});
 				setCantArtCarrito(0);
 			}
 		} else {
 			//Usuario deslogueado, se limpian array/varibales con datos
 			setCarrito({});
-			setCantArtCarrito(0);
 			setUsusarioLogin({});
+			setCantArtCarrito(0);
 			setMisCompras([]);
 			setBuscarMisCompras(false);
 		}
