@@ -129,7 +129,7 @@ export const ArticulosListar = () => {
 						{articulosPorPagina.map((art) => {
 							return (
 								<ArticuloCard
-									key={art.ID}
+									key={art.idArticulo}
 									art={art}
 									setAbrirVerMas={setAbrirVerMas}
 									setArtParaVerMas={setArtParaVerMas}

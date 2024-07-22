@@ -34,7 +34,7 @@ export const FiltrarPorCategoria = ({ abrirFiltrar, setAbrirFiltrar }) => {
 
 	const mostraArticulosFiltrados = (e) => {
 		setAbrirFiltrar(false);
-		setFiltrarPor(e.target.value);
+		setFiltrarPor(parseInt(e.target.value));
 
 		navegar("/articulos");
 	};
@@ -94,6 +94,11 @@ export const FiltrarPorCategoria = ({ abrirFiltrar, setAbrirFiltrar }) => {
 					</ListItem>
 				</List>
 				<Divider />
+				{categoria.length === 0 && (
+					<Typography sx={{ marginTop: "20px", fontSize: "1.3rem" }}>
+						Espere....
+					</Typography>
+				)}
 				<List>
 					{categoria.map((cat) => (
 						<ListItem key={cat.idCateg} disablePadding>

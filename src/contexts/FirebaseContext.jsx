@@ -1,19 +1,21 @@
 import { createContext, useEffect, useState } from "react";
+export const FirebaseContext = createContext();
 
 import dayjs from "dayjs";
 
-import { articulos } from "../utils/Articulos.jsx";
-import { categorias } from "../utils/Articulos.jsx";
 import { usuarios } from "../utils/Articulos.jsx";
 import { ordenes } from "../utils/Articulos.jsx";
-
-export const FirebaseContext = createContext();
-
 import { onChangeUser } from "../Firebase/Autenticacion.js";
-//, logoutUsuario
+import { getTodasCategorias } from "../Firebase/BaseDatos.js";
+import { getTodosArticulos } from "../Firebase/BaseDatos.js";
+
 //====================================================================
 //------------------ Componente Principal ----------------------------
 export const FirebaseProvider = ({ children }) => {
+	//Array de las DBF firebase
+	const [categorias, setCategorias] = useState();
+	const [articulos, setArticulos] = useState([]);
+
 	const [filtrarPor, setFiltrarPor] = useState("");
 	const [categoria, setCategoria] = useState([]);
 
@@ -169,19 +171,38 @@ export const FirebaseProvider = ({ children }) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [artiParaAgregarCarrito]);
 
-	//-------------
-	//Aquí debería buscar articulos de firebase
-	//y dejarlos en el array "articulos"
+	//--------------------------------------------
+	//--------------------------------------------
+	// categorias y articulos de la BaseDatos.jsx
+	const getCat = async () => {
+		const res = await getTodasCategorias();
+		
+		setCategorias(res);
+	};
+	const getArt = async () => {
+		const res = await getTodosArticulos();
+		
+		setArticulos(res);
+	};
+
+	useEffect(() => {
+		getCat();
+		getArt();
+	}, []);
 
 	//Contar cantidad de artículos por categoría
 	useEffect(() => {
 		console.log("cant art x cat");
-		const cat = categorias.map((c) => {
-			const cant = articulos.filter((a) => a.categoriaId === c.idCateg);
-			return { ...c, cantidad: cant.length };
-		});
-		setCategoria(cat);
-	}, []);
+
+		if (categorias) {
+			const cat = categorias.map((c) => {
+				const cant = articulos.filter((a) => a.categoriaId === c.idCateg);
+				return { ...c, cantidad: cant.length };
+			});
+			setCategoria(cat);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [categorias,articulos ]);
 
 	//Filtrar por categoría
 	useEffect(() => {
@@ -226,6 +247,7 @@ export const FirebaseProvider = ({ children }) => {
 				setMostrarTitulo("NO HUBO RESULTADOS PARA LA BÚSQUEDA");
 			}
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [buscarPor]);
 
 	//Buscar Mis Compras

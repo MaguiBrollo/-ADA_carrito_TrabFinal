@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, addDoc } from "firebase/firestore";
+import { getFirestore, collection, addDoc, getDocs } from "firebase/firestore";
 import { handleError } from "./ManejoErrores";
 
 const { VITE_FIREBASE_CONFIG, VITE_DATABASE_NAME } = import.meta.env;
@@ -21,14 +21,18 @@ export const crearUsuarioBD = (nuevoUs, setMensajeError) => {
 		});
 };
 
-/* export const createPost = (post) =>
-	addDoc(collection(db, VITE_DATABASE_NAME), post); */
-/* 
-export const getTodosArticulos = async () => {
-	const result = await getDocs(collection(db, VITE_DATABASE_NAME));
-
+//-------- Buscar Categorias
+export const getTodasCategorias = async () => {
+	const result = await getDocs(collection(db, "CATEGORIAS"));
 	const postsData = result.docs.map((document) => document.data());
 
 	return postsData;
 };
- */
+
+//-------- Buscar Artivulos
+export const getTodosArticulos = async () => {
+	const result = await getDocs(collection(db, "ARTICULOS"));
+	const postsData = result.docs.map((document) => document.data());
+
+	return postsData;
+};

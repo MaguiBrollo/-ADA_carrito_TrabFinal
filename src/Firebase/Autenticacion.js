@@ -8,7 +8,7 @@ import {
 } from "firebase/auth";
 
 import { handleError } from "./ManejoErrores.js";
-//=============================================================
+
 //--- Mis funciones de Base de Datos
 import { appFirebase } from "./BaseDatos.js";
 import { crearUsuarioBD } from "./BaseDatos.js";
