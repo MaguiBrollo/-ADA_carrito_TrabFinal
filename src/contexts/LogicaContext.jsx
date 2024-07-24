@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-export const FirebaseContext = createContext();
+export const LogicaContext = createContext();
 
 import dayjs from "dayjs";
 
@@ -11,7 +11,7 @@ import { getUnUsuario } from "../Firebase/BaseDatos.js";
 
 //====================================================================
 //------------------ Componente Principal ----------------------------
-export const FirebaseProvider = ({ children }) => {
+export const LogicaProvider = ({ children }) => {
 	//Array de las DBF firebase
 	const [categorias, setCategorias] = useState();
 	const [articulos, setArticulos] = useState([]);
@@ -45,14 +45,11 @@ export const FirebaseProvider = ({ children }) => {
 	}, []);
 
 	// se hizo LogIn, con email y contraseña.
-	// con el ID se busca de la DBf usuario, sus datos, por
-	// ahora en al array "usuarios"
-
+	// con el ID se busca de la DBf los demás datos del usuario
 	const getUs = async (usuarioId) => {
 		const res = await getUnUsuario(usuarioId);
 		setUsusarioLogin(res);
 	};
-
 	useEffect(() => {
 		console.log("buscar dato Usuario, y su carrito", usuarioId);
 		if (usuarioId !== 0) {
@@ -102,6 +99,7 @@ export const FirebaseProvider = ({ children }) => {
 				setCarrito({ ...carrito, articulos: nuevo, total: suma });
 				setCantArtCarrito(nuevo.length);
 			}
+			//aqui UPDATE objeto carrito.
 		}
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -263,7 +261,7 @@ export const FirebaseProvider = ({ children }) => {
 
 	//==============================
 	return (
-		<FirebaseContext.Provider
+		<LogicaContext.Provider
 			value={{
 				articulosMostrar,
 				categoria,
@@ -284,6 +282,6 @@ export const FirebaseProvider = ({ children }) => {
 			}}
 		>
 			{children}
-		</FirebaseContext.Provider>
+		</LogicaContext.Provider>
 	);
 };

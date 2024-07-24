@@ -27,7 +27,7 @@ import { useNavigate } from "react-router-dom";
 
 import { ColorModeContext } from "../contexts/ModoClaOscContext";
 import { ConstantesContext } from "../contexts/ConstantesContext";
-import { FirebaseContext } from "../contexts/FirebaseContext";
+import { LogicaContext } from "../contexts/LogicaContext";
 
 import Logo_Baby from "../assets/Logo_Baby.png";
 
@@ -43,7 +43,7 @@ export const NavBar = ({
 	const { anchoMaximo } = useContext(ConstantesContext);
 	const { colorMode, mode } = useContext(ColorModeContext);
 	const { cantArtCarrito, usuarioLogin, setBuscarMisCompras } =
-		useContext(FirebaseContext);
+		useContext(LogicaContext);
 
 	const isMenuOpen = Boolean(anchorEl);
 

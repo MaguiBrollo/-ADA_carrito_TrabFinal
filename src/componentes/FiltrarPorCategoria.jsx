@@ -15,14 +15,14 @@ import Divider from "@mui/material/Divider";
 
 import { MdClose } from "react-icons/md";
 
-import { FirebaseContext } from "../contexts/FirebaseContext";
+import { LogicaContext } from "../contexts/LogicaContext";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 //====================================================================
 //------------------ Componente Principal ----------------------------
 export const FiltrarPorCategoria = ({ abrirFiltrar, setAbrirFiltrar }) => {
-	const { categoria, setFiltrarPor } = useContext(FirebaseContext);
+	const { categoria, setFiltrarPor } = useContext(LogicaContext);
 
 	const navegar = useNavigate();
 

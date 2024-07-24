@@ -13,7 +13,7 @@ import { ArticuloCard } from "./ArticuloCard";
 import { ArticuloVerMas } from "./ArticuloVerMas";
 
 import { ConstantesContext } from "../contexts/ConstantesContext";
-import { FirebaseContext } from "../contexts/FirebaseContext";
+import { LogicaContext } from "../contexts/LogicaContext";
 import { MdClose } from "react-icons/md";
 
 const style = {
@@ -39,7 +39,7 @@ export const ArticulosListar = () => {
 
 	const { anchoMaximo, altoMinimo } = useContext(ConstantesContext);
 	const { articulosMostrar, mostrarTitulo, artiParaAgregarCarrito } =
-		useContext(FirebaseContext);
+		useContext(LogicaContext);
 
 	const cantArtiPorPagina = 8;
 

@@ -51,6 +51,11 @@ export const logoutUsuario = () => {
 	signOut(auth);
 };
 
+
+
+
+
+
 //-----------------------------------------
 //Crear una cuenta
 export const crearCuentaUsuario = async (datos, setMensajeError) => {
@@ -72,7 +77,7 @@ export const crearCuentaUsuario = async (datos, setMensajeError) => {
 			crearUsuarioBD(nuevoUs, setMensajeError);
 		})
 		.catch((err) => {
-			console.log("NUEVO US:", err.message);
+			console.log("NUEVO US ERR:", err.message);
 			setMensajeError(handleError(err.code, err.message));
 		});
 };

@@ -9,6 +9,11 @@ import {
 	Typography,
 	Alert,
 	CardMedia,
+	FormControl,
+	InputLabel,
+	OutlinedInput,
+	InputAdornment,
+	IconButton,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
@@ -18,6 +23,7 @@ import { ConstantesContext } from "../contexts/ConstantesContext";
 
 import { crearCuentaUsuario } from "../Firebase/Autenticacion";
 import { IoCloudUploadOutline } from "react-icons/io5";
+import { MdOutlineVisibility, MdOutlineVisibilityOff } from "react-icons/md";
 
 const VisuallyHiddenInput = styled("input")({
 	clip: "rect(0 0 0 0)",
@@ -37,7 +43,7 @@ const controlarDatos = (event, setMensajeError) => {
 		return false;
 	}
 
-	if (event.target[2].value === "" || event.target[4].value === "") {
+	if (event.target[2].value === "" || event.target[5].value === "") {
 		setMensajeError("Contraseña vacía.");
 		return false;
 	}
@@ -47,11 +53,11 @@ const controlarDatos = (event, setMensajeError) => {
 		return false;
 	}
 
-	if (event.target[2].value !== event.target[4].value) {
+	if (event.target[2].value !== event.target[5].value) {
 		setMensajeError("Contraseña y confirmar contraseña no coinicen.");
 		return false;
 	}
-	if (event.target[6].value === "") {
+	if (event.target[8].value === "") {
 		setMensajeError("Nombre vacío.");
 		return false;
 	}
@@ -68,9 +74,18 @@ export const CrearCuenta = () => {
 			"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsBAMAAACLU5NGAAAAG1BMVEXMzMyWlpa3t7eqqqqcnJyjo6PFxcWxsbG+vr6NAD6nAAAACXBIWXMAAA7EAAAOxAGVKw4bAAACjklEQVR4nO3XO2/bMBDA8fNTGn2OlGS00S8QAWnnaKi7xnBQdJSBFl3joY/RRpHv3SNFykYtdKOm/w8BHOkOIM3HkRYBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/uddvWvsI38sj+7xT/2lJ2n8WH64iMbkdCaqurTPteqda98eX6+zKnu9OkdDckIH3W21kbmWlR5F9rrT+6ukTMv3ettFY3JC9UZyfZBJ0czrZxuWjXwtr5KmRSOnmy4ak9PJ3bc+PMveJvJ0a+OwslfNv1knG6Ks7KIhOaGxulYXsl7YmNy1j/XV4nLRXLtoSE4oczN2epLK5mRSuj/x/7tuPImfOfHDKXnRRUNyaq6l17bhu7aX/q1N1fY8Va7TIRqSE/tuS2a78i3Nludu7QsbsW4+54dlFw3JadVqM1Uf3b6XqSsO+4V/n+nrtGt7qrZdYzQkp6WuFLUtNW3DYebqzXoZk0ZqWzZGQ3LqblmLvhFtRq5Ho9Ct9c25OI1c52M0JKftlrzpc+9ozfSilOfbctjRsv226FtbtuBvLpJmOuza8hW7Zyfa4lpeJFl5H24nZr/Fz4srReNQt9ahW5nGpn8d/azFaEhOyJ8hNi+HtnBn5yrvClcsW+44slmL0UPyKj8Jh0/fmVjd12HxV+3hM+CZ6DZUFW4Q9+GOcPShuT6sw5o/3PovEKMhOaG5frZBWPXdt2a2xkMV2JeNuNI62H1LqmJXF9J3O7XbQ65t4xP9+OguFMPdTr9Zkd9I313eLaxt28X5VtUuqAPe5eVH/ckalPyl/THzFn/5jF0H9qEMZC/Fz4toTAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEjpL514clJrNSt2AAAAAElFTkSuQmCC",
 	});
 
+	const [showPassword, setShowPassword] = useState(false);
+	const handleClickShowPassword = () => setShowPassword((show) => !show);
+	const [showPassword2, setShowPassword2] = useState(false);
+	const handleClickShowPassword2 = () => setShowPassword2((show) => !show);
+
 	const { anchoMaximo, altoMinimo } = useContext(ConstantesContext);
 
 	const navegar = useNavigate();
+
+	const handleMouseDownPassword = (event) => {
+		event.preventDefault();
+	};
 
 	const manejarImagen = (e) => {
 		e.preventDefault();
@@ -78,6 +93,7 @@ export const CrearCuenta = () => {
 		var file = e.target.files[0];
 		var reader = new FileReader();
 		reader.onloadend = function () {
+			console.log(reader.result);
 			setDatosUsuario({ ...datosUsuario, imagen: `${reader.result}` });
 		};
 
@@ -88,12 +104,13 @@ export const CrearCuenta = () => {
 	const crearCuenta = (event) => {
 		event.preventDefault();
 		setMensajeError("");
+
 		if (controlarDatos(event, setMensajeError)) {
 			const datos = datosUsuario;
 			datos.idUsuario = "";
 			datos.correo = event.target[0].value;
 			datos.contrasenia = event.target[2].value;
-			datos.nombre = event.target[6].value;
+			datos.nombre = event.target[8].value.toUpperCase();
 			//imagen: se guarda en manejarImagen
 			datos.carritoAbierto = 0;
 			datos.carritoCerrado = [];
@@ -181,43 +198,82 @@ export const CrearCuenta = () => {
 								/* error={false} */
 								id="email"
 								label=" Email "
-								helperText="Ingrese email."
 								fullWidth
 								inputProps={{ style: { color: "black" } }}
 								autoComplete="off"
 							/>
 						</Box>
 
-						<Box sx={{ margin: "20px 0px" }}>
-							<TextField
-								type="password"
-								id="contrasenia"
+						<FormControl sx={{ width: "100%" }} variant="outlined">
+							<InputLabel htmlFor="ver-contrasenia">Contraseña</InputLabel>
+							<OutlinedInput
+								id="ver-contrasenia"
+								type={showPassword ? "text" : "password"}
+								inputProps={{
+									"aria-label": "Ingrese ontraseña",
+									style: { color: "black" },
+								}}
+								autoComplete="off"
+								endAdornment={
+									<InputAdornment position="end">
+										<IconButton
+											aria-label="Cambiar visibilidad de la contraseña"
+											onClick={handleClickShowPassword}
+											onMouseDown={handleMouseDownPassword}
+											edge="end"
+										>
+											{showPassword ? (
+												<MdOutlineVisibilityOff />
+											) : (
+												<MdOutlineVisibility />
+											)}
+										</IconButton>
+									</InputAdornment>
+								}
 								label=" Contraseña "
-								helperText="Ingrese contraseña."
-								fullWidth
-								inputProps={{ style: { color: "black" } }}
-								autoComplete="off"
 							/>
-						</Box>
+						</FormControl>
 
-						<Box sx={{ margin: "20px 0px" }}>
-							<TextField
-								type="password"
-								id="confirmarcontrasenia"
-								label=" Confirmar Contraseña "
-								helperText="Repita la contraseña."
-								fullWidth
-								inputProps={{ style: { color: "black" } }}
+						<FormControl
+							sx={{ marginTop: "20px", width: "100%" }}
+							variant="outlined"
+						>
+							<InputLabel htmlFor="ver-contrasenia2">
+								Confirmar Contraseña
+							</InputLabel>
+							<OutlinedInput
+								id="ver-contrasenia2"
+								type={showPassword2 ? "text" : "password"}
+								inputProps={{
+									"aria-label": "Confirmar contraseña",
+									style: { color: "black" },
+								}}
 								autoComplete="off"
+								endAdornment={
+									<InputAdornment position="end">
+										<IconButton
+											aria-label="Cambiar visibilidad de la contraseña"
+											onClick={handleClickShowPassword2}
+											onMouseDown={handleMouseDownPassword}
+											edge="end"
+										>
+											{showPassword2 ? (
+												<MdOutlineVisibilityOff />
+											) : (
+												<MdOutlineVisibility />
+											)}
+										</IconButton>
+									</InputAdornment>
+								}
+								label=" Confirmar Contraseña "
 							/>
-						</Box>
+						</FormControl>
 
 						<Box sx={{ margin: "20px 0px" }}>
 							<TextField
 								type="text"
 								id="nombre"
 								label=" Nombre "
-								helperText="Ingrese su nombre."
 								fullWidth
 								inputProps={{ style: { color: "black" } }}
 								autoComplete="off"

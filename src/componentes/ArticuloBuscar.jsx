@@ -9,7 +9,7 @@ import { useContext } from "react";
 
 import { useNavigate } from "react-router-dom";
 
-import { FirebaseContext } from "../contexts/FirebaseContext";
+import { LogicaContext } from "../contexts/LogicaContext";
 
 //====================================================================
 //------------------ Componente Principal ----------------------------
@@ -17,7 +17,7 @@ export const ArticuloBuscar = ({ abrirBuscar, setAbrirBuscar }) => {
 	const [error, setError] = useState();
 	const [helperText, setHelperText] = useState(" ");
 	const [buscar, setBuscar] = useState("");
-	const { setBuscarPor } = useContext(FirebaseContext);
+	const { setBuscarPor } = useContext(LogicaContext);
 
 	const navegar = useNavigate();
 
@@ -39,7 +39,7 @@ export const ArticuloBuscar = ({ abrirBuscar, setAbrirBuscar }) => {
 			setHelperText("No puede ser vacío.");
 			setError(true);
 		} else {
-			setBuscarPor(buscar.toUpperCase()); //activa la busqueda en FirebaseContext
+			setBuscarPor(buscar.toUpperCase()); //activa la busqueda en LogicaContext
 			setHelperText("");
 			setAbrirBuscar(false);
 

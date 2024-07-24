@@ -3,7 +3,7 @@ import { ConstantesContext } from "../contexts/ConstantesContext.jsx";
 import { Box, CardMedia, Divider, Typography } from "@mui/material";
 import { useTheme } from "@emotion/react";
 
-import { FirebaseContext } from "../contexts/FirebaseContext.jsx";
+import { LogicaContext } from "../contexts/LogicaContext.jsx";
 
 import { formatPesos } from "../utils/Funciones.js";
 
@@ -13,7 +13,7 @@ import dayjs from "dayjs";
 //------------------ Componente Principal ----------------------------
 export const MisCompras = () => {
 	const { anchoMaximo, altoMinimo } = useContext(ConstantesContext);
-	const { misCompras } = useContext(FirebaseContext);
+	const { misCompras } = useContext(LogicaContext);
 	const theme = useTheme();
 
 	const style = {
