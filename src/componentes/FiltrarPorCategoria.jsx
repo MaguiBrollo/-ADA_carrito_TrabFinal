@@ -8,20 +8,21 @@ import {
 	ListItemButton,
 	ListItemText,
 	Button,
+	CircularProgress,
 } from "@mui/material";
 import Drawer from "@mui/material/Drawer";
 import Divider from "@mui/material/Divider";
 
 import { MdClose } from "react-icons/md";
 
-import { FirebaseContext } from "../contexts/FirebaseContext";
+import { LogicaContext } from "../contexts/LogicaContext";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 //====================================================================
 //------------------ Componente Principal ----------------------------
 export const FiltrarPorCategoria = ({ abrirFiltrar, setAbrirFiltrar }) => {
-	const { categoria, setFiltrarPor } = useContext(FirebaseContext);
+	const { categoria, setFiltrarPor } = useContext(LogicaContext);
 
 	const navegar = useNavigate();
 
@@ -94,6 +95,21 @@ export const FiltrarPorCategoria = ({ abrirFiltrar, setAbrirFiltrar }) => {
 					</ListItem>
 				</List>
 				<Divider />
+				{categoria.length === 0 && (
+					<Box
+						sx={{
+							width: "100%",
+							display: "flex",
+							flexDirection: "column",
+							alignItems: "center",
+						}}
+					>
+						<Typography sx={{ margin: "20px auto", fontSize: "1.3rem" }}>
+							Espere....
+						</Typography>
+						<CircularProgress sx={{ margin: "20px auto" }} color="secondary" />
+					</Box>
+				)}
 				<List>
 					{categoria.map((cat) => (
 						<ListItem key={cat.idCateg} disablePadding>

@@ -7,17 +7,17 @@ import CssBaseline from "@mui/material/CssBaseline";
 
 import { ConstantesProvider } from "./contexts/ConstantesContext.jsx";
 import { ModoClaOscProvider } from "./contexts/ModoClaOscContext.jsx";
-import { FirebaseProvider } from "./contexts/FirebaseContext.jsx";
+import { LogicaProvider } from "./contexts/LogicaContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
 	//<React.StrictMode>
-		<FirebaseProvider>
+		<LogicaProvider>
 			<ConstantesProvider>
 				<ModoClaOscProvider>
 					<CssBaseline />
 					<App />
 				</ModoClaOscProvider>
 			</ConstantesProvider>
-		</FirebaseProvider>
+		</LogicaProvider>
 //	</React.StrictMode>
 );

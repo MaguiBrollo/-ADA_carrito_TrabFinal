@@ -1,30 +1,28 @@
 import { createContext, useEffect, useState } from "react";
-
-//Importar módulos defirebas
-import appFirebase from "../Firebase/FirebaseCredenciales.js";
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+export const LogicaContext = createContext();
 
 import dayjs from "dayjs";
 
-import { articulos } from "../utils/Articulos.jsx";
-import { categorias } from "../utils/Articulos.jsx";
-import { usuarios } from "../utils/Articulos.jsx";
-import { ordenes } from "../utils/Articulos.jsx";
-
-export const FirebaseContext = createContext();
+import { onChangeUser } from "../Firebase/Autenticacion.js";
+//import { logoutUsuario } from "../Firebase/Autenticacion.js";
+import { getTodasCategorias } from "../Firebase/BaseDatos.js";
+import { getTodosArticulos } from "../Firebase/BaseDatos.js";
+import { getUnUsuario } from "../Firebase/BaseDatos.js";
 
 //====================================================================
 //------------------ Componente Principal ----------------------------
-export const FirebaseProvider = ({ children }) => {
+export const LogicaProvider = ({ children }) => {
+	//Array de las DBF firebase
+	const [categorias, setCategorias] = useState();
+	const [articulos, setArticulos] = useState([]);
+
 	const [filtrarPor, setFiltrarPor] = useState("");
 	const [categoria, setCategoria] = useState([]);
 
 	const [buscarPor, setBuscarPor] = useState("");
 
-	//const [usuario, setUsuario] = useState(null); //firebase
-
 	const [usuarioId, setUsusarioId] = useState(0);
-	const [usuarioLogin, setUsusarioLogin] = useState(0);
+	const [usuarioLogin, setUsusarioLogin] = useState({});
 
 	const [articulosMostrar, setArticulosMostrar] = useState([]);
 	const [mostrarTitulo, setMostrarTitulo] = useState(""); //articuloListar.jsx
@@ -37,61 +35,49 @@ export const FirebaseProvider = ({ children }) => {
 	const [misCompras, setMisCompras] = useState([]);
 	const [buscarMisCompras, setBuscarMisCompras] = useState(false);
 
-	const auth = getAuth(appFirebase);
-
 	//-----------------------------------------
 	//Verificar si hay o no un usuario logueado
 	useEffect(() => {
 		console.log("----------busca logueo firebase");
-		onAuthStateChanged(auth, (usuFirebase) => {
-			if (usuFirebase) {
-				setUsusarioId(usuFirebase.uid);
-			} else {
-				setUsusarioId(0);
-			}
-		});
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		onChangeUser(setUsusarioId);
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	// se hizo LogIn, con email y contraseña.
-	// con el ID se busca de la DBf usuario, sus datos, por
-	// ahora en al array "usuarios"
+	// con el ID se busca de la DBf los demás datos del usuario
+	const getUs = async (usuarioId) => {
+		const res = await getUnUsuario(usuarioId);
+		setUsusarioLogin(res);
+	};
 	useEffect(() => {
-		console.log("buscar dato us y su carrito");
+		console.log("buscar dato Usuario, y su carrito", usuarioId);
 		if (usuarioId !== 0) {
-			const usuLogin = usuarios.find((usu) => {
-				return usu.idUsuario === usuarioId;
-			});
-
-			if (usuLogin) {
-				setUsusarioLogin(usuLogin);
-				if (usuLogin.carritoAbierto > 0) {
-					const car = ordenes.find((ord) => {
-						return ord.idOrden === usuLogin.carritoAbierto;
-					});
-					setCarrito(car);
-					setCantArtCarrito(car.articulos.length);
-				} else {
-					setCarrito({});
-					setCantArtCarrito(0);
-				}
-			} else {
-				//El usuario se logueo, pero no se encontró sus datos
-				signOut(auth); //se cierra sesión
-				setUsusarioLogin(0);
-				setCarrito({});
-				setCantArtCarrito(0);
-			}
+			//buscar UN usuario de la DB
+			getUs(usuarioId);
 		} else {
 			//Usuario deslogueado, se limpian array/varibales con datos
-			setCarrito({});
-			setCantArtCarrito(0);
 			setUsusarioLogin({});
-			setMisCompras([]);
 			setBuscarMisCompras(false);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [usuarioId]);
+
+	// Busca Carrito Abierto
+	useEffect(() => {
+		console.log("busca carrito abierto");
+		if (Object.keys(usuarioLogin).length !== 0) {
+			setCarrito(usuarioLogin.carritoAbierto);
+			if (Object.keys(usuarioLogin.carritoAbierto).length > 0) {
+				setCantArtCarrito(usuarioLogin.carritoAbierto.articulos.length);
+			} else {
+				setCantArtCarrito(0);
+			}
+		} else {
+			setCarrito({});
+			setCantArtCarrito(0);
+		}
+	}, [usuarioLogin]);
 
 	// BORRAR un artículo del carrito
 	useEffect(() => {
@@ -113,6 +99,7 @@ export const FirebaseProvider = ({ children }) => {
 				setCarrito({ ...carrito, articulos: nuevo, total: suma });
 				setCantArtCarrito(nuevo.length);
 			}
+			//aqui UPDATE objeto carrito.
 		}
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -181,19 +168,50 @@ export const FirebaseProvider = ({ children }) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [artiParaAgregarCarrito]);
 
-	//-------------
-	//Aquí debería buscar articulos de firebase
-	//y dejarlos en el array "articulos"
+	// Buscar Mis Compras
+	useEffect(() => {
+		console.log("buscar mis compras");
+		if (buscarMisCompras) {
+			if (usuarioLogin.carritoCerrado.length > 0) {
+				setMisCompras(usuarioLogin.carritoCerrado);
+			} else {
+				//No tiene compras
+				setMisCompras([]);
+			}
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [buscarMisCompras]);
+
+	//-------------------------------------------------------
+	//-------------------------------------------------------
+	// categorías y artículos de la BaseDatos.jsx
+	const getCat = async () => {
+		const res = await getTodasCategorias();
+		setCategorias(res);
+	};
+	const getArt = async () => {
+		const res = await getTodosArticulos();
+		setArticulos(res);
+	};
+
+	useEffect(() => {
+		getCat();
+		getArt();
+	}, []);
 
 	//Contar cantidad de artículos por categoría
 	useEffect(() => {
 		console.log("cant art x cat");
-		const cat = categorias.map((c) => {
-			const cant = articulos.filter((a) => a.categoriaId === c.idCateg);
-			return { ...c, cantidad: cant.length };
-		});
-		setCategoria(cat);
-	}, []);
+
+		if (categorias) {
+			const cat = categorias.map((c) => {
+				const cant = articulos.filter((a) => a.categoriaId === c.idCateg);
+				return { ...c, cantidad: cant.length };
+			});
+			setCategoria(cat);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [categorias, articulos]);
 
 	//Filtrar por categoría
 	useEffect(() => {
@@ -238,35 +256,12 @@ export const FirebaseProvider = ({ children }) => {
 				setMostrarTitulo("NO HUBO RESULTADOS PARA LA BÚSQUEDA");
 			}
 		}
-	}, [buscarPor]);
-
-	//Buscar Mis Compras
-	useEffect(() => {
-		console.log("buscar mis compras");
-		if (buscarMisCompras) {
-			if (usuarioLogin.carritoCerrado.length > 0) {
-				//Por cada elemento del array carritoCerrado,
-				//hay que bucar en "ordenes", la orden del Carrito.
-				const compras = [];
-				usuarioLogin.carritoCerrado.forEach((cc) => {
-					const car = ordenes.find((ord) => {
-						return ord.idOrden === cc;
-					});
-					compras.push(car);
-				});
-				setMisCompras(compras);
-			} else {
-				//No tiene compras
-				setMisCompras([]);
-			}
-		}
-
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [buscarMisCompras]);
+	}, [buscarPor]);
 
 	//==============================
 	return (
-		<FirebaseContext.Provider
+		<LogicaContext.Provider
 			value={{
 				articulosMostrar,
 				categoria,
@@ -287,6 +282,6 @@ export const FirebaseProvider = ({ children }) => {
 			}}
 		>
 			{children}
-		</FirebaseContext.Provider>
+		</LogicaContext.Provider>
 	);
 };

@@ -25,7 +25,8 @@ import { IniciarSesion } from "./componentes/IniciarSesion";
 import { CerrarSesion } from "./componentes/CerrarSesion";
 
 import { ColorModeContext } from "./contexts/ModoClaOscContext";
-import { FirebaseContext } from "./contexts/FirebaseContext";
+import { LogicaContext } from "./contexts/LogicaContext";
+import { CrearCuenta } from "./componentes/CrearCuenta";
 
 //====================================================================
 //------------------- PRINCIPAL ------------------
@@ -35,7 +36,7 @@ function App() {
 	const [abrirCarrito, setAbrirCarrito] = React.useState(false);
 
 	const { mode } = useContext(ColorModeContext);
-	const { usuarioId } = useContext(FirebaseContext);
+	const { usuarioId } = useContext(LogicaContext);
 
 	//--------- Paleta de colores para Modo Claro Oscuro / Fuente
 	const theme = React.useMemo(
@@ -103,6 +104,13 @@ function App() {
 							path="/iniciarsesion"
 							element={
 								usuarioId === 0 ? <IniciarSesion /> : <Navigate to="/" />
+							}
+						/>
+
+						<Route
+							path="/crearcuenta"
+							element={
+								usuarioId === 0 ? <CrearCuenta/> : <Navigate to="/" />
 							}
 						/>
 

@@ -23,7 +23,7 @@ import {
 import { useTheme } from "@emotion/react";
 
 import { formatPesos } from "../utils/Funciones.js";
-import { FirebaseContext } from "../contexts/FirebaseContext";
+import { LogicaContext } from "../contexts/LogicaContext";
 
 function PaperComponent(props) {
 	return (
@@ -63,7 +63,7 @@ export const ArticuloVerMas = ({
 	const [cantidad, setCantidad] = useState(1);
 	const [abrirCantidad, setAbrirCantidad] = useState(false);
 	const [alertaStock, setAlertaStock] = useState(false);
-	const { usuarioId, setArtiParaAgregarCarrito } = useContext(FirebaseContext);
+	const { usuarioId, setArtiParaAgregarCarrito } = useContext(LogicaContext);
 
 	const theme = useTheme();
 
@@ -203,8 +203,8 @@ export const ArticuloVerMas = ({
 								</FormControl>
 								{alertaStock && (
 									<Alert
-										variant="outlined"
 										severity="warning"
+										color="warning"
 										onClose={() => setAlertaStock(false)}
 									>
 										Stock insuficiente.

@@ -13,7 +13,7 @@ import {
 	ListItemIcon,
 } from "@mui/material";
 
-import { FirebaseContext } from "../contexts/FirebaseContext";
+import { LogicaContext } from "../contexts/LogicaContext";
 import { formatPesos } from "../utils/Funciones.js";
 import carritoVacioImg from "../assets/carritovacio.png";
 
@@ -21,7 +21,7 @@ import carritoVacioImg from "../assets/carritovacio.png";
 //------------------ Componente Principal ----------------------------
 export const CarritoModal = ({ abrirCarrito, setAbrirCarrito }) => {
 	const { carrito, cantArtCarrito, setArtiBrorrarCarrito } =
-		useContext(FirebaseContext);
+		useContext(LogicaContext);
 
 	const anchor = "right";
 
