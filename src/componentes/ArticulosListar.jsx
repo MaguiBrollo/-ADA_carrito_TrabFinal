@@ -151,81 +151,6 @@ export const ArticulosListar = () => {
 					) : (
 						""
 					)}
-
-					{/* ------ Modal Ver más detalles/Comprar un art. -------- */}
-					{abrirVerMas && (
-						<ArticuloVerMas
-							abrirVerMas={abrirVerMas}
-							setAbrirVerMas={setAbrirVerMas}
-							artParaVerMas={artParaVerMas}
-							setAbrirAgregadoCarrito={setAbrirAgregadoCarrito}
-						/>
-					)}
-
-					{/* ------ Modal de "Artículo agregado al Carrito" -------- */}
-					{abrirAgregadoCarrito && (
-						<Modal
-							open={abrirAgregadoCarrito}
-							onClose={() => setAbrirAgregadoCarrito(false)}
-							aria-labelledby="agregado-carrito-titulo"
-							aria-describedby="agregado-carrito-descripcion"
-						>
-							<Box sx={style}>
-								<Box
-									sx={{
-										display: "flex",
-										flexDirection: "row",
-										alignItems: "center",
-										justifyContent: "space-between",
-									}}
-								>
-									<Typography
-										id="agregado-carrito-titulo"
-										sx={{ fontSize: "0.7rem", fontWeight: "bold" }}
-									>
-										Carrito de Compras
-									</Typography>
-									<IconButton
-										size="small"
-										aria-label="Cerrar aviso"
-										color="inherit"
-										onClick={() => setAbrirAgregadoCarrito(false)}
-									>
-										<MdClose />
-									</IconButton>
-								</Box>
-								<Box
-									sx={{
-										display: "flex",
-										flexDirection: "row",
-										alignItems: "center",
-									}}
-								>
-									<CardMedia
-										component="img"
-										sx={{
-											width: "20%",
-											maxWidth: "60px",
-											margin: "10px",
-										}}
-										image={artiParaAgregarCarrito.imagen}
-									/>
-									<Typography
-										id="agregado-carrito-descripcion"
-										sx={{ fontSize: "0.7rem" }}
-									>
-										{artiParaAgregarCarrito.nombre}
-									</Typography>
-								</Box>
-								<Typography
-									id="agregado-carrito-descripcion"
-									sx={{ fontSize: "0.7rem" }}
-								>
-									{"Artículo agregado al carrito. "}
-								</Typography>
-							</Box>
-						</Modal>
-					)}
 				</>
 			) : (
 				<Box
@@ -240,6 +165,82 @@ export const ArticulosListar = () => {
 						No hay artículos para mostrar. Vuelva a filtrar/buscar.
 					</Typography>
 				</Box>
+			)}
+
+
+			{/* ------ Modal Ver más detalles/Comprar un art. -------- */}
+			{abrirVerMas && (
+				<ArticuloVerMas
+					abrirVerMas={abrirVerMas}
+					setAbrirVerMas={setAbrirVerMas}
+					artParaVerMas={artParaVerMas}
+					setAbrirAgregadoCarrito={setAbrirAgregadoCarrito}
+				/>
+			)}
+
+			{/* ------ Modal de "Artículo agregado al Carrito" -------- */}
+			{abrirAgregadoCarrito && (
+				<Modal
+					open={abrirAgregadoCarrito}
+					onClose={() => setAbrirAgregadoCarrito(false)}
+					aria-labelledby="agregado-carrito-titulo"
+					aria-describedby="agregado-carrito-descripcion"
+				>
+					<Box sx={style}>
+						<Box
+							sx={{
+								display: "flex",
+								flexDirection: "row",
+								alignItems: "center",
+								justifyContent: "space-between",
+							}}
+						>
+							<Typography
+								id="agregado-carrito-titulo"
+								sx={{ fontSize: "0.7rem", fontWeight: "bold" }}
+							>
+								Carrito de Compras
+							</Typography>
+							<IconButton
+								size="small"
+								aria-label="Cerrar aviso"
+								color="inherit"
+								onClick={() => setAbrirAgregadoCarrito(false)}
+							>
+								<MdClose />
+							</IconButton>
+						</Box>
+						<Box
+							sx={{
+								display: "flex",
+								flexDirection: "row",
+								alignItems: "center",
+							}}
+						>
+							<CardMedia
+								component="img"
+								sx={{
+									width: "20%",
+									maxWidth: "60px",
+									margin: "10px",
+								}}
+								image={artiParaAgregarCarrito.imagen}
+							/>
+							<Typography
+								id="agregado-carrito-descripcion"
+								sx={{ fontSize: "0.7rem" }}
+							>
+								{artiParaAgregarCarrito.nombre}
+							</Typography>
+						</Box>
+						<Typography
+							id="agregado-carrito-descripcion"
+							sx={{ fontSize: "0.7rem" }}
+						>
+							{"Artículo agregado al carrito. "}
+						</Typography>
+					</Box>
+				</Modal>
 			)}
 		</Box>
 	);

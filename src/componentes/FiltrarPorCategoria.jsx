@@ -8,6 +8,7 @@ import {
 	ListItemButton,
 	ListItemText,
 	Button,
+	CircularProgress,
 } from "@mui/material";
 import Drawer from "@mui/material/Drawer";
 import Divider from "@mui/material/Divider";
@@ -34,7 +35,7 @@ export const FiltrarPorCategoria = ({ abrirFiltrar, setAbrirFiltrar }) => {
 
 	const mostraArticulosFiltrados = (e) => {
 		setAbrirFiltrar(false);
-		setFiltrarPor(parseInt(e.target.value));
+		setFiltrarPor(e.target.value);
 
 		navegar("/articulos");
 	};
@@ -95,9 +96,19 @@ export const FiltrarPorCategoria = ({ abrirFiltrar, setAbrirFiltrar }) => {
 				</List>
 				<Divider />
 				{categoria.length === 0 && (
-					<Typography sx={{ marginTop: "20px", fontSize: "1.3rem" }}>
-						Espere....
-					</Typography>
+					<Box
+						sx={{
+							width: "100%",
+							display: "flex",
+							flexDirection: "column",
+							alignItems: "center",
+						}}
+					>
+						<Typography sx={{ margin: "20px auto", fontSize: "1.3rem" }}>
+							Espere....
+						</Typography>
+						<CircularProgress sx={{ margin: "20px auto" }} color="secondary" />
+					</Box>
 				)}
 				<List>
 					{categoria.map((cat) => (

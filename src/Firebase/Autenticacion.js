@@ -13,6 +13,7 @@ import { handleError } from "./ManejoErrores.js";
 import { appFirebase } from "./BaseDatos.js";
 import { crearUsuarioBD } from "./BaseDatos.js";
 
+//=============================================================
 //-----------------------------------------
 //Verificar si hay o no un usuario logueado
 export const onChangeUser = (setUsusarioId) => {
