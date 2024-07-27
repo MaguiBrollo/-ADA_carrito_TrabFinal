@@ -1,13 +1,15 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { createContext, useEffect, useState } from "react";
 export const LogicaContext = createContext();
 
-import dayjs from "dayjs";
+//import { v4 as uuidv4 } from "uuid";
 
 import { onChangeUser } from "../Firebase/Autenticacion.js";
-//import { logoutUsuario } from "../Firebase/Autenticacion.js";
 import { getTodasCategorias } from "../Firebase/BaseDatos.js";
 import { getTodosArticulos } from "../Firebase/BaseDatos.js";
 import { getUnUsuario } from "../Firebase/BaseDatos.js";
+import { instantanea } from "../Firebase/BaseDatos.js";
+import { actualizarCarritoDB } from "../Firebase/BaseDatos.js";
 
 //====================================================================
 //------------------ Componente Principal ----------------------------
@@ -29,7 +31,7 @@ export const LogicaProvider = ({ children }) => {
 
 	const [carrito, setCarrito] = useState({});
 	const [cantArtCarrito, setCantArtCarrito] = useState(0);
-	const [artiBrorrarCarrito, setArtiBrorrarCarrito] = useState(0);
+	const [artiBorrarCarrito, setArtiBorrarCarrito] = useState(0);
 	const [artiParaAgregarCarrito, setArtiParaAgregarCarrito] = useState({});
 
 	const [misCompras, setMisCompras] = useState([]);
@@ -40,27 +42,32 @@ export const LogicaProvider = ({ children }) => {
 	useEffect(() => {
 		console.log("----------busca logueo firebase");
 		onChangeUser(setUsusarioId);
-
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	// se hizo LogIn, con email y contraseña.
+	// Actualización en timepo real. Se marca los que tiene que escuchar
+	useEffect(() => {
+		if (usuarioId !== 0) {
+			const inst = instantanea(usuarioId);
+			setUsusarioLogin(inst);
+		}		
+	}, []);
+
+	// Se hizo LogIn, con email y contraseña.
 	// con el ID se busca de la DBf los demás datos del usuario
 	const getUs = async (usuarioId) => {
 		const res = await getUnUsuario(usuarioId);
 		setUsusarioLogin(res);
 	};
 	useEffect(() => {
-		console.log("buscar dato Usuario, y su carrito", usuarioId);
+		console.log("buscar datos del Usuario logueado: ", usuarioId);
 		if (usuarioId !== 0) {
-			//buscar UN usuario de la DB
+			//Buscar UN usuario de la DB
 			getUs(usuarioId);
 		} else {
 			//Usuario deslogueado, se limpian array/varibales con datos
 			setUsusarioLogin({});
 			setBuscarMisCompras(false);
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [usuarioId]);
 
 	// Busca Carrito Abierto
@@ -79,36 +86,50 @@ export const LogicaProvider = ({ children }) => {
 		}
 	}, [usuarioLogin]);
 
-	// BORRAR un artículo del carrito
+	// BORRAR un/Todos artículo/s del carrito
 	useEffect(() => {
 		console.log("borrar carrito uno/t");
 		if (cantArtCarrito > 0) {
-			if (artiBrorrarCarrito === "T") {
+			if (artiBorrarCarrito === "T") {
+				//borrar todo el carrito
 				setCarrito({});
+				actualizarCarritoDB(usuarioId, {});
 				setCantArtCarrito(0);
-				setArtiBrorrarCarrito(0);
+				setArtiBorrarCarrito(0);
 			} else {
 				const nuevo = carrito.articulos.filter(
-					(a) => a.idArticulo !== artiBrorrarCarrito
+					(a) => a.idArticulo !== artiBorrarCarrito
 				);
 
-				let suma = nuevo.reduce(function (total, art) {
-					return total + art.precio * art.cantidad;
-				}, 0);
+				if (nuevo.length == 0) {
+					//de a uno, borró todo
+					setCarrito({});
+					actualizarCarritoDB(usuarioId, {});
+					setCantArtCarrito(0);
+				} else {
+					//borró, pero quedan...
+					let suma = nuevo.reduce(function (total, art) {
+						return total + art.precio * art.cantidad;
+					}, 0);
 
-				setCarrito({ ...carrito, articulos: nuevo, total: suma });
-				setCantArtCarrito(nuevo.length);
+					setCarrito({ ...carrito, articulos: nuevo, total: suma });
+					actualizarCarritoDB(usuarioId, {
+						...carrito,
+						articulos: nuevo,
+						total: suma,
+					});
+					setCantArtCarrito(nuevo.length);
+				}
 			}
-			//aqui UPDATE objeto carrito.
 		}
-
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [artiBrorrarCarrito]);
+	}, [artiBorrarCarrito]);
 
 	// AGREGAR un artículo al carrito
 	useEffect(() => {
-		console.log("agregar carrito");
+		console.log("agregar un art carrito: ");
 		if (Object.keys(artiParaAgregarCarrito).length !== 0) {
+			console.log(artiParaAgregarCarrito.idArticulo);
+
 			let nuevo = [];
 			if (cantArtCarrito > 0) {
 				let indice = carrito.articulos.findIndex(
@@ -131,7 +152,7 @@ export const LogicaProvider = ({ children }) => {
 					nuevo = [
 						...carrito.articulos,
 						{
-							idArticulo: artiParaAgregarCarrito.ID,
+							idArticulo: artiParaAgregarCarrito.idArticulo,
 							nombre: artiParaAgregarCarrito.nombre,
 							precio: artiParaAgregarCarrito.precio,
 							imagen: artiParaAgregarCarrito.imagen,
@@ -142,30 +163,30 @@ export const LogicaProvider = ({ children }) => {
 			} else {
 				nuevo = [
 					{
-						idArticulo: artiParaAgregarCarrito.ID,
+						idArticulo: artiParaAgregarCarrito.idArticulo,
 						nombre: artiParaAgregarCarrito.nombre,
 						precio: artiParaAgregarCarrito.precio,
 						imagen: artiParaAgregarCarrito.imagen,
 						cantidad: artiParaAgregarCarrito.cantidad,
 					},
 				];
-				setCarrito({
-					idOrden: dayjs(), //una fecha como ID
-					fecha: dayjs().format("YYYY/MM/DD"),
-					total: 0,
-					cerrado: false,
-					articulos: [],
-				});
 			}
 			let suma = 0;
 			suma = nuevo.reduce(function (total, art) {
 				return total + art.precio * art.cantidad;
 			}, 0);
 
+			let numero = new Date().getTime();
+			console.log("Fecha numero:", numero);
 			setCarrito({ ...carrito, articulos: nuevo, total: suma });
+			actualizarCarritoDB(usuarioId, {
+				...carrito,
+				fecha: numero,
+				articulos: nuevo,
+				total: suma,
+			});
 			setCantArtCarrito(nuevo.length);
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [artiParaAgregarCarrito]);
 
 	// Buscar Mis Compras
@@ -179,7 +200,6 @@ export const LogicaProvider = ({ children }) => {
 				setMisCompras([]);
 			}
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [buscarMisCompras]);
 
 	//-------------------------------------------------------
@@ -210,7 +230,6 @@ export const LogicaProvider = ({ children }) => {
 			});
 			setCategoria(cat);
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [categorias, articulos]);
 
 	//Filtrar por categoría
@@ -234,7 +253,6 @@ export const LogicaProvider = ({ children }) => {
 			}
 			setArticulosMostrar(articulosFiltrados);
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [filtrarPor]);
 
 	//Buscar artíciculos
@@ -256,7 +274,6 @@ export const LogicaProvider = ({ children }) => {
 				setMostrarTitulo("NO HUBO RESULTADOS PARA LA BÚSQUEDA");
 			}
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [buscarPor]);
 
 	//==============================
@@ -274,7 +291,7 @@ export const LogicaProvider = ({ children }) => {
 				usuarioLogin,
 				cantArtCarrito,
 				carrito,
-				setArtiBrorrarCarrito,
+				setArtiBorrarCarrito,
 				artiParaAgregarCarrito,
 				setArtiParaAgregarCarrito,
 				setBuscarMisCompras,

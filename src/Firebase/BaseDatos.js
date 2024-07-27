@@ -6,6 +6,8 @@ import {
 	setDoc,
 	getDoc,
 	getDocs,
+	onSnapshot,
+	updateDoc,
 } from "firebase/firestore";
 import { handleError } from "./ManejoErrores";
 
@@ -22,12 +24,28 @@ export const appFirebase = initializeApp(firebaseConfig);
 const db = getFirestore(appFirebase);
 
 //=====================================================================
-//Crear un susuario con todos los datos.
-export const crearUsuarioBD = async (nuevoUs, setMensajeError) => {
-	console.log("llegoooo a crear una DB ususario");
+//-------- Actualización en timepo real de los datos de UN usuario
+export const instantanea = (usuarioId) => {
+	const unsub = onSnapshot(doc(db, VITE_COLECCION_US, usuarioId), (doc) => {
+		console.log("Usuario a escuchar: ", doc.data());
+		return unsub;
+	});
+};
 
-	//Agrega un nuevo documento a la collección USUARIO
-	// el nombre del nuevo documento es el ID del nuevo usuario
+export const actualizarCarritoDB = async (idUs, carrito) => {
+	console.log("actu CARRR", carrito);
+	await updateDoc(doc(db, VITE_COLECCION_US, idUs), {
+		carritoAbierto: carrito,
+	});
+};
+
+
+
+//-------- Crear un susuario con todos los datos.
+export const crearUsuarioBD = async (nuevoUs, setMensajeError) => {
+	console.log("llegoooo a crear una DB usuario");
+
+	//Agrega un nuevo documento a la collección USUARIO, con el ID del usuario
 	await setDoc(doc(db, VITE_COLECCION_US, nuevoUs.idUsuario), nuevoUs)
 		.then((resultado) => console.log(resultado))
 		.catch((err) => {
@@ -35,7 +53,7 @@ export const crearUsuarioBD = async (nuevoUs, setMensajeError) => {
 			setMensajeError(handleError(err.code, err.message));
 		});
 
-	//esta forma... el nombre del nuevo docuento lo crea FireStore.
+	//esta forma... el nombre del nuevo documento lo crea FireStore.
 	/* addDoc(collection(db, VITE_COLECCION_US), nuevoUs)
 		.then((resultado) => console.log(resultado))
 		.catch((err) => {
@@ -44,7 +62,7 @@ export const crearUsuarioBD = async (nuevoUs, setMensajeError) => {
 		}); */
 };
 
-//------------ buscar un Usuario y sus datos
+//-------- Busca un Usuario y sus datos
 export const getUnUsuario = async (idUs) => {
 	const docRef = doc(db, VITE_COLECCION_US, idUs);
 	const docUs = await getDoc(docRef);
@@ -54,7 +72,6 @@ export const getUnUsuario = async (idUs) => {
 		return {};
 	}
 };
-
 
 //-------- Buscar Categorías
 export const getTodasCategorias = async () => {
@@ -71,3 +88,4 @@ export const getTodosArticulos = async () => {
 
 	return postsData;
 };
+
