@@ -64,7 +64,6 @@ export const NavBar = ({
 		if (Object.keys(usuarioLogin).length !== 0) {
 			setAbrirCarrito(true);
 		} else {
-			//mandar a login
 			navegar("/iniciarsesion");
 		}
 	};

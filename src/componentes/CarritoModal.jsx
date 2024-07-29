@@ -13,6 +13,9 @@ import {
 	ListItemIcon,
 } from "@mui/material";
 
+import { useNavigate } from "react-router-dom";
+import dayjs from "dayjs";
+
 import { LogicaContext } from "../contexts/LogicaContext";
 import { formatPesos } from "../utils/Funciones.js";
 import carritoVacioImg from "../assets/carritovacio.png";
@@ -20,29 +23,26 @@ import carritoVacioImg from "../assets/carritovacio.png";
 //====================================================================
 //------------------ Componente Principal ----------------------------
 export const CarritoModal = ({ abrirCarrito, setAbrirCarrito }) => {
-	const { carrito, cantArtCarrito, setArtiBrorrarCarrito } =
+	const { carrito, cantArtCarrito, setArtiBorrarCarrito } =
 		useContext(LogicaContext);
+
+	const navegar = useNavigate();
 
 	const anchor = "right";
 
 	const borrarArtCarrito = (idBorrar) => {
-		setArtiBrorrarCarrito(idBorrar);
+		setArtiBorrarCarrito(idBorrar);
 	};
 
 	const borrarTodoCarrito = () => {
 		//para borrar todos
 		setAbrirCarrito(false);
-		setArtiBrorrarCarrito("T");
+		setArtiBorrarCarrito("T");
 	};
 
 	const finalizarCompraCarrito = () => {
-		alert("Finlizó");
 		setAbrirCarrito(false);
-		//Antes de Borrar Carrito, debe:
-		// pasar el IDcarrito de la propiedad carritoAbierto a carritoCerrado.
-		// poner la propiedad de  cerrado=True, en carrito.
-		// descontar el stock de los artículos.
-		setArtiBrorrarCarrito("T");
+		navegar("/checkout");
 	};
 
 	//===========================
@@ -81,10 +81,21 @@ export const CarritoModal = ({ abrirCarrito, setAbrirCarrito }) => {
 						</IconButton>
 					</Tooltip>
 				</Box>
-				<Divider sx={{ margin: "10px0px" }} />
 
 				{cantArtCarrito > 0 ? (
 					<>
+						<Typography
+							sx={{
+								fontSize: "0.8rem",
+								margin: "10px",
+								color: "error.main",
+								fontWeight:"bold"
+							}}
+						>
+							Fecha: {dayjs(carrito.fecha).format("DD/MM/YYYY - HH:mm")}hs.
+							{"(Duración: 1 día)"}
+						</Typography>
+						<Divider sx={{ margin: "10px0px" }} />
 						<Box sx={{ margin: "5px 10px" }}>
 							{carrito.articulos.map((arti) => (
 								<Box key={arti.idArticulo}>

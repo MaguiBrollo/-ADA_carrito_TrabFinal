@@ -27,6 +27,8 @@ import { CerrarSesion } from "./componentes/CerrarSesion";
 import { ColorModeContext } from "./contexts/ModoClaOscContext";
 import { LogicaContext } from "./contexts/LogicaContext";
 import { CrearCuenta } from "./componentes/CrearCuenta";
+import { Checkout } from "./componentes/Checkout";
+import { MuchasGracias } from "./componentes/MuchasGracias";
 
 //====================================================================
 //------------------- PRINCIPAL ------------------
@@ -92,12 +94,14 @@ function App() {
 
 					<Routes>
 						<Route index path="/" element={<Inicio />} />
-
 						<Route path="/articulos" element={<ArticulosListar />} />
-
 						<Route
 							path="/miscompras"
 							element={usuarioId !== 0 ? <MisCompras /> : <Navigate to="/" />}
+						/>
+						<Route
+							path="/checkout"
+							element={usuarioId !== 0 ? <Checkout /> : <Navigate to="/" />}
 						/>
 
 						<Route
@@ -106,19 +110,20 @@ function App() {
 								usuarioId === 0 ? <IniciarSesion /> : <Navigate to="/" />
 							}
 						/>
-
 						<Route
 							path="/crearcuenta"
+							element={usuarioId === 0 ? <CrearCuenta /> : <Navigate to="/" />}
+						/>
+						<Route
+							path="/muchasgracias"
 							element={
-								usuarioId === 0 ? <CrearCuenta/> : <Navigate to="/" />
+								usuarioId !== 0 ? <MuchasGracias /> : <Navigate to="/" />
 							}
 						/>
-
 						<Route
 							path="/cerrarsesion"
 							element={usuarioId !== 0 ? <CerrarSesion /> : <Navigate to="/" />}
 						/>
-
 						<Route path="*" element={<Error404 />} />
 					</Routes>
 

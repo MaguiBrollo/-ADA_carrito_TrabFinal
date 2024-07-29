@@ -101,7 +101,6 @@ export const ArticulosListar = () => {
 					<Box
 						sx={{
 							width: "100%",
-							maxWidth: `${anchoMaximo}px`,
 							margin: "5px",
 						}}
 					>
@@ -166,7 +165,6 @@ export const ArticulosListar = () => {
 					</Typography>
 				</Box>
 			)}
-
 
 			{/* ------ Modal Ver más detalles/Comprar un art. -------- */}
 			{abrirVerMas && (
