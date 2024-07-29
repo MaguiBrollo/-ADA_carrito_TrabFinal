@@ -219,7 +219,7 @@ export const LogicaProvider = ({ children }) => {
 			const nCC = [...usuarioLogin.carritoCerrado, nC];
 
 			actualizarCarritoCerradoDB(usuarioId, nCC);
-			
+
 			setCarrito({});
 			actualizarCarritoDB(usuarioId, {});
 			setCantArtCarrito(0);
