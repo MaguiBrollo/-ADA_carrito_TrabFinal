@@ -37,20 +37,27 @@
 
 [:top:](#tabla-de-contenidos) <br>
 
-> Las aplicaciones web, comúnmente conocidas como apps, se han convertido en una parte esencial de nuestra vida cotidiana. Las apps se han consolidado como nuestras aliadas, simplificándonos tareas diarias complejas como otras no tan complejas como por ejemplo, comprar artículos o servicios. <br> `Baby Store` es una tienda en línea de ropa para niños de cero a seis años.
+Las aplicaciones web, comúnmente conocidas como apps, se han convertido en una parte esencial de nuestra vida cotidiana. Las apps se han consolidado como nuestras aliadas, simplificándonos tareas diarias complejas como otras no tan complejas como por ejemplo, comprar artículos o servicios. 
+
+<br> 
+
+> `Baby Store` es una tienda en línea de ropa para niños de cero a seis años.
+
+<br>
 
 <p align="center" >
    <img src="src/assets/readme/inicio.png" width="500px" alt-text="Presentación">
 </p>
 
 <br>
+
 > [!NOTE]
 > La aplicación `Baby Store`, fue diseñada de tal manera que puede ser utilizada en diferentes dispositivos, lo que implica un correcto diseño responsive.
 
 
 <br>
 
-Baby Store es una app desarrollada como Trabajo Final de la capacitación de `"Desarrollo Frontend"` dictado por [ADA ITW](https://www.linkedin.com/school/ada-itw/), y se encuentra incluido en mi `Portfolio Personal`, de tal manera de reflejar el grado de avance, apropiación y uso de los conocimiento adquiridos y asimilados durante la capacitación.
+Baby Store es una app desarrollada como Trabajo Final de la capacitación de `"Desarrollo Frontend"` dictada por [ADA ITW](https://www.linkedin.com/school/ada-itw/), y se encuentra incluida en mi `Portfolio Personal`, de tal manera de reflejar el grado de avance, apropiación y uso de los conocimiento adquiridos y asimilados durante la capacitación.
 
 > [!NOTE]
 > Visite mi portafolio personal: [PORTFOLIO](https://maguibrollo.github.io/ADA_Portafolio_mod01_tf/).
@@ -83,11 +90,14 @@ La aplicación cuenta con los siguientes menús: [Inicio](#inicio), [Artículos]
    <img src="src/assets/readme/menus.png" width="500px" alt-text="Carrusel">
 </p>
 
+<br>
+
 ---
 
 ### _Inicio:_
 
 [:top:](#menús) <br>
+
 Al iniciar la aplicación se visualiza un carrusel de imágenes alusivas, e información básica de Baby Store.
 
 <br>
@@ -100,8 +110,9 @@ Al iniciar la aplicación se visualiza un carrusel de imágenes alusivas, e info
 ### _Artículos:_
 
 [:top:](#menús) <br>
-Este menú es el corazón de la aplicación, ya que permite ver todos los artículos ordenados por nombre, pero también permite filtrar por categoría.
-Como se puede observar en la imagen, las categorías aparecen ordenadas alfabéticamente acompañadas con un número que indica la cantidad de artículos que tienen cada categoría. Las categorías que no tienen artículos, se encuentran deshabilitadas.
+
+El menú Artículos es el corazón de la aplicación ya que permite ver todos los artículos ordenados por nombre, pero también permite filtrar por categoría.
+Como se puede observar en la imagen, las categorías aparecen ordenadas alfabéticamente acompañadas con un número que indica la cantidad de artículos que tiene cada categoría. Las categorías que no tienen artículos se encuentran deshabilitadas.
 <p align="center" >
    <img src="src/assets/readme/artiPorCat_Filtrar.png" width="400px" alt-text="Spinner">
 </p>
@@ -159,11 +170,13 @@ La información encontrada se visualiza de la misma manera que cuando se filtra 
 <p align="center" >
    <img src="src/assets/readme/buscar.png" width="400px" alt-text="Spinner">
 </p>
+
 ---
 
 ## _Modo_
 
 [:top:](#menús) <br>
+
 Toda la aplicación se puede visualizar en modo claro o bien en modo oscuro.
 
 <div align="center">
@@ -214,7 +227,10 @@ Si se inició sesión, este menú cambia y presenta las opciones de `Mis Compras
 ### _Compras:_
 
 [:top:](#menús) <br>
-Este menú está disponible únicamente para los usuarios que han iniciado sesión. Se puede visualizar la cantidad de artículos en el carrito de compras.
+
+Este menú está disponible únicamente para los usuarios que han iniciado sesión. 
+<br> Si el carrito tiene artículos se puede visualizar la cantidad de artículos mediante un número con fondo rojo. Si el carrito no tiene artículos no hay número, pero igual se puede acceder.
+
 <p align="center" >
    <img src="src/assets/readme/carrito0.png" width="100px" alt-text="Spinner">
 </p>
