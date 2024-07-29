@@ -37,17 +37,16 @@
 
 [:top:](#tabla-de-contenidos) <br>
 
-> Las aplicaciones web, comúnmente conocidas como apps, se han convertido en una parte esencial de nuestra vida cotidiana. Las apps se han consolidado como nuestras aliadas, simplificándonos tareas diarias complejas, como otras no tan complejas como, por ejemplo la búsqueda de empleo. <br> `Baby Store` es un ecomerce de ropa para niños de cero hasta seis años.
+> Las aplicaciones web, comúnmente conocidas como apps, se han convertido en una parte esencial de nuestra vida cotidiana. Las apps se han consolidado como nuestras aliadas, simplificándonos tareas diarias complejas como otras no tan complejas como por ejemplo, comprar artículos o servicios. <br> `Baby Store` es una tienda en línea de ropa para niños de cero a seis años.
 
 <p align="center" >
    <img src="src/assets/readme/inicio.png" width="500px" alt-text="Presentación">
 </p>
 
-La aplicación `Baby Store`, fue diseñada de tal manera que puede ser utilizada en diferentes dispositivos, lo que implica un correcto diseño responsive.
+<br>
+> [!NOTE]
+> La aplicación `Baby Store`, fue diseñada de tal manera que puede ser utilizada en diferentes dispositivos, lo que implica un correcto diseño responsive.
 
-<p align="center" >
-   <img src="imgReadme/responsive.png" width="400px" alt-text="Responsive">
-</p>
 
 <br>
 
@@ -61,7 +60,7 @@ Baby Store es una app desarrollada como Trabajo Final de la capacitación de `"D
 ## _Tecnologías_
 
 [:top:](#tabla-de-contenidos) <br>
-Teacher JOB fue desarrollada utilizando las siguientes tecnologías:
+`Baby Store` fue desarrollada utilizando las siguientes tecnologías:
 
 <div align="center">
 
@@ -83,6 +82,7 @@ La aplicación cuenta con los siguientes menús: [Inicio](#inicio), [Artículos]
 <p align="center" >
    <img src="src/assets/readme/menus.png" width="500px" alt-text="Carrusel">
 </p>
+
 ---
 
 ### _Inicio:_
@@ -100,7 +100,7 @@ Al iniciar la aplicación se visualiza un carrusel de imágenes alusivas, e info
 ### _Artículos:_
 
 [:top:](#menús) <br>
-Este menú es el corazón de la aplicación, ya que permite ver todos los artículos, pero también permite filtrar por categoría.
+Este menú es el corazón de la aplicación, ya que permite ver todos los artículos ordenados por nombre, pero también permite filtrar por categoría.
 Como se puede observar en la imagen, las categorías aparecen ordenadas alfabéticamente acompañadas con un número que indica la cantidad de artículos que tienen cada categoría. Las categorías que no tienen artículos, se encuentran deshabilitadas.
 <p align="center" >
    <img src="src/assets/readme/artiPorCat_Filtrar.png" width="400px" alt-text="Spinner">
@@ -127,22 +127,22 @@ Todos los artículos tiene un botón que permite `Ver Mas - Comprar`
    <img src="src/assets/readme/verMas.png" width="400px" alt-text="Spinner">
 </p>
 
-Al presionar este botón, se abre una ventana con más información del artículo. <br>
-Esta Ventana se puede mover por la pantalla para poder ver los demás artículos.<br>
+Al presionar ese botón, se abre una ventana con más información del artículo. <br>
+Esa ventana se puede mover por la pantalla para poder ver los demás artículos.<br>
 <p align="center" >
    <img src="src/assets/readme/verMas2.png" width="400px" alt-text="Spinner">
 </p>
 
-Además, se puede seleccionar la cantidad de artículos a comprar respetando no más de 5 artículos, y respetando el Stock disponible, en caso de no cumplir con una de las condiciones se mostrará un mensaje de advertencia. 
+Se puede seleccionar la cantidad de artículos a comprar respetando no más de 5 artículos, y respetando el Stock disponible, en caso de no cumplir con una de las condiciones se mostrará un mensaje de advertencia. 
 <br>
-Si cumple con las condiciones puede realizar la compra presionando el botón `Comprar`. Se visualiza un pequeño cartel informando que el artículo fue agregado al Carrito de Compras.
+Si se cumple con las condiciones se puede realizar la compra del artículo presionando el botón `Comprar`. Luego de presionar el botón "comprar" se visualiza un pequeño cartel informando que el artículo fue agregado al Carrito de Compras.
 <p align="center" >
    <img src="src/assets/readme/verMas4.png" width="100px" alt-text="Spinner">
 </p>
 
 
 > [!NOTE]
-> Para poder realizar una compra deberá iniciar sesión (o crear una cuenta).
+> Para poder realizar una compra se debe iniciar sesión (o crear una cuenta).
 <p align="center" >
    <img src="src/assets/readme/verMas3.png" width="100px" alt-text="Spinner">
 </p>
@@ -155,7 +155,7 @@ Si cumple con las condiciones puede realizar la compra presionando el botón `Co
 [:top:](#menús) <br>
 
 Buscar permite escribir una palabra por ejemplo "remera", y busca entre los datos de cada artículo, sin tener en cuenta la categoría.
-La información encontrada se visualiza de la misma manera que cuando se filtra por artículos. Además de poder realizar la compra (si ha iniciado sesión).
+La información encontrada se visualiza de la misma manera que cuando se filtra por artículos. Al igual que en artículos, también es posible realizar la compra (si ha iniciado sesión).
 <p align="center" >
    <img src="src/assets/readme/buscar.png" width="400px" alt-text="Spinner">
 </p>
@@ -164,7 +164,7 @@ La información encontrada se visualiza de la misma manera que cuando se filtra 
 ## _Modo_
 
 [:top:](#menús) <br>
-Toda la aplicación puede ser visualizada en modo claro o bien en modo oscuro.
+Toda la aplicación se puede visualizar en modo claro o bien en modo oscuro.
 
 <div align="center">
 
@@ -194,7 +194,7 @@ Al seleccionar este menú se puede `Iniciar SESIÓN` si ya tiene cuenta, o bien 
 
 </div>
 
-Si ya inició sesión, este menú cambia y presenta las opciones de ver `Mis Compras`, y `Cerrar sesión`. Además, de ver el carrito de compras, si tiene.
+Si se inició sesión, este menú cambia y presenta las opciones de `Mis Compras`, y `Cerrar sesión`. Además, de ver el carrito de compras, si tiene.
 <br>
 <p align="center" >
    <img src="src/assets/readme/usuario4.png" width="150px" alt-text="Carrusel">
@@ -214,15 +214,19 @@ Si ya inició sesión, este menú cambia y presenta las opciones de ver `Mis Com
 ### _Compras:_
 
 [:top:](#menús) <br>
-Este menú está disponible únicamente para los usuarios que han iniciado sesión.
-<br>
+Este menú está disponible únicamente para los usuarios que han iniciado sesión. Se puede visualizar la cantidad de artículos en el carrito de compras.
+<p align="center" >
+   <img src="src/assets/readme/carrito0.png" width="100px" alt-text="Spinner">
+</p>
 El carrito de compras presenta la siguiente información: 
 <br>- Fecha y hora en que se creó el carrito.
 <br>- Duración: los carritos serán borrados después de un día.
 <br>- Datos del producto comprado.
 <br>- Total de la compra.
 <br>
+
 Además, los botones `FINALIZAR COMPRA` y `ELIMINAR CARRITO`
+
 <p align="center" >
    <img src="src/assets/readme/carrito1.png" width="400px" alt-text="Spinner">
 </p>
@@ -239,7 +243,7 @@ Si selecciona `FINALIZAR COMPRA` se pasará a página de checkout.
 
 |                    Paso 1                    |                   Paso 2                  |
 | :----------------------------------------------: | :----------------------------------------------: |
-| <img src="src/assets/readme/carrito2.png" width="170px"> | <img src="src/assets/readme/carrito3.png" width="170px"> |
+| <img src="src/assets/readme/carrito2.png" width="200px"> | <img src="src/assets/readme/carrito3.png" width="200px"> |
 
 </div>
 
@@ -250,14 +254,41 @@ Si selecciona `FINALIZAR COMPRA` se pasará a página de checkout.
 
 |                    Paso 3                    |                   Finalizar               |
 | :----------------------------------------------: | :----------------------------------------------: |
-| <img src="src/assets/readme/carrito4.png" width="170px"> | <img src="src/assets/readme/carrito5.png" width="170px"> |
+| <img src="src/assets/readme/carrito4.png" width="200px"> | <img src="src/assets/readme/carrito5.png" width="200px"> |
 
 </div>
 
-> [!NOTE]
 > Se debe `MARCAR` cada paso para poder finalizar la compra.
 
 ---
+
+
+> [!NOTE]
+> Cuando se intente acceder a una página inexistente se mostrara el `ERROR 404`.
+
+
+<p align="center" >
+   <img src="src/assets/readme/error404.png" width="400px" alt-text="Spinner">
+</p>
+
+
+---
+
+
+## _Mobile:_
+
+[:top:](#tabla-de-contenidos) <br>
+
+Todas las opciones antes mencionadas se encuentran disponibles para los diferentes tamaños de móviles.
+
+
+
+<p align="center" >
+   <img src="src/assets/readme/celu1.png" width="200px" alt-text="Spinner">
+</p>
+
+---
+
 
 ## _Contáctame:_
 
