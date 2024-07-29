@@ -39,13 +39,17 @@ export const actualizarCarritoDB = async (idUs, carrito) => {
 	});
 };
 
-
+export const actualizarCarritoCerradoDB = async (idUs, carrito) => {
+	console.log("actu CARRR Cerrado", carrito);
+	await updateDoc(doc(db, VITE_COLECCION_US, idUs), {
+		carritoCerrado: carrito,
+	});
+};
 
 //-------- Crear un susuario con todos los datos.
 export const crearUsuarioBD = async (nuevoUs, setMensajeError) => {
 	console.log("llegoooo a crear una DB usuario");
-
-	//Agrega un nuevo documento a la collección USUARIO, con el ID del usuario
+	
 	await setDoc(doc(db, VITE_COLECCION_US, nuevoUs.idUsuario), nuevoUs)
 		.then((resultado) => console.log(resultado))
 		.catch((err) => {
@@ -88,4 +92,3 @@ export const getTodosArticulos = async () => {
 
 	return postsData;
 };
-

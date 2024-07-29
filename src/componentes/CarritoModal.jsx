@@ -81,14 +81,21 @@ export const CarritoModal = ({ abrirCarrito, setAbrirCarrito }) => {
 						</IconButton>
 					</Tooltip>
 				</Box>
-				<Typography sx={{ fontSize: "0.8rem", margin: "10px" }}>
-					Fecha: {dayjs(carrito.fecha).format("DD/MM/YYYY - HH:mm")}hs.
-					(Duración: 1 día)
-				</Typography>
-				<Divider sx={{ margin: "10px0px" }} />
 
 				{cantArtCarrito > 0 ? (
 					<>
+						<Typography
+							sx={{
+								fontSize: "0.8rem",
+								margin: "10px",
+								color: "error.main",
+								fontWeight:"bold"
+							}}
+						>
+							Fecha: {dayjs(carrito.fecha).format("DD/MM/YYYY - HH:mm")}hs.
+							{"(Duración: 1 día)"}
+						</Typography>
+						<Divider sx={{ margin: "10px0px" }} />
 						<Box sx={{ margin: "5px 10px" }}>
 							{carrito.articulos.map((arti) => (
 								<Box key={arti.idArticulo}>

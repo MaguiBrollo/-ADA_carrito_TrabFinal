@@ -2,7 +2,7 @@
 import { createContext, useEffect, useState } from "react";
 export const LogicaContext = createContext();
 
-//import { v4 as uuidv4 } from "uuid";
+import { v4 as uuidv4 } from "uuid";
 
 import { onChangeUser } from "../Firebase/Autenticacion.js";
 import { getTodasCategorias } from "../Firebase/BaseDatos.js";
@@ -10,6 +10,7 @@ import { getTodosArticulos } from "../Firebase/BaseDatos.js";
 import { getUnUsuario } from "../Firebase/BaseDatos.js";
 import { instantanea } from "../Firebase/BaseDatos.js";
 import { actualizarCarritoDB } from "../Firebase/BaseDatos.js";
+import { actualizarCarritoCerradoDB } from "../Firebase/BaseDatos.js";
 
 //====================================================================
 //------------------ Componente Principal ----------------------------
@@ -33,6 +34,7 @@ export const LogicaProvider = ({ children }) => {
 	const [cantArtCarrito, setCantArtCarrito] = useState(0);
 	const [artiBorrarCarrito, setArtiBorrarCarrito] = useState(0);
 	const [artiParaAgregarCarrito, setArtiParaAgregarCarrito] = useState({});
+	const [guardarCarritoCerrado, setGuardarCarritoCerrado] = useState(false);
 
 	const [misCompras, setMisCompras] = useState([]);
 	const [buscarMisCompras, setBuscarMisCompras] = useState(false);
@@ -49,7 +51,7 @@ export const LogicaProvider = ({ children }) => {
 		if (usuarioId !== 0) {
 			const inst = instantanea(usuarioId);
 			setUsusarioLogin(inst);
-		}		
+		}
 	}, []);
 
 	// Se hizo LogIn, con email y contraseña.
@@ -74,10 +76,19 @@ export const LogicaProvider = ({ children }) => {
 	useEffect(() => {
 		console.log("busca carrito abierto");
 		if (Object.keys(usuarioLogin).length !== 0) {
-			setCarrito(usuarioLogin.carritoAbierto);
 			if (Object.keys(usuarioLogin.carritoAbierto).length > 0) {
-				setCantArtCarrito(usuarioLogin.carritoAbierto.articulos.length);
+				//Los carritos se borran después de un día
+				const unDia = new Date().getTime() - usuarioLogin.carritoAbierto.fecha;
+				if (unDia > 86400000) {
+					setCarrito({});
+					setCantArtCarrito(0);
+					actualizarCarritoDB(usuarioId, {});
+				} else {
+					setCarrito(usuarioLogin.carritoAbierto);
+					setCantArtCarrito(usuarioLogin.carritoAbierto.articulos.length);
+				}
 			} else {
+				setCarrito({});
 				setCantArtCarrito(0);
 			}
 		} else {
@@ -91,7 +102,7 @@ export const LogicaProvider = ({ children }) => {
 		console.log("borrar carrito uno/t");
 		if (cantArtCarrito > 0) {
 			if (artiBorrarCarrito === "T") {
-				//borrar todo el carrito
+				//Borrar todo el carrito
 				setCarrito({});
 				actualizarCarritoDB(usuarioId, {});
 				setCantArtCarrito(0);
@@ -102,12 +113,12 @@ export const LogicaProvider = ({ children }) => {
 				);
 
 				if (nuevo.length == 0) {
-					//de a uno, borró todo
+					//De a uno, borró todo
 					setCarrito({});
 					actualizarCarritoDB(usuarioId, {});
 					setCantArtCarrito(0);
 				} else {
-					//borró, pero quedan...
+					//Borró, pero quedan...
 					let suma = nuevo.reduce(function (total, art) {
 						return total + art.precio * art.cantidad;
 					}, 0);
@@ -176,12 +187,12 @@ export const LogicaProvider = ({ children }) => {
 				return total + art.precio * art.cantidad;
 			}, 0);
 
-			let numero = new Date().getTime();
-			console.log("Fecha numero:", numero);
+			let fechaNumero = new Date().getTime();
+			console.log("Fecha numero:", fechaNumero);
 			setCarrito({ ...carrito, articulos: nuevo, total: suma });
 			actualizarCarritoDB(usuarioId, {
 				...carrito,
-				fecha: numero,
+				fecha: fechaNumero,
 				articulos: nuevo,
 				total: suma,
 			});
@@ -193,28 +204,40 @@ export const LogicaProvider = ({ children }) => {
 	useEffect(() => {
 		console.log("buscar mis compras");
 		if (buscarMisCompras) {
-			if (usuarioLogin.carritoCerrado.length > 0) {
-				setMisCompras(usuarioLogin.carritoCerrado);
-			} else {
-				//No tiene compras
-				setMisCompras([]);
-			}
+			getUs(usuarioId);
+			setMisCompras(usuarioLogin.carritoCerrado);
 		}
 	}, [buscarMisCompras]);
 
-	//-------------------------------------------------------
-	//-------------------------------------------------------
-	// categorías y artículos de la BaseDatos.jsx
-	const getCat = async () => {
-		const res = await getTodasCategorias();
-		setCategorias(res);
-	};
-	const getArt = async () => {
-		const res = await getTodosArticulos();
-		setArticulos(res);
-	};
-
+	// Guardar carritoAbierto  en carritoCerrado
 	useEffect(() => {
+		console.log("guardar carrito cerrado");
+		if (guardarCarritoCerrado) {
+			const fechaNumero = new Date().getTime();
+			const id = uuidv4();
+			const nC = { ...carrito, fecha: fechaNumero, idOrden: id };
+			const nCC = [...usuarioLogin.carritoCerrado, nC];
+
+			actualizarCarritoCerradoDB(usuarioId, nCC);
+			
+			setCarrito({});
+			actualizarCarritoDB(usuarioId, {});
+			setCantArtCarrito(0);
+		}
+	}, [guardarCarritoCerrado]);
+
+	//-------------------------------------------------------
+	// Buscar Categorías y Artículos
+	useEffect(() => {
+		const getCat = async () => {
+			const res = await getTodasCategorias();
+			setCategorias(res);
+		};
+		const getArt = async () => {
+			const res = await getTodosArticulos();
+			setArticulos(res);
+		};
+
 		getCat();
 		getArt();
 	}, []);
@@ -230,7 +253,7 @@ export const LogicaProvider = ({ children }) => {
 			});
 			setCategoria(cat);
 		}
-	}, [categorias, articulos]);
+	}, [categorias]);
 
 	//Filtrar por categoría
 	useEffect(() => {
@@ -296,6 +319,7 @@ export const LogicaProvider = ({ children }) => {
 				setArtiParaAgregarCarrito,
 				setBuscarMisCompras,
 				misCompras,
+				setGuardarCarritoCerrado,
 			}}
 		>
 			{children}

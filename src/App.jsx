@@ -28,6 +28,7 @@ import { ColorModeContext } from "./contexts/ModoClaOscContext";
 import { LogicaContext } from "./contexts/LogicaContext";
 import { CrearCuenta } from "./componentes/CrearCuenta";
 import { Checkout } from "./componentes/Checkout";
+import { MuchasGracias } from "./componentes/MuchasGracias";
 
 //====================================================================
 //------------------- PRINCIPAL ------------------
@@ -112,6 +113,12 @@ function App() {
 						<Route
 							path="/crearcuenta"
 							element={usuarioId === 0 ? <CrearCuenta /> : <Navigate to="/" />}
+						/>
+						<Route
+							path="/muchasgracias"
+							element={
+								usuarioId !== 0 ? <MuchasGracias /> : <Navigate to="/" />
+							}
 						/>
 						<Route
 							path="/cerrarsesion"
