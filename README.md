@@ -10,9 +10,9 @@
 
 <div align="center">
 
-<a target="_blank" href="https://baby-store-ada.web.app/"><img alt="Baby Store" src="https://img.shields.io/badge/Baby%20Store-Link-%23fa0130%20?labelColor=black&link=https%3A%2F%2Fhttps://baby-store-ada.web.app/"></a>
+<a target="_blank" href="https://baby-store-ada.web.app/"><img alt="Baby Store" src="https://img.shields.io/badge/Baby%20Store-Link-%2300899A%20?labelColor=black&link=https%3A%2F%2Fhttps://baby-store-ada.web.app/"></a>
 
-![GitHub Tag](https://img.shields.io/github/v/tag/MaguiBrollo/ADA_carrito_TrabFinal?sort=semver&labelColor=black&color=fa0130 "Versión")
+![GitHub Tag](https://img.shields.io/github/v/tag/MaguiBrollo/ADA_carrito_TrabFinal?sort=semver&labelColor=black&color=00899A "Versión")
 
 </div>
 
@@ -88,7 +88,7 @@ La aplicación cuenta con los siguientes menús: [Inicio](#inicio), [Artículos]
 ### _Inicio:_
 
 [:top:](#menús) <br>
-Al iniciar la aplicación se visualiza un carrusel de imágenes alusivas, en información básica de nosotros.
+Al iniciar la aplicación se visualiza un carrusel de imágenes alusivas, e información básica de Baby Store.
 
 <br>
 <p align="center" >
@@ -100,16 +100,53 @@ Al iniciar la aplicación se visualiza un carrusel de imágenes alusivas, en inf
 ### _Artículos:_
 
 [:top:](#menús) <br>
-Este menú es el corazón de la aplicación, ya que presenta todas las
-
+Este menú es el corazón de la aplicación, ya que permite ver todos los artículos, pero también permite filtrar por categoría.
+Como se puede observar en la imagen, las categorías aparecen ordenadas alfabéticamente acompañadas con un número que indica la cantidad de artículos que tienen cada categoría. Las categorías que no tienen artículos, se encuentran deshabilitadas.
 <p align="center" >
-   <img src="imgReadme/aspirantesTodos.png" width="400px" alt-text="Spinner">
+   <img src="src/assets/readme/artiPorCat_Filtrar.png" width="400px" alt-text="Spinner">
 </p>
 
 <br>
 
+Luego de seleccionar "Todos" o una "Categoría", se puede ver un mensaje que informa lo seleccionado, y el número de página.
+
+<p align="center" >
+   <img src="src/assets/readme/artiPorCat_Filtrar1.png" width="400px" alt-text="Spinner">
+</p>
+
 > [!NOTE]
-> Cuando la información visualizada -listado, ver más, editar, inscripción- habilite el scroll vertical se puede visualizar la aparición de una flecha que le permitirá volver al menú de manera más práctica.
+> Cuando la cantidad de artículos mostrados supera la cantidad de 8 (ocho), se habilita automáticamente la paginación.
+
+<p align="center" >
+   <img src="src/assets/readme/artiPorCat_Filtrar2.png" width="400px" alt-text="Spinner">
+</p>
+
+Todos los artículos tiene un botón que permite `Ver Mas - Comprar`
+
+<p align="center" >
+   <img src="src/assets/readme/verMas.png" width="400px" alt-text="Spinner">
+</p>
+
+Al presionar este botón, se abre una ventana con más información del artículo. <br>
+Esta Ventana se puede mover por la pantalla para poder ver los demás artículos.<br>
+<p align="center" >
+   <img src="src/assets/readme/verMas2.png" width="400px" alt-text="Spinner">
+</p>
+
+Además, se puede seleccionar la cantidad de artículos a comprar respetando no más de 5 artículos, y respetando el Stock disponible, en caso de no cumplir con una de las condiciones se mostrará un mensaje de advertencia. 
+<br>
+Si cumple con las condiciones puede realizar la compra presionando el botón `Comprar`. Se visualiza un pequeño cartel informando que el artículo fue agregado al Carrito de Compras.
+<p align="center" >
+   <img src="src/assets/readme/verMas4.png" width="100px" alt-text="Spinner">
+</p>
+
+
+> [!NOTE]
+> Para poder realizar una compra deberá iniciar sesión (o crear una cuenta).
+<p align="center" >
+   <img src="src/assets/readme/verMas3.png" width="100px" alt-text="Spinner">
+</p>
+
 
 ---
 
@@ -117,20 +154,23 @@ Este menú es el corazón de la aplicación, ya que presenta todas las
 
 [:top:](#menús) <br>
 
-Por medio de
-
+Buscar permite escribir una palabra por ejemplo "remera", y busca entre los datos de cada artículo, sin tener en cuenta la categoría.
+La información encontrada se visualiza de la misma manera que cuando se filtra por artículos. Además de poder realizar la compra (si ha iniciado sesión).
+<p align="center" >
+   <img src="src/assets/readme/buscar.png" width="400px" alt-text="Spinner">
+</p>
 ---
 
 ## _Modo_
 
-[:top:](#tabla-de-contenidos) <br>
-Todas las opciones antes descriptas, se encuentran disposnibles para los diferentes dispositivos móviles.
+[:top:](#menús) <br>
+Toda la aplicación puede ser visualizada en modo claro o bien en modo oscuro.
 
 <div align="center">
 
 |                    Modo Claro                    |                   Modo Oscuro                    |
 | :----------------------------------------------: | :----------------------------------------------: |
-| <img src="imgReadme/mobile01.png" width="150px"> | <img src="imgReadme/mobile02.png" width="150px"> |
+| <img src="src/assets/readme/Inicio.png" width="200px"> | <img src="src/assets/readme/InicioModo_Oscuro.png" width="200px"> |
 
 </div>
 <br>
@@ -140,28 +180,82 @@ Todas las opciones antes descriptas, se encuentran disposnibles para los diferen
 ### _Usuario:_
 
 [:top:](#menús) <br>
-Al iniciar la aplicación, se visualiza un mensaje de bienvenida con un carrusel de imágenes alusivas.
 
+Al seleccionar este menú se puede `Iniciar SESIÓN` si ya tiene cuenta, o bien `Crear CUENTA`.
+<p align="center" >
+   <img src="src/assets/readme/usuario1.png" width="150px" alt-text="Spinner">
+</p>
+
+<div align="center">
+
+|                    Iniciar Sesión                    |                   Crear Cuenta                    |
+| :----------------------------------------------: | :----------------------------------------------: |
+| <img src="src/assets/readme/usuario2.png" width="170px"> | <img src="src/assets/readme/usuario3.png" width="170px"> |
+
+</div>
+
+Si ya inició sesión, este menú cambia y presenta las opciones de ver `Mis Compras`, y `Cerrar sesión`. Además, de ver el carrito de compras, si tiene.
 <br>
 <p align="center" >
-   <img src="src/assets/readme/carrusel.gif" width="400px" alt-text="Carrusel">
+   <img src="src/assets/readme/usuario4.png" width="150px" alt-text="Carrusel">
 </p>
+
+
+<div align="center">
+
+|                    Mis compras                    |                   Cerrar Sesión                    |
+| :----------------------------------------------: | :----------------------------------------------: |
+| <img src="src/assets/readme/miscompras.png" width="170px"> | <img src="src/assets/readme/usuario5Cerrar.png" width="170px"> |
+
+</div>
 
 ---
 
 ### _Compras:_
 
 [:top:](#menús) <br>
-Este menú es el corazón de la aplicación, ya que presenta todas las
-
+Este menú está disponible únicamente para los usuarios que han iniciado sesión.
+<br>
+El carrito de compras presenta la siguiente información: 
+<br>- Fecha y hora en que se creó el carrito.
+<br>- Duración: los carritos serán borrados después de un día.
+<br>- Datos del producto comprado.
+<br>- Total de la compra.
+<br>
+Además, los botones `FINALIZAR COMPRA` y `ELIMINAR CARRITO`
 <p align="center" >
-   <img src="imgReadme/aspirantesTodos.png" width="400px" alt-text="Spinner">
+   <img src="src/assets/readme/carrito1.png" width="400px" alt-text="Spinner">
 </p>
 
 <br>
 
+Si selecciona `FINALIZAR COMPRA` se pasará a página de checkout.
+<br>
+
+- Paso 1: Controlar Artículos, Cantidad, Precio y Total.
+- Paso 2: Completar datos de envio.
+
+<div align="center">
+
+|                    Paso 1                    |                   Paso 2                  |
+| :----------------------------------------------: | :----------------------------------------------: |
+| <img src="src/assets/readme/carrito2.png" width="170px"> | <img src="src/assets/readme/carrito3.png" width="170px"> |
+
+</div>
+
+- Paso 3: Aceptar todos los datos.
+- Finalizar: Comprar finalizada. Muchas Gracias.
+
+<div align="center">
+
+|                    Paso 3                    |                   Finalizar               |
+| :----------------------------------------------: | :----------------------------------------------: |
+| <img src="src/assets/readme/carrito4.png" width="170px"> | <img src="src/assets/readme/carrito5.png" width="170px"> |
+
+</div>
+
 > [!NOTE]
-> Cuando la información visualizada -listado, ver más, editar, inscripción- habilite el scroll vertical se puede visualizar la aparición de una flecha que le permitirá volver al menú de manera más práctica.
+> Se debe `MARCAR` cada paso para poder finalizar la compra.
 
 ---
 
@@ -169,10 +263,10 @@ Este menú es el corazón de la aplicación, ya que presenta todas las
 
 [:top:](#tabla-de-contenidos) <br>
 
-<a target="_blank" href="https://www.linkedin.com/in/magui-brollo/"><img alt="LinkedIn" src="https://img.shields.io/badge/LinkedIn-Magdalena%20Brollo-%23fa0130%20?logo=linkedin&labelColor=black"></a>
-<a href="mailto:maguieb@gmail.com"><img alt="Email" src="https://img.shields.io/badge/Gmail-maguieb%40gmail.com-%23fa0130?style=flat&logo=gmail&labelColor=black&link=https%3A%2F%2Fwww.linkedin.com%2Fin%2Fmagui-brollo%2F"></a>
-<a target="_blank" href="https://discord.gg/v7cZYHDz"><img alt="Discord" src="https://img.shields.io/badge/Discord-Magui-%23fa0130%20?logo=discord&labelColor=black"></a>
+<a target="_blank" href="https://www.linkedin.com/in/magui-brollo/"><img alt="LinkedIn" src="https://img.shields.io/badge/LinkedIn-Magdalena%20Brollo-%2300899A%20?logo=linkedin&labelColor=black"></a>
+<a href="mailto:maguieb@gmail.com"><img alt="Email" src="https://img.shields.io/badge/Gmail-maguieb%40gmail.com-%2300899A?style=flat&logo=gmail&labelColor=black&link=https%3A%2F%2Fwww.linkedin.com%2Fin%2Fmagui-brollo%2F"></a>
+<a target="_blank" href="https://discord.gg/v7cZYHDz"><img alt="Discord" src="https://img.shields.io/badge/Discord-Magui-%2300899A%20?logo=discord&labelColor=black"></a>
 
 ---
 
-![](https://komarev.com/ghpvc/?username=MaguiBrollo&color=fa0130 "Visitas")
+![](https://komarev.com/ghpvc/?username=MaguiBrollo&color=00899A "Visitas")
