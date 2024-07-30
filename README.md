@@ -47,7 +47,7 @@ Las aplicaciones web, comúnmente conocidas como apps, se han convertido en una 
 <br>
 
 <p align="center" >
-   <img src="src/assets/readme/Inicio.png" width="500px" alt-text="Presentación">
+   <img src="src/assets/readme/Inicio.png" width="600px" alt-text="Presentación">
 </p>
 
 
@@ -86,7 +86,7 @@ La aplicación cuenta con los siguientes menús: [Inicio](#inicio), [Artículos]
 
 <br>
 <p align="center" >
-   <img src="src/assets/readme/menus.png" width="500px" alt-text="Carrusel">
+   <img src="src/assets/readme/menus.png" width="600px" alt-text="Carrusel">
 </p>
 
 ---
@@ -99,7 +99,7 @@ Al iniciar la aplicación se visualiza un carrusel de imágenes alusivas, más i
 
 <br>
 <p align="center" >
-   <img src="src/assets/readme/carrusel.gif" width="400px" alt-text="Carrusel">
+   <img src="src/assets/readme/carrusel.gif" width="600px" alt-text="Carrusel">
 </p>
 
 ---
@@ -112,7 +112,7 @@ El menú artículos es el corazón de la aplicación, ya que permite ver todos l
 Como se puede observar en la imagen, las categorías aparecen ordenadas alfabéticamente acompañadas con un número que indica la cantidad de artículos que tiene cada categoría. Las categorías que no tienen artículos, se encuentran deshabilitadas.
 
 <p align="center" >
-   <img src="src/assets/readme/artiPorCat_Filtrar.png" width="400px" alt-text="Spinner">
+   <img src="src/assets/readme/artiPorCat_Filtrar.png" width="600px" alt-text="Spinner">
 </p>
 
 <br>
@@ -120,27 +120,27 @@ Como se puede observar en la imagen, las categorías aparecen ordenadas alfabét
 Luego de seleccionar "Todos" los artículos, o una "Categoría", se puede ver un mensaje que informa lo seleccionado, y el número de página.
 
 <p align="center" >
-   <img src="src/assets/readme/artiPorCat_Filtrar1.png" width="400px" alt-text="Spinner">
+   <img src="src/assets/readme/artiPorCat_Filtrar1.png" width="600px" alt-text="Spinner">
 </p>
 
 > [!NOTE]
 > Cuando la cantidad de artículos mostrados supera 8 (ocho), se habilita automáticamente la paginación.
 
 <p align="center" >
-   <img src="src/assets/readme/artiPorCat_Filtrar2.png" width="400px" alt-text="Spinner">
+   <img src="src/assets/readme/artiPorCat_Filtrar2.png" width="600px" alt-text="Spinner">
 </p>
 
 Todos los artículos tiene un botón que permite `Ver Mas - Comprar`
 
 <p align="center" >
-   <img src="src/assets/readme/verMas.png" width="400px" alt-text="Spinner">
+   <img src="src/assets/readme/verMas.png" width="600px" alt-text="Spinner">
 </p>
 
 Al presionar ese botón, se abre una ventana con más información del artículo. <br>
 Esa ventana se puede mover por la pantalla para poder ver los demás artículos.<br>
 
 <p align="center" >
-   <img src="src/assets/readme/verMas2.png" width="400px" alt-text="Spinner">
+   <img src="src/assets/readme/verMas2.png" width="600px" alt-text="Spinner">
 </p>
 
 Además, se puede seleccionar la cantidad de artículos a comprar respetando no más de 5 artículos, y respetando el Stock disponible, en caso de no cumplir con una de las condiciones se mostrará un mensaje de advertencia.
@@ -148,14 +148,14 @@ Además, se puede seleccionar la cantidad de artículos a comprar respetando no 
 Si cumple con las condiciones puede realizar la compra presionando el botón `Comprar`. Luego de comprar, se visualiza un pequeño cartel informando que el artículo fue agregado al Carrito de Compras.
 
 <p align="center" >
-   <img src="src/assets/readme/verMas4.png" width="100px" alt-text="Spinner">
+   <img src="src/assets/readme/verMas4.png" width="300px" alt-text="Spinner">
 </p>
 
 > [!NOTE]
 > Para poder realizar una compra se debe iniciar sesión (o crear una cuenta).
 
 <p align="center" >
-   <img src="src/assets/readme/verMas3.png" width="100px" alt-text="Spinner">
+   <img src="src/assets/readme/verMas3.png" width="300px" alt-text="Spinner">
 </p>
 
 ---
@@ -168,7 +168,7 @@ Buscar permite escribir una palabra, por ejemplo "remera", y busca entre los dat
 La información encontrada se visualiza de la misma manera que cuando se filtra por artículos. Además, de poder realizar la compra (si se ha iniciado sesión).
 
 <p align="center" >
-   <img src="src/assets/readme/buscar.png" width="400px" alt-text="Spinner">
+   <img src="src/assets/readme/buscar.png" width="600px" alt-text="Spinner">
 </p>
 
 
@@ -185,7 +185,7 @@ Toda la aplicación puede ser visualizada en modo claro o bien en modo oscuro.
 
 |                       Modo Claro                       |                            Modo Oscuro                            |
 | :----------------------------------------------------: | :---------------------------------------------------------------: |
-| <img src="src/assets/readme/Inicio.png" width="200px"> | <img src="src/assets/readme/InicioModo_Oscuro.png" width="200px"> |
+| <img src="src/assets/readme/Inicio.png" width="300px"> | <img src="src/assets/readme/InicioModo_Oscuro.png" width="300px"> |
 
 </div>
 <br>
@@ -199,14 +199,14 @@ Toda la aplicación puede ser visualizada en modo claro o bien en modo oscuro.
 Al seleccionar este menú se puede `Iniciar SESIÓN` si se tiene una cuenta creada, o bien `Crear CUENTA`.
 
 <p align="center" >
-   <img src="src/assets/readme/usuario1.png" width="150px" alt-text="Spinner">
+   <img src="src/assets/readme/usuario1.png" width="300px" alt-text="Spinner">
 </p>
 
 <div align="center">
 
 |                      Iniciar Sesión                      |                       Crear Cuenta                       |
 | :------------------------------------------------------: | :------------------------------------------------------: |
-| <img src="src/assets/readme/usuario2.png" width="170px"> | <img src="src/assets/readme/usuario3.png" width="170px"> |
+| <img src="src/assets/readme/usuario2.png" width="300px"> | <img src="src/assets/readme/usuario3.png" width="300px"> |
 
 </div>
 
@@ -214,14 +214,14 @@ Si se inició sesión este menú cambia y presenta las opciones de ver `Mis Comp
 <br>
 
 <p align="center" >
-   <img src="src/assets/readme/usuario4.png" width="150px" alt-text="Carrusel">
+   <img src="src/assets/readme/usuario4.png" width="300px" alt-text="Carrusel">
 </p>
 
 <div align="center">
 
 |                        Mis compras                         |                         Cerrar Sesión                          |
 | :--------------------------------------------------------: | :------------------------------------------------------------: |
-| <img src="src/assets/readme/miscompras.png" width="170px"> | <img src="src/assets/readme/usuario5Cerrar.png" width="170px"> |
+| <img src="src/assets/readme/miscompras.png" width="300px"> | <img src="src/assets/readme/usuario5Cerrar.png" width="300px"> |
 
 </div>
 
@@ -239,7 +239,7 @@ Si el carrito tiene artículos, se puede ver un número con fondo rojo. Si no ha
 
 |                         Compras                          |                       Carrito vacío                       |
 | :------------------------------------------------------: | :-------------------------------------------------------: |
-| <img src="src/assets/readme/carrito0.png" width="150px"> | <img src="src/assets/readme/carrito00.png" width="150px"> |
+| <img src="src/assets/readme/carrito0.png" width="200px"> | <img src="src/assets/readme/carrito00.png" width="300px"> |
 
 </div>
 
@@ -254,7 +254,7 @@ El carrito de compras presenta la siguiente información:
 Además, se presenta los botones `FINALIZAR COMPRA` y `ELIMINAR CARRITO`
 
 <p align="center" >
-   <img src="src/assets/readme/carrito1.png" width="400px" alt-text="Spinner">
+   <img src="src/assets/readme/carrito1.png" width="500px" alt-text="Spinner">
 </p>
 
 <br>
@@ -269,7 +269,7 @@ Si se selecciona `FINALIZAR COMPRA` se pasará a la página de checkout, en la c
 
 |                          Paso 1                          |                          Paso 2                          |
 | :------------------------------------------------------: | :------------------------------------------------------: |
-| <img src="src/assets/readme/carrito2.png" width="170px"> | <img src="src/assets/readme/carrito3.png" width="170px"> |
+| <img src="src/assets/readme/carrito2.png" width="300px"> | <img src="src/assets/readme/carrito3.png" width="300px"> |
 
 </div>
 
@@ -280,7 +280,7 @@ Si se selecciona `FINALIZAR COMPRA` se pasará a la página de checkout, en la c
 
 |                          Paso 3                          |                        Finalizar                         |
 | :------------------------------------------------------: | :------------------------------------------------------: |
-| <img src="src/assets/readme/carrito4.png" width="170px"> | <img src="src/assets/readme/carrito5.png" width="170px"> |
+| <img src="src/assets/readme/carrito4.png" width="300px"> | <img src="src/assets/readme/carrito5.png" width="300px"> |
 
 </div>
 
@@ -290,7 +290,7 @@ Si se selecciona `FINALIZAR COMPRA` se pasará a la página de checkout, en la c
 > Cuando se intente acceder a una página inexistente se mostrara el `ERROR 404`.
 
 <p align="center" >
-   <img src="src/assets/readme/error404.png" width="400px" alt-text="Spinner">
+   <img src="src/assets/readme/error404.png" width="500px" alt-text="Spinner">
 </p>
 
 ---
@@ -302,7 +302,7 @@ Si se selecciona `FINALIZAR COMPRA` se pasará a la página de checkout, en la c
 Todas las opciones antes mencionadas se encuentran disponibles para los diferentes tamaños de móviles. 
 
 <p align="center" >
-   <img src="src/assets/readme/celu1.png" width="200px" alt-text="Spinner">
+   <img src="src/assets/readme/celu1.png" width="300px" alt-text="Spinner">
 </p>
 
 
