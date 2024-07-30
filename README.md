@@ -37,7 +37,9 @@
 
 [:top:](#tabla-de-contenidos) <br>
 
-> Las aplicaciones web, comúnmente conocidas como apps, se han convertido en una parte esencial de nuestra vida cotidiana. Las apps se han consolidado como nuestras aliadas, simplificándonos tareas diarias complejas, como otras no tan complejas como, por ejemplo la búsqueda de empleo. <br> `Baby Store` es un ecomerce de ropa para niños de cero hasta seis años.
+Las aplicaciones web, comúnmente conocidas como apps, se han convertido en una parte esencial de nuestra vida cotidiana. Las apps se han consolidado como nuestras aliadas, simplificándonos tareas diarias complejas, como otras no tan complejas como por ejemplo comprar artículos o servicios. 
+<br> 
+> `Baby Store` es una tienda en línea de venta de ropa para niños de cero hasta seis años.
 
 <p align="center" >
    <img src="src/assets/readme/inicio.png" width="500px" alt-text="Presentación">
@@ -45,13 +47,9 @@
 
 La aplicación `Baby Store`, fue diseñada de tal manera que puede ser utilizada en diferentes dispositivos, lo que implica un correcto diseño responsive.
 
-<p align="center" >
-   <img src="imgReadme/responsive.png" width="400px" alt-text="Responsive">
-</p>
-
 <br>
 
-Baby Store es una app desarrollada como Trabajo Final de la capacitación de `"Desarrollo Frontend"` dictado por [ADA ITW](https://www.linkedin.com/school/ada-itw/), y se encuentra incluido en mi `Portfolio Personal`, de tal manera de reflejar el grado de avance, apropiación y uso de los conocimiento adquiridos y asimilados durante la capacitación.
+Baby Store es una app desarrollada como Trabajo Final de la capacitación de `"Desarrollo Frontend"` dictada por [ADA ITW](https://www.linkedin.com/school/ada-itw/), y se encuentra incluida en mi `Portfolio Personal`, de tal manera de reflejar el grado de avance, apropiación y uso de los conocimiento adquiridos y asimilados durante la capacitación.
 
 > [!NOTE]
 > Visite mi portafolio personal: [PORTFOLIO](https://maguibrollo.github.io/ADA_Portafolio_mod01_tf/).
@@ -61,6 +59,7 @@ Baby Store es una app desarrollada como Trabajo Final de la capacitación de `"D
 ## _Tecnologías_
 
 [:top:](#tabla-de-contenidos) <br>
+
 Teacher JOB fue desarrollada utilizando las siguientes tecnologías:
 
 <div align="center">
@@ -83,11 +82,13 @@ La aplicación cuenta con los siguientes menús: [Inicio](#inicio), [Artículos]
 <p align="center" >
    <img src="src/assets/readme/menus.png" width="500px" alt-text="Carrusel">
 </p>
+
 ---
 
 ### _Inicio:_
 
 [:top:](#menús) <br>
+
 Al iniciar la aplicación se visualiza un carrusel de imágenes alusivas, e información básica de Baby Store.
 
 <br>
@@ -100,7 +101,8 @@ Al iniciar la aplicación se visualiza un carrusel de imágenes alusivas, e info
 ### _Artículos:_
 
 [:top:](#menús) <br>
-Este menú es el corazón de la aplicación, ya que permite ver todos los artículos, pero también permite filtrar por categoría.
+
+El menú artículos es el corazón de la aplicación, ya que permite ver todos los artículos ordenados por nombre, pero también permite filtrar por categoría.
 Como se puede observar en la imagen, las categorías aparecen ordenadas alfabéticamente acompañadas con un número que indica la cantidad de artículos que tienen cada categoría. Las categorías que no tienen artículos, se encuentran deshabilitadas.
 <p align="center" >
    <img src="src/assets/readme/artiPorCat_Filtrar.png" width="400px" alt-text="Spinner">
@@ -127,22 +129,22 @@ Todos los artículos tiene un botón que permite `Ver Mas - Comprar`
    <img src="src/assets/readme/verMas.png" width="400px" alt-text="Spinner">
 </p>
 
-Al presionar este botón, se abre una ventana con más información del artículo. <br>
-Esta Ventana se puede mover por la pantalla para poder ver los demás artículos.<br>
+Al presionar ese botón, se abre una ventana con más información del artículo. <br>
+Esa ventana se puede mover por la pantalla para poder ver los demás artículos.<br>
 <p align="center" >
    <img src="src/assets/readme/verMas2.png" width="400px" alt-text="Spinner">
 </p>
 
 Además, se puede seleccionar la cantidad de artículos a comprar respetando no más de 5 artículos, y respetando el Stock disponible, en caso de no cumplir con una de las condiciones se mostrará un mensaje de advertencia. 
 <br>
-Si cumple con las condiciones puede realizar la compra presionando el botón `Comprar`. Se visualiza un pequeño cartel informando que el artículo fue agregado al Carrito de Compras.
+Si cumple con las condiciones puede realizar la compra presionando el botón `Comprar`. Luego de comprar, se visualiza un pequeño cartel informando que el artículo fue agregado al Carrito de Compras.
 <p align="center" >
    <img src="src/assets/readme/verMas4.png" width="100px" alt-text="Spinner">
 </p>
 
 
 > [!NOTE]
-> Para poder realizar una compra deberá iniciar sesión (o crear una cuenta).
+> Para poder realizar una compra se debe iniciar sesión (o crear una cuenta).
 <p align="center" >
    <img src="src/assets/readme/verMas3.png" width="100px" alt-text="Spinner">
 </p>
@@ -155,7 +157,7 @@ Si cumple con las condiciones puede realizar la compra presionando el botón `Co
 [:top:](#menús) <br>
 
 Buscar permite escribir una palabra por ejemplo "remera", y busca entre los datos de cada artículo, sin tener en cuenta la categoría.
-La información encontrada se visualiza de la misma manera que cuando se filtra por artículos. Además de poder realizar la compra (si ha iniciado sesión).
+La información encontrada se visualiza de la misma manera que cuando se filtra por artículos. Además, de poder realizar la compra (si ha iniciado sesión).
 <p align="center" >
    <img src="src/assets/readme/buscar.png" width="400px" alt-text="Spinner">
 </p>
@@ -164,6 +166,7 @@ La información encontrada se visualiza de la misma manera que cuando se filtra 
 ## _Modo_
 
 [:top:](#menús) <br>
+
 Toda la aplicación puede ser visualizada en modo claro o bien en modo oscuro.
 
 <div align="center">
@@ -181,7 +184,7 @@ Toda la aplicación puede ser visualizada en modo claro o bien en modo oscuro.
 
 [:top:](#menús) <br>
 
-Al seleccionar este menú se puede `Iniciar SESIÓN` si ya tiene cuenta, o bien `Crear CUENTA`.
+Al seleccionar este menú se puede `Iniciar SESIÓN` si se tiene cuenta creada, o bien `Crear CUENTA`.
 <p align="center" >
    <img src="src/assets/readme/usuario1.png" width="150px" alt-text="Spinner">
 </p>
@@ -194,7 +197,7 @@ Al seleccionar este menú se puede `Iniciar SESIÓN` si ya tiene cuenta, o bien 
 
 </div>
 
-Si ya inició sesión, este menú cambia y presenta las opciones de ver `Mis Compras`, y `Cerrar sesión`. Además, de ver el carrito de compras, si tiene.
+Si se inició sesión, este menú cambia y presenta las opciones de ver `Mis Compras`, y `Cerrar sesión`. Además, se puede ver el carrito de compras, si existe.
 <br>
 <p align="center" >
    <img src="src/assets/readme/usuario4.png" width="150px" alt-text="Carrusel">
@@ -214,22 +217,37 @@ Si ya inició sesión, este menú cambia y presenta las opciones de ver `Mis Com
 ### _Compras:_
 
 [:top:](#menús) <br>
+
 Este menú está disponible únicamente para los usuarios que han iniciado sesión.
+<br>
+Si el carrito tiene artículos, se puede ver un número con fondo rojo. Si no hay artículos, igual se puede acceder.
+
+<div align="center">
+
+|                    Compras                    |                   Carrito vacío                    |
+| :----------------------------------------------: | :----------------------------------------------: |
+| <img src="src/assets/readme/carrito0.png" width="150px"> | <img src="src/assets/readme/carrito00.png" width="150px"> |
+
+</div>
+
+
 <br>
 El carrito de compras presenta la siguiente información: 
 <br>- Fecha y hora en que se creó el carrito.
-<br>- Duración: los carritos serán borrados después de un día.
+<br>- Duración: los carritos se borran después de un día.
 <br>- Datos del producto comprado.
 <br>- Total de la compra.
 <br>
-Además, los botones `FINALIZAR COMPRA` y `ELIMINAR CARRITO`
+
+Además, se presenta los botones `FINALIZAR COMPRA` y `ELIMINAR CARRITO`
+
 <p align="center" >
    <img src="src/assets/readme/carrito1.png" width="400px" alt-text="Spinner">
 </p>
 
 <br>
 
-Si selecciona `FINALIZAR COMPRA` se pasará a página de checkout.
+Si se selecciona `FINALIZAR COMPRA` se pasará a la página de checkout, en la cual se debe completar los siguientes pasos:
 <br>
 
 - Paso 1: Controlar Artículos, Cantidad, Precio y Total.
@@ -244,7 +262,7 @@ Si selecciona `FINALIZAR COMPRA` se pasará a página de checkout.
 </div>
 
 - Paso 3: Aceptar todos los datos.
-- Finalizar: Comprar finalizada. Muchas Gracias.
+- Finalizar: Compra finalizada. Muchas Gracias.
 
 <div align="center">
 
