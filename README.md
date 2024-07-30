@@ -40,11 +40,16 @@
 Las aplicaciones web, comúnmente conocidas como apps, se han convertido en una parte esencial de nuestra vida cotidiana. Las apps se han consolidado como nuestras aliadas, simplificándonos tareas diarias complejas, como otras no tan complejas como por ejemplo comprar artículos o servicios.
 <br>
 
+
 > `Baby Store` es una tienda en línea de venta de ropa para niños de cero hasta seis años.
 
+
+<br>
+
 <p align="center" >
-   <img src="src/assets/readme/inicio.png" width="500px" alt-text="Presentación">
+   <img src="src/assets/readme/Inicio.png" width="500px" alt-text="Presentación">
 </p>
+
 
 La aplicación `Baby Store`, fue diseñada de tal manera que puede ser utilizada en diferentes dispositivos, lo que implica un correcto diseño responsive.
 
@@ -90,7 +95,7 @@ La aplicación cuenta con los siguientes menús: [Inicio](#inicio), [Artículos]
 
 [:top:](#menús) <br>
 
-Al iniciar la aplicación se visualiza un carrusel de imágenes alusivas, e información básica de Baby Store.
+Al iniciar la aplicación se visualiza un carrusel de imágenes alusivas, más información básica de Baby Store.
 
 <br>
 <p align="center" >
@@ -104,7 +109,7 @@ Al iniciar la aplicación se visualiza un carrusel de imágenes alusivas, e info
 [:top:](#menús) <br>
 
 El menú artículos es el corazón de la aplicación, ya que permite ver todos los artículos ordenados por nombre, pero también permite filtrar por categoría.
-Como se puede observar en la imagen, las categorías aparecen ordenadas alfabéticamente acompañadas con un número que indica la cantidad de artículos que tienen cada categoría. Las categorías que no tienen artículos, se encuentran deshabilitadas.
+Como se puede observar en la imagen, las categorías aparecen ordenadas alfabéticamente acompañadas con un número que indica la cantidad de artículos que tiene cada categoría. Las categorías que no tienen artículos, se encuentran deshabilitadas.
 
 <p align="center" >
    <img src="src/assets/readme/artiPorCat_Filtrar.png" width="400px" alt-text="Spinner">
@@ -112,14 +117,14 @@ Como se puede observar en la imagen, las categorías aparecen ordenadas alfabét
 
 <br>
 
-Luego de seleccionar "Todos" o una "Categoría", se puede ver un mensaje que informa lo seleccionado, y el número de página.
+Luego de seleccionar "Todos" los artículos, o una "Categoría", se puede ver un mensaje que informa lo seleccionado, y el número de página.
 
 <p align="center" >
    <img src="src/assets/readme/artiPorCat_Filtrar1.png" width="400px" alt-text="Spinner">
 </p>
 
 > [!NOTE]
-> Cuando la cantidad de artículos mostrados supera la cantidad de 8 (ocho), se habilita automáticamente la paginación.
+> Cuando la cantidad de artículos mostrados supera 8 (ocho), se habilita automáticamente la paginación.
 
 <p align="center" >
    <img src="src/assets/readme/artiPorCat_Filtrar2.png" width="400px" alt-text="Spinner">
@@ -159,14 +164,16 @@ Si cumple con las condiciones puede realizar la compra presionando el botón `Co
 
 [:top:](#menús) <br>
 
-Buscar permite escribir una palabra por ejemplo "remera", y busca entre los datos de cada artículo, sin tener en cuenta la categoría.
-La información encontrada se visualiza de la misma manera que cuando se filtra por artículos. Además, de poder realizar la compra (si ha iniciado sesión).
+Buscar permite escribir una palabra, por ejemplo "remera", y busca entre los datos de cada artículo, sin tener en cuenta la categoría.
+La información encontrada se visualiza de la misma manera que cuando se filtra por artículos. Además, de poder realizar la compra (si se ha iniciado sesión).
 
 <p align="center" >
    <img src="src/assets/readme/buscar.png" width="400px" alt-text="Spinner">
 </p>
 
+
 ---
+
 
 ## _Modo_
 
@@ -189,7 +196,7 @@ Toda la aplicación puede ser visualizada en modo claro o bien en modo oscuro.
 
 [:top:](#menús) <br>
 
-Al seleccionar este menú se puede `Iniciar SESIÓN` si se tiene cuenta creada, o bien `Crear CUENTA`.
+Al seleccionar este menú se puede `Iniciar SESIÓN` si se tiene una cuenta creada, o bien `Crear CUENTA`.
 
 <p align="center" >
    <img src="src/assets/readme/usuario1.png" width="150px" alt-text="Spinner">
@@ -203,7 +210,7 @@ Al seleccionar este menú se puede `Iniciar SESIÓN` si se tiene cuenta creada, 
 
 </div>
 
-Si se inició sesión, este menú cambia y presenta las opciones de ver `Mis Compras`, y `Cerrar sesión`. Además, se puede ver el carrito de compras, si existe.
+Si se inició sesión este menú cambia y presenta las opciones de ver `Mis Compras`, y `Cerrar sesión`. Además, se puede ver el carrito de compras, si existe.
 <br>
 
 <p align="center" >
@@ -298,57 +305,9 @@ Todas las opciones antes mencionadas se encuentran disponibles para los diferent
    <img src="src/assets/readme/celu1.png" width="200px" alt-text="Spinner">
 </p>
 
----
-
-> [!NOTE]
-> Cuando se intente acceder a una página inexistente se mostrara el `ERROR 404`.
-
-<p align="center" >
-   <img src="src/assets/readme/error404.png" width="400px" alt-text="Spinner">
-</p>
 
 ---
 
-## _Mobile:_
-
-[:top:](#tabla-de-contenidos) <br>
-
-Todas las opciones antes mencionadas se encuentran disponibles para los diferentes tamaños de móviles. 
-
-<p align="center" >
-   <img src="src/assets/readme/celu1.png" width="200px" alt-text="Spinner">
-</p>
-
----
-
----
-
-
-> [!NOTE]
-> Cuando se intente acceder a una página inexistente se mostrara el `ERROR 404`.
-
-
-<p align="center" >
-   <img src="src/assets/readme/error404.png" width="400px" alt-text="Spinner">
-</p>
-
-
----
-
-
-## _Mobile:_
-
-[:top:](#tabla-de-contenidos) <br>
-
-Todas las opciones antes mencionadas se encuentran disponibles para los diferentes tamaños de móviles.
-
-
-
-<p align="center" >
-   <img src="src/assets/readme/celu1.png" width="200px" alt-text="Spinner">
-</p>
-
----
 
 
 ## _Contáctame:_
