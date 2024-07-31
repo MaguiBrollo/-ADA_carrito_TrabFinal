@@ -1,5 +1,5 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import {
 	Divider,
@@ -43,6 +43,11 @@ export const Checkout = () => {
 		menErrorLocalidad: "",
 	});
 	const [alertaError, setAlertaError] = useState(false);
+	
+	useEffect(()=>{
+		setGuardarCarritoCerrado(false)
+	})
+	
 	const theme = useTheme();
 	const steps = ["Carrito", "Datos", "Finalizar"];
 	const navegar = useNavigate();
@@ -231,7 +236,7 @@ export const Checkout = () => {
 				...datos,
 				nombre: e.target.value.toUpperCase(),
 				errorNombre: false,
-				menErrorNombre: "Ingrese nombre completo. Hasta 30 caracteres.",
+				menErrorNombre: "Ingrese nombre completo, 5-30 caracteres.",
 			});
 		}
 	};
@@ -266,7 +271,7 @@ export const Checkout = () => {
 				...datos,
 				localidad: e.target.value.toUpperCase(),
 				errorLocalidad: false,
-				menErrorLocalidad: "Ingrese Localidad. Hasta 50 caracteres.",
+				menErrorLocalidad: "Ingrese Localidad, 5-30 caracteres.",
 			});
 		}
 	};
@@ -276,14 +281,14 @@ export const Checkout = () => {
 				...datos,
 				provincia: e.target.value.toUpperCase(),
 				errorProvincia: true,
-				menErrorProvincia: "No puede ser vacío., 5-30 caracteres..",
+				menErrorProvincia: "No puede ser vacío, 5-30 caracteres..",
 			});
 		} else {
 			setDatos({
 				...datos,
 				provincia: e.target.value.toUpperCase(),
 				errorProvincia: false,
-				menErrorProvincia: "Ingrese Provincia. Hasta 50 caracteres.",
+				menErrorProvincia: "Ingrese Provincia, 5-30 caracteres.",
 			});
 		}
 	};
@@ -480,7 +485,6 @@ export const Checkout = () => {
 									fontStyle: "italic",
 								}}
 							>
-								{/* <Typography>Paso {activeStep + 1}</Typography> */}
 								<Typography>MARCAR cada paso como realizado</Typography>
 							</Box>
 

@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import {
 	AppBar,
 	Box,
@@ -45,6 +45,10 @@ export const NavBar = ({
 	const { cantArtCarrito, usuarioLogin, setBuscarMisCompras } =
 		useContext(LogicaContext);
 
+	useEffect(()=>{
+		setBuscarMisCompras(false)
+	})
+	
 	const isMenuOpen = Boolean(anchorEl);
 
 	const navegar = useNavigate();
@@ -68,7 +72,7 @@ export const NavBar = ({
 		}
 	};
 
-	//Controles de Menu Usuario login logout
+	//Controles de Menú Usuario login logout
 	const handleMenuUsuario = (event) => {
 		setAnchorEl(event.currentTarget);
 	};
@@ -92,7 +96,7 @@ export const NavBar = ({
 
 	const verMisCompras = () => {
 		setBuscarMisCompras(true), //solo busca la compras con este estado
-			navegar("/miscompras");
+		navegar("/miscompras");
 		setAnchorEl(null);
 	};
 	//-------- Menú de Usuario Login/out -----

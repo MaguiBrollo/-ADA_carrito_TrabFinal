@@ -127,9 +127,10 @@ function App() {
 						<Route path="*" element={<Error404 />} />
 					</Routes>
 
+					{/* --------- Barra de Footer  ----------- */}
 					<Footer />
 
-					{/* --------- Modal Drawer Buscar -------- */}
+					{/* ----- Modal Drawer Filtrar por categoría ----- */}
 					{abrirFiltrar && (
 						<FiltrarPorCategoria
 							abrirFiltrar={abrirFiltrar}
@@ -151,8 +152,6 @@ function App() {
 							setAbrirCarrito={setAbrirCarrito}
 						/>
 					)}
-
-					{/* --------- Barra de Footer  ----------- */}
 				</Box>
 			</BrowserRouter>
 		</ThemeProvider>

@@ -34,7 +34,6 @@ export const IniciarSesion = () => {
 	const handleClickShowPassword = () => setShowPassword((show) => !show);
 	const navegar = useNavigate();
 
-	//Iiniciar SS
 	const iniciarSesion = (event) => {
 		event.preventDefault();
 		setMensajeError("");

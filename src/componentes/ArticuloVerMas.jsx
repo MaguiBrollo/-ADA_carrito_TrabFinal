@@ -70,7 +70,7 @@ export const ArticuloVerMas = ({
 	const guardarCantidad = (event) => {
 		if (parseInt(event.target.value) > artParaVerMas.stock) {
 			setAlertaStock(true);
-			setCantidad(artParaVerMas.stock);
+			setCantidad(1);
 			setTimeout(() => {
 				setAlertaStock(false);
 			}, 4000);
@@ -85,7 +85,6 @@ export const ArticuloVerMas = ({
 		setAbrirCantidad(true);
 	};
 
-	const etiqueta = "draggable-dialog-title";
 	const cerrarModalVerMas = () => {
 		setAbrirVerMas(false);
 	};
@@ -93,14 +92,21 @@ export const ArticuloVerMas = ({
 	const agregarAlCarrito = () => {
 		//si hay un usuario
 		if (usuarioId !== 0) {
-			//guardar en el carrito artParaVerMas y cantidadPedida
-			setArtiParaAgregarCarrito({ ...artParaVerMas, cantidad: cantidad });
+			if (artParaVerMas.stock === 0) {
+				setAlertaStock(true);
+				setCantidad(1);
+				setTimeout(() => {
+					setAlertaStock(false);
+				}, 4000);
+			} else {
+				setArtiParaAgregarCarrito({ ...artParaVerMas, cantidad: cantidad });
 
-			setAbrirVerMas(false);
-			setAbrirAgregadoCarrito(true);
-			setTimeout(() => {
+				setAbrirVerMas(false);
+				setAbrirAgregadoCarrito(true);
+				setTimeout(() => {
 					setAbrirAgregadoCarrito(false);
-			}, 3000);
+				}, 3000);
+			}
 		} else {
 			setAvisoNoInicioSesion(true);
 		}
@@ -113,12 +119,12 @@ export const ArticuloVerMas = ({
 				open={abrirVerMas}
 				onClose={cerrarModalVerMas}
 				PaperComponent={PaperComponent}
-				aria-labelledby={etiqueta}
+				aria-labelledby="draggable-dialog-title"
 			>
 				<Box sx={{ padding: "10px" }}>
 					<DialogTitle
 						style={{ cursor: "move", padding: "0px 10px" }}
-						id={etiqueta}
+						id="draggable-dialog-title"
 					>
 						{artParaVerMas.nombre}
 					</DialogTitle>

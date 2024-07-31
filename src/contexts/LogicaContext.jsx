@@ -11,6 +11,8 @@ import { getUnUsuario } from "../Firebase/BaseDatos.js";
 import { instantanea } from "../Firebase/BaseDatos.js";
 import { actualizarCarritoDB } from "../Firebase/BaseDatos.js";
 import { actualizarCarritoCerradoDB } from "../Firebase/BaseDatos.js";
+import { actualizarStockDB } from "../Firebase/BaseDatos.js";
+
 
 //====================================================================
 //------------------ Componente Principal ----------------------------
@@ -42,29 +44,16 @@ export const LogicaProvider = ({ children }) => {
 	//-----------------------------------------
 	//Verificar si hay o no un usuario logueado
 	useEffect(() => {
-		console.log("----------busca logueo firebase");
 		onChangeUser(setUsusarioId);
 	}, []);
-
-	// Actualización en timepo real. Se marca los que tiene que escuchar
-	useEffect(() => {
-		if (usuarioId !== 0) {
-			const inst = instantanea(usuarioId);
-			setUsusarioLogin(inst);
-		}
-	}, []);
-
+	
 	// Se hizo LogIn, con email y contraseña.
 	// con el ID se busca de la DBf los demás datos del usuario
-	const getUs = async (usuarioId) => {
-		const res = await getUnUsuario(usuarioId);
-		setUsusarioLogin(res);
-	};
 	useEffect(() => {
-		console.log("buscar datos del Usuario logueado: ", usuarioId);
 		if (usuarioId !== 0) {
 			//Buscar UN usuario de la DB
-			getUs(usuarioId);
+			//getUs(usuarioId);
+			instantanea(usuarioId, setUsusarioLogin);
 		} else {
 			//Usuario deslogueado, se limpian array/varibales con datos
 			setUsusarioLogin({});
@@ -74,7 +63,6 @@ export const LogicaProvider = ({ children }) => {
 
 	// Busca Carrito Abierto
 	useEffect(() => {
-		console.log("busca carrito abierto");
 		if (Object.keys(usuarioLogin).length !== 0) {
 			if (Object.keys(usuarioLogin.carritoAbierto).length > 0) {
 				//Los carritos se borran después de un día
@@ -99,7 +87,6 @@ export const LogicaProvider = ({ children }) => {
 
 	// BORRAR un/Todos artículo/s del carrito
 	useEffect(() => {
-		console.log("borrar carrito uno/t");
 		if (cantArtCarrito > 0) {
 			if (artiBorrarCarrito === "T") {
 				//Borrar todo el carrito
@@ -137,9 +124,7 @@ export const LogicaProvider = ({ children }) => {
 
 	// AGREGAR un artículo al carrito
 	useEffect(() => {
-		console.log("agregar un art carrito: ");
 		if (Object.keys(artiParaAgregarCarrito).length !== 0) {
-			console.log(artiParaAgregarCarrito.idArticulo);
 
 			let nuevo = [];
 			if (cantArtCarrito > 0) {
@@ -188,7 +173,7 @@ export const LogicaProvider = ({ children }) => {
 			}, 0);
 
 			let fechaNumero = new Date().getTime();
-			console.log("Fecha numero:", fechaNumero);
+	
 			setCarrito({ ...carrito, articulos: nuevo, total: suma });
 			actualizarCarritoDB(usuarioId, {
 				...carrito,
@@ -201,27 +186,33 @@ export const LogicaProvider = ({ children }) => {
 	}, [artiParaAgregarCarrito]);
 
 	// Buscar Mis Compras
+	const getUs = async (usuarioId) => {
+		const res = await getUnUsuario(usuarioId);
+		setUsusarioLogin(res);
+	};
 	useEffect(() => {
-		console.log("buscar mis compras");
 		if (buscarMisCompras) {
 			getUs(usuarioId);
 			setMisCompras(usuarioLogin.carritoCerrado);
 		}
 	}, [buscarMisCompras]);
 
+
 	// Guardar carritoAbierto  en carritoCerrado
 	useEffect(() => {
-		console.log("guardar carrito cerrado");
 		if (guardarCarritoCerrado) {
 			const fechaNumero = new Date().getTime();
 			const id = uuidv4();
 			const nC = { ...carrito, fecha: fechaNumero, idOrden: id };
 			const nCC = [...usuarioLogin.carritoCerrado, nC];
 
-			actualizarCarritoCerradoDB(usuarioId, nCC);
+			carrito.articulos.forEach((art) => {
+				actualizarStockDB(art);
+			});
 
-			setCarrito({});
+			actualizarCarritoCerradoDB(usuarioId, nCC);
 			actualizarCarritoDB(usuarioId, {});
+			setCarrito({});
 			setCantArtCarrito(0);
 		}
 	}, [guardarCarritoCerrado]);
@@ -234,18 +225,17 @@ export const LogicaProvider = ({ children }) => {
 			setCategorias(res);
 		};
 		const getArt = async () => {
-			const res = await getTodosArticulos();
-			setArticulos(res);
+			/* const res = await getTodosArticulos();
+			setArticulos(res); */
+			await getTodosArticulos(setArticulos);
 		};
 
 		getCat();
 		getArt();
-	}, []);
+	}, [guardarCarritoCerrado]);
 
 	//Contar cantidad de artículos por categoría
 	useEffect(() => {
-		console.log("cant art x cat");
-
 		if (categorias) {
 			const cat = categorias.map((c) => {
 				const cant = articulos.filter((a) => a.categoriaId === c.idCateg);
@@ -257,7 +247,6 @@ export const LogicaProvider = ({ children }) => {
 
 	//Filtrar por categoría
 	useEffect(() => {
-		console.log("filtrar por cat");
 		if (filtrarPor !== "") {
 			let articulosFiltrados = [];
 
@@ -275,12 +264,11 @@ export const LogicaProvider = ({ children }) => {
 				setMostrarTitulo("Artículos por categoría: " + cat.categoria);
 			}
 			setArticulosMostrar(articulosFiltrados);
-		}
-	}, [filtrarPor]);
+		}	
+	}, [filtrarPor, articulos]);
 
 	//Buscar artíciculos
 	useEffect(() => {
-		console.log("buscar los articulos");
 		if (buscarPor !== undefined && buscarPor.trim() !== "") {
 			const articulosBuscados = articulos.filter((a) => {
 				return (
@@ -297,7 +285,7 @@ export const LogicaProvider = ({ children }) => {
 				setMostrarTitulo("NO HUBO RESULTADOS PARA LA BÚSQUEDA");
 			}
 		}
-	}, [buscarPor]);
+	}, [buscarPor, articulos]);
 
 	//==============================
 	return (

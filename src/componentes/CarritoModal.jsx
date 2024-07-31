@@ -35,7 +35,6 @@ export const CarritoModal = ({ abrirCarrito, setAbrirCarrito }) => {
 	};
 
 	const borrarTodoCarrito = () => {
-		//para borrar todos
 		setAbrirCarrito(false);
 		setArtiBorrarCarrito("T");
 	};

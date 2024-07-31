@@ -40,16 +40,13 @@
 Las aplicaciones web, comúnmente conocidas como apps, se han convertido en una parte esencial de nuestra vida cotidiana. Las apps se han consolidado como nuestras aliadas, simplificándonos tareas diarias complejas, como otras no tan complejas como por ejemplo comprar artículos o servicios.
 <br>
 
-
 > `Baby Store` es una tienda en línea de venta de ropa para niños de cero hasta seis años.
-
 
 <br>
 
 <p align="center" >
    <img src="src/assets/readme/Inicio.png" width="600px" alt-text="Presentación">
 </p>
-
 
 La aplicación `Baby Store`, fue diseñada de tal manera que puede ser utilizada en diferentes dispositivos, lo que implica un correcto diseño responsive.
 
@@ -66,7 +63,7 @@ Baby Store es una app desarrollada como Trabajo Final de la capacitación de `"D
 
 [:top:](#tabla-de-contenidos) <br>
 
-Teacher JOB fue desarrollada utilizando las siguientes tecnologías:
+Baby Store fue desarrollada utilizando las siguientes tecnologías:
 
 <div align="center">
 
@@ -145,7 +142,7 @@ Esa ventana se puede mover por la pantalla para poder ver los demás artículos.
 
 Además, se puede seleccionar la cantidad de artículos a comprar respetando no más de 5 artículos, y respetando el Stock disponible, en caso de no cumplir con una de las condiciones se mostrará un mensaje de advertencia.
 <br>
-Si cumple con las condiciones puede realizar la compra presionando el botón `Comprar`. Luego de comprar, se visualiza un pequeño cartel informando que el artículo fue agregado al Carrito de Compras.
+Si se cumple con las condiciones se puede realizar la compra presionando el botón `Comprar`. Luego de comprar, se visualiza un pequeño cartel informando que el artículo fue agregado al Carrito de Compras.
 
 <p align="center" >
    <img src="src/assets/readme/verMas4.png" width="300px" alt-text="Spinner">
@@ -171,15 +168,13 @@ La información encontrada se visualiza de la misma manera que cuando se filtra 
    <img src="src/assets/readme/buscar.png" width="600px" alt-text="Spinner">
 </p>
 
-
 ---
-
 
 ## _Modo_
 
 [:top:](#menús) <br>
 
-Toda la aplicación puede ser visualizada en modo claro o bien en modo oscuro.
+Toda la aplicación puede ser visualizada en modo claro o en modo oscuro.
 
 <div align="center">
 
@@ -210,7 +205,7 @@ Al seleccionar este menú se puede `Iniciar SESIÓN` si se tiene una cuenta crea
 
 </div>
 
-Si se inició sesión este menú cambia y presenta las opciones de ver `Mis Compras`, y `Cerrar sesión`. Además, se puede ver el carrito de compras, si existe.
+Si se inició sesión, este menú cambia y presenta las opciones de ver `Mis Compras`, y `Cerrar sesión`. Además, se puede ver el carrito de compras, si existe.
 <br>
 
 <p align="center" >
@@ -284,10 +279,14 @@ Si se selecciona `FINALIZAR COMPRA` se pasará a la página de checkout, en la c
 
 </div>
 
-> Se debe `MARCAR` cada paso para poder finalizar la compra.
+> Se debe `MARCAR` cada paso para poder finalizar la compra.<br>
+> Cada venta DESCUENTA el  STOCK del/los artículo/s vendido/s.
+
+---
+
 
 > [!NOTE]
-> Cuando se intente acceder a una página inexistente se mostrara el `ERROR 404`.
+> Cuando se intente acceder a una página inexistente se mostrará la página de `ERROR 404`, con la opción de volver a la página de `Incio`.
 
 <p align="center" >
    <img src="src/assets/readme/error404.png" width="500px" alt-text="Spinner">
@@ -299,16 +298,13 @@ Si se selecciona `FINALIZAR COMPRA` se pasará a la página de checkout, en la c
 
 [:top:](#tabla-de-contenidos) <br>
 
-Todas las opciones antes mencionadas se encuentran disponibles para los diferentes tamaños de móviles. 
+Todas las opciones antes mencionadas se encuentran disponibles para los diferentes tamaños de móviles.
 
 <p align="center" >
    <img src="src/assets/readme/celu1.png" width="300px" alt-text="Spinner">
 </p>
 
-
 ---
-
-
 
 ## _Contáctame:_
 

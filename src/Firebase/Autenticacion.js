@@ -17,11 +17,11 @@ import { crearUsuarioBD } from "./BaseDatos.js";
 //-----------------------------------------
 //Verificar si hay o no un usuario logueado
 export const onChangeUser = (setUsusarioId) => {
-	console.log("pasa por buscar");
 	const auth = getAuth(appFirebase);
 	onAuthStateChanged(auth, (usuFirebase) => {
 		if (usuFirebase) {
 			setUsusarioId(usuFirebase.uid);
+			
 		} else {
 			setUsusarioId(0);
 		}
@@ -34,12 +34,8 @@ export const loginUsuario = async (correo, contrasenia, setMensajeError) => {
 	const auth = getAuth(appFirebase);
 
 	await signInWithEmailAndPassword(auth, correo, contrasenia)
-		.then((credencial) => {
-			const usuario = credencial.user;
-			console.log("login:", usuario);
-		})
+		.then()
 		.catch((err) => {
-			console.log("ERROR login:", err.message);
 			setMensajeError(handleError(err.code, err.message));
 		});
 };
