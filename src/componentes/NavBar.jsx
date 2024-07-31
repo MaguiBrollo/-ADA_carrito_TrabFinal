@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import {
 	AppBar,
 	Box,
@@ -45,6 +45,10 @@ export const NavBar = ({
 	const { cantArtCarrito, usuarioLogin, setBuscarMisCompras } =
 		useContext(LogicaContext);
 
+	useEffect(()=>{
+		setBuscarMisCompras(false)
+	})
+	
 	const isMenuOpen = Boolean(anchorEl);
 
 	const navegar = useNavigate();

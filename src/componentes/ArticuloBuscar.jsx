@@ -1,3 +1,4 @@
+
 import { Box, Tooltip, IconButton, Typography, TextField } from "@mui/material";
 import Drawer from "@mui/material/Drawer";
 import Divider from "@mui/material/Divider";
@@ -5,7 +6,7 @@ import { MdOutlineSearch } from "react-icons/md";
 import { MdClose } from "react-icons/md";
 import { useState } from "react";
 
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 import { useNavigate } from "react-router-dom";
 
@@ -18,6 +19,10 @@ export const ArticuloBuscar = ({ abrirBuscar, setAbrirBuscar }) => {
 	const [helperText, setHelperText] = useState(" ");
 	const [buscar, setBuscar] = useState("");
 	const { setBuscarPor } = useContext(LogicaContext);
+
+	useEffect(() => {
+		setBuscarPor("");
+	});
 
 	const navegar = useNavigate();
 

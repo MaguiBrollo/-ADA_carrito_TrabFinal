@@ -264,7 +264,7 @@ export const LogicaProvider = ({ children }) => {
 				setMostrarTitulo("Artículos por categoría: " + cat.categoria);
 			}
 			setArticulosMostrar(articulosFiltrados);
-		}
+		}	
 	}, [filtrarPor, articulos]);
 
 	//Buscar artíciculos

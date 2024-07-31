@@ -1,5 +1,5 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import {
 	Divider,
@@ -43,6 +43,11 @@ export const Checkout = () => {
 		menErrorLocalidad: "",
 	});
 	const [alertaError, setAlertaError] = useState(false);
+	
+	useEffect(()=>{
+		setGuardarCarritoCerrado(false)
+	})
+	
 	const theme = useTheme();
 	const steps = ["Carrito", "Datos", "Finalizar"];
 	const navegar = useNavigate();

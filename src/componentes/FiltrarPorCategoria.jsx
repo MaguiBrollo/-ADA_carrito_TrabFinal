@@ -13,16 +13,20 @@ import {
 import Drawer from "@mui/material/Drawer";
 import Divider from "@mui/material/Divider";
 
+import { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { MdClose } from "react-icons/md";
 
 import { LogicaContext } from "../contexts/LogicaContext";
-import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
 
 //====================================================================
 //------------------ Componente Principal ----------------------------
 export const FiltrarPorCategoria = ({ abrirFiltrar, setAbrirFiltrar }) => {
 	const { categoria, setFiltrarPor } = useContext(LogicaContext);
+
+	useEffect(() => {
+		setFiltrarPor("");
+	});
 
 	const navegar = useNavigate();
 
