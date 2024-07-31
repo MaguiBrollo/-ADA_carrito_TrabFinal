@@ -27,44 +27,17 @@ const db = getFirestore(appFirebase);
 
 //=====================================================================
 //-------- Actualización en tiempo real de los datos de UN usuario
-export const instantanea = (usuarioId) => {
-	const unsub = onSnapshot(doc(db, VITE_COLECCION_US, usuarioId), (doc) => {
-		console.log("Usuario a escuchar: ", doc.data());
-		return unsub;
-	}, (error)=>{alert("Error al buscar usuario logueado."+error.message)});
-};
-
-export const actualizarCarritoDB = async (idUs, carrito) => {
-	console.log("actu CARRR", carrito);
-	await updateDoc(doc(db, VITE_COLECCION_US, idUs), {
-		carritoAbierto: carrito,
-	}).catch((e)=> alert("Error al actualizar carrito Abierto: ",e.message));
-};
-
-export const actualizarCarritoCerradoDB = async (idUs, carrito) => {
-	console.log("actu CARRR Cerrado", carrito);
-	await updateDoc(doc(db, VITE_COLECCION_US, idUs), {
-		carritoCerrado: carrito,
-	}).catch((e) => alert("Error al actualizar carrito Cerrado: ", e.message));
-};
-
-//-------- Crear un susuario con todos los datos.
-export const crearUsuarioBD = async (nuevoUs, setMensajeError) => {
-	console.log("llegoooo a crear una DB usuario");
-
-	await setDoc(doc(db, VITE_COLECCION_US, nuevoUs.idUsuario), nuevoUs)
-		.then((resultado) => console.log(resultado))
-		.catch((err) => {
-			setMensajeError(handleError(err.code, err.message));
-		});
-
-	//esta forma... el nombre del nuevo documento lo crea FireStore.
-	/* addDoc(collection(db, VITE_COLECCION_US), nuevoUs)
-		.then((resultado) => console.log(resultado))
-		.catch((err) => {
-			console.log(err.code);
-			setMensajeError(handleError(err.code, err.message));
-		}); */
+export const instantanea = (usuarioId, setUsuarioLogin) => {
+	onSnapshot(
+		doc(db, VITE_COLECCION_US, usuarioId),
+		(doc) => {
+			setUsuarioLogin(doc.data());
+		},
+		(error) => {
+			alert("Error al buscar usuario logueado:" + error.message);
+			setUsuarioLogin({});
+		}
+	);
 };
 
 //-------- Busca un Usuario y sus datos
@@ -80,6 +53,36 @@ export const getUnUsuario = async (idUs) => {
 	}
 };
 
+//-------- Crear un susuario con todos los datos.
+export const crearUsuarioBD = async (nuevoUs, setMensajeError) => {
+	await setDoc(doc(db, VITE_COLECCION_US, nuevoUs.idUsuario), nuevoUs)
+		.then()
+		.catch((err) => {
+			setMensajeError(handleError(err.code, err.message));
+		});
+
+	//esta forma... el nombre del nuevo documento lo crea FireStore.
+	/* addDoc(collection(db, VITE_COLECCION_US), nuevoUs)
+		.then((resultado) => console.log(resultado))
+		.catch((err) => {
+			console.log(err.code);
+			setMensajeError(handleError(err.code, err.message));
+		}); */
+};
+
+//------ Carrito de compras
+export const actualizarCarritoDB = async (idUs, carrito) => {
+	await updateDoc(doc(db, VITE_COLECCION_US, idUs), {
+		carritoAbierto: carrito,
+	}).catch((e) => alert("Error al actualizar carrito Abierto: ", e.message));
+};
+
+export const actualizarCarritoCerradoDB = async (idUs, carrito) => {
+	await updateDoc(doc(db, VITE_COLECCION_US, idUs), {
+		carritoCerrado: carrito,
+	}).catch((e) => alert("Error al actualizar carrito Cerrado: ", e.message));
+};
+
 //-------- Buscar Categorías Ordenadas
 export const getTodasCategorias = async () => {
 	const catOrdenado = query(
@@ -93,20 +96,37 @@ export const getTodasCategorias = async () => {
 };
 
 //-------- Buscar Artículos Ordenados
-export const getTodosArticulos = async () => {
-	console.log("hhhhhhhhhhh");
+export const getTodosArticulos = async (setArticulos) => {
 	const artOrdenado = query(
 		collection(db, VITE_COLECCION_ART),
 		orderBy("nombre")
 	);
 
-	/* NO puedo hacer un await... pasa de largo antes de traer la data...
-	   const art =  onSnapshot(artOrdenado, (data) => {
-		const arr = data.docs.map((document) => document.data());
-		return arr
-	}); */
+	onSnapshot(artOrdenado, (querySnapshot) => {
+		const artis = [];
+		querySnapshot.forEach((doc) => {
+			artis.push(doc.data());
+		});
+		setArticulos(artis);
+	});
 
-	const resArt = await getDocs(artOrdenado);
+	/* const resArt = await getDocs(artOrdenado);
 	const artDatos = resArt.docs.map((document) => document.data());
-	return artDatos;
+	return artDatos; */
+};
+
+export const actualizarStockDB = async (articulo) => {
+	const ref = doc(db, VITE_COLECCION_ART, articulo.idArticulo);
+	const art = await getDoc(ref).catch((e) =>
+		alert("Error al buscar datos de un artículo: ", e.message)
+	);
+
+	if (art.exists()) {
+		let stockActual = art.data().stock - articulo.cantidad;
+		await updateDoc(doc(db, VITE_COLECCION_ART, articulo.idArticulo), {
+			stock: stockActual,
+		}).catch((e) =>
+			alert("Error al actualizar stock de artículo: ", e.message)
+		);
+	} 
 };

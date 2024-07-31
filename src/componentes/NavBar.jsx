@@ -68,7 +68,7 @@ export const NavBar = ({
 		}
 	};
 
-	//Controles de Menu Usuario login logout
+	//Controles de Menú Usuario login logout
 	const handleMenuUsuario = (event) => {
 		setAnchorEl(event.currentTarget);
 	};
@@ -92,7 +92,7 @@ export const NavBar = ({
 
 	const verMisCompras = () => {
 		setBuscarMisCompras(true), //solo busca la compras con este estado
-			navegar("/miscompras");
+		navegar("/miscompras");
 		setAnchorEl(null);
 	};
 	//-------- Menú de Usuario Login/out -----

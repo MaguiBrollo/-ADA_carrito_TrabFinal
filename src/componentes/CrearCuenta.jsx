@@ -89,7 +89,6 @@ export const CrearCuenta = () => {
 
 	const manejarImagen = (e) => {
 		e.preventDefault();
-
 		var file = e.target.files[0];
 		var reader = new FileReader();
 		reader.onloadend = function () {
@@ -100,7 +99,6 @@ export const CrearCuenta = () => {
 		reader.readAsDataURL(file);
 	};
 
-	//Crear una cuenta
 	const crearCuenta = (event) => {
 		event.preventDefault();
 		setMensajeError("");
@@ -195,7 +193,6 @@ export const CrearCuenta = () => {
 						<Box sx={{ margin: "20px 0px" }}>
 							<TextField
 								type="email"
-								/* error={false} */
 								id="email"
 								label=" Email "
 								fullWidth

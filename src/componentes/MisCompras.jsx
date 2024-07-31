@@ -44,7 +44,7 @@ export const MisCompras = () => {
 					{misCompras.map((mis) => (
 						<Box key={mis.idOrden} sx={style}>
 							<Typography sx={{ fontSize: "0.8rem", marginLeft: "10px" }}>
-								Fecha: {dayjs(mis.fecha).format("DD/MM/YYYY")}
+								Fecha-hora de compra: {dayjs(mis.fecha).format("DD/MM/YYYY - HH:mm")}hs.
 							</Typography>
 							<Divider />
 							<Box>

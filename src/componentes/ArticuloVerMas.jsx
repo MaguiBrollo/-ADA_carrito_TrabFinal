@@ -93,7 +93,6 @@ export const ArticuloVerMas = ({
 	const agregarAlCarrito = () => {
 		//si hay un usuario
 		if (usuarioId !== 0) {
-			//guardar en el carrito artParaVerMas y cantidadPedida
 			setArtiParaAgregarCarrito({ ...artParaVerMas, cantidad: cantidad });
 
 			setAbrirVerMas(false);
